@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>California News</title>
+
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background-color: #F00;
+	background-image: url(img/decor.jpg);
+	background-repeat: repeat;
+}
+</style>
+
+<style type="text/css">
+<!--
+span.label {color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c1 {cursor:hand;color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c2 {cursor:hand;color:red;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c3 {cursor:hand;color:#b0b0b0;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 12px Arial}
+-->
+</style>
+
+<script type="text/javascript">
+
+
+<!-- Begin
+function maxDays(mm, yyyy){
+var mDay;
+	if((mm == 3) || (mm == 5) || (mm == 8) || (mm == 10)){
+		mDay = 30;
+  	}
+  	else{
+  		mDay = 31
+  		if(mm == 1){
+   			if (yyyy/4 - parseInt(yyyy/4) != 0){
+   				mDay = 28
+   			}
+		   	else{
+   				mDay = 29
+  			}
+		}
+  }
+return mDay;
+}
+function changeBg(id){
+	if (eval(id).style.backgroundColor != "yellow"){
+		eval(id).style.backgroundColor = "yellow"
+	}
+	else{
+		eval(id).style.backgroundColor = "#ffffff"
+	}
+}
+function writeCalendar(){
+var now = new Date
+var dd = now.getDate()
+var mm = now.getMonth()
+var dow = now.getDay()
+var yyyy = now.getFullYear()
+var arrM = new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+var arrY = new Array()
+	for (ii=0;ii<=4;ii++){
+		arrY[ii] = yyyy - 2 + ii
+	}
+var arrD = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
+
+var text = ""
+text = "<form name=calForm>"
+text += "<table border=1>"
+text += "<tr><td>"
+text += "<table width=100%><tr>"
+text += "<td align=left>"
+text += "<select name=selMonth onChange='changeCal()'>"
+	for (ii=0;ii<=11;ii++){
+		if (ii==mm){
+			text += "<option value= " + ii + " Selected>" + arrM[ii] + "</option>"
+		}
+		else{
+			text += "<option value= " + ii + ">" + arrM[ii] + "</option>"
+		}
+	}
+text += "</select>"
+text += "</td>"
+text += "<td align=right>"
+text += "<select name=selYear onChange='changeCal()'>"
+	for (ii=0;ii<=4;ii++){
+		if (ii==2){
+			text += "<option value= " + arrY[ii] + " Selected>" + arrY[ii] + "</option>"
+		}
+		else{
+			text += "<option value= " + arrY[ii] + ">" + arrY[ii] + "</option>"
+		}
+	}
+text += "</select>"
+text += "</td>"
+text += "</tr></table>"
+text += "</td></tr>"
+text += "<tr><td>"
+text += "<table border=1>"
+text += "<tr>"
+	for (ii=0;ii<=6;ii++){
+		text += "<td align=center><span class=label>" + arrD[ii] + "</span></td>"
+	}
+text += "</tr>"
+aa = 0
+	for (kk=0;kk<=5;kk++){
+		text += "<tr>"
+		for (ii=0;ii<=6;ii++){
+			text += "<td align=center><span id=sp" + aa + " onClick='changeBg(this.id)'>1</span></td>"
+			aa += 1
+		}
+		text += "</tr>"
+	}
+text += "</table>"
+text += "</td></tr>"
+text += "</table>"
+text += "</form>"
+document.write(text)
+changeCal()
+}
+function changeCal(){
+var now = new Date
+var dd = now.getDate()
+var mm = now.getMonth()
+var dow = now.getDay()
+var yyyy = now.getFullYear()
+var currM = parseInt(document.calForm.selMonth.value)
+var prevM
+	if (currM!=0){
+		prevM = currM - 1
+	}
+	else{
+		prevM = 11
+	}
+var currY = parseInt(document.calForm.selYear.value)
+var mmyyyy = new Date()
+mmyyyy.setFullYear(currY)
+mmyyyy.setMonth(currM)
+mmyyyy.setDate(1)
+var day1 = mmyyyy.getDay()
+	if (day1 == 0){
+		day1 = 7
+	}
+var arrN = new Array(41)
+var aa
+	for (ii=0;ii<day1;ii++){
+		arrN[ii] = maxDays((prevM),currY) - day1 + ii + 1
+	}
+	aa = 1
+	for (ii=day1;ii<=day1+maxDays(currM,currY)-1;ii++){
+		arrN[ii] = aa
+		aa += 1
+	}
+	aa = 1
+	for (ii=day1+maxDays(currM,currY);ii<=41;ii++){
+		arrN[ii] = aa
+		aa += 1
+	}
+	for (ii=0;ii<=41;ii++){
+		eval("sp"+ii).style.backgroundColor = "#FFFFFF"
+	}
+var dCount = 0
+	for (ii=0;ii<=41;ii++){
+		if (((ii<7)&&(arrN[ii]>20))||((ii>27)&&(arrN[ii]<20))){
+			eval("sp"+ii).innerHTML = arrN[ii]
+			eval("sp"+ii).className = "c3"
+		}
+		else{
+			eval("sp"+ii).innerHTML = arrN[ii]
+			if ((dCount==0)||(dCount==6)){
+				eval("sp"+ii).className = "c2"
+			}
+			else{
+				eval("sp"+ii).className = "c1"
+			}
+			if ((arrN[ii]==dd)&&(mm==currM)&&(yyyy==currY)){
+				eval("sp"+ii).style.backgroundColor="#90EE90"
+			}
+		}
+	dCount += 1
+		if (dCount>6){
+			dCount=0
+		}
+	}
+}
+//  End -->
+</script>
+
+
+
+
+</head>
+
+<body>
+<div class="container">
+  <div class="header"><!-- end .header -->
+    <a name="PGTOP">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+  </div>
+  <div class="content">
+    <h1>California News Page</h1><p>
+        <p hspace="10">This is the California News Page, featuring news from all around California, with a focus around the central California area, starting with Sacramento weather.&nbsp; Turn off your speakers now, or unplug your headphones now.&nbsp; For best results, when you find an item that you wish to read more about, RIGHT-click on that item, and, "Open in New Window."&nbsp; Below this area, several different California news websites are now being laid out side by side.&nbsp; After the websites below have finished loading, the clocks below will start ticking.<br />
+For additional news, read also the following news pages: <a href="newspg.html">Newspaper</a>, <a href="newspg4.html">Oregon News</a>, <a href="newspg7.html">MidWest News</a>, <a href="newspg5.html">Health News</a>, <a href="newspg2.html">Christian News</a> or <A href="newspg3.html">Technology News</a>.<br>
+    </p>
+    <table>
+    <tr>
+    <td>
+    <table><tr><td>
+    <SCRIPT LANGUAGE="JavaScript">
+var Today=new Date();
+var ThisDay=Today.getDay();
+var ThisDate=Today.getDate();
+var ThisMonth=Today.getMonth()+1;
+var ThisYear=Today.getFullYear();  //included if you wish to insert the year
+function DayTxt (DayNumber) {
+var Day=new Array();
+Day[0]="Sunday";
+Day[1]="Monday";
+Day[2]="Tuesday";
+Day[3]="Wednesday";
+Day[4]="Thursday";
+Day[5]="Friday";
+Day[6]="Saturday";
+return Day[DayNumber];
+}
+var DayName=DayTxt(ThisDay);
+function MonthTxt (MonthNumber) {
+var Month=new Array();
+Month[1]="January";
+Month[2]="February";
+Month[3]="March";
+Month[4]="April";
+Month[5]="May";
+Month[6]="June";
+Month[7]="July";
+Month[8]="August";
+Month[9]="September";
+Month[10]="October";
+Month[11]="November";
+Month[12]="December";
+return Month[MonthNumber];
+}
+var MonthName=MonthTxt(ThisMonth);
+var d = new Date();
+var h = d.getHours();
+document.write("<TABLE BORDER=3 BGCOLOR=WHITE  WIDTH=100 HEIGHT=85 hspace=10 align=left>"+"<TD>"+"<p align=center>"+"<font size=-1 >"+DayName+"<br>"+"<font color=orangered size=+3 >"+ThisDate+"</font>"+"<br>"+MonthName+"<br>"+ThisYear+"<br>"+"</B>"+"</font>"+"</p>"+"</TD>"+"</TR>"+"</TABLE>");
+
+if (h < 2) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Yes, it's after midnight."+"</B>"+"</td></tr></table>");
+else if (h < 3) document.write("<table ALIGN=center border=0 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Up early or working late?"+"</B>"+"</td></tr></table>");
+else if (h < 7) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Up bright and early!"+"</B>"+"</td></tr></table>");
+else if (h < 12) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning!"+"</B>"+"</td></tr></table>");
+else if (h < 17) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good afternoon!"+"</B>"+"</td></tr></table>");
+else if (h < 23) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good evening!"+"</B>"+"</td></tr></table>");
+else document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; A late good evening! Not much left of it now."+"</B>"+"</td></tr></table>");
+//  End -->
+
+</script>
+
+<br />
+</td></tr><tr><td>
+
+<script type="text/javascript">writeCalendar()</script>
+</td></tr></table>
+</td><td>
+Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvkrud/n136/tluk/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+Exact Time right now in Los Angeles:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvktuv/n137/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br />
+</td></tr>
+</table></p></table>
+<br><p>
+The WillyWeather website ( <a href="https://www.willyweather.com/">https://www.willyweather.com/</a> ) will occasionally publish alerts on this page in the area below.<br>
+The area below here will have blank and empty spots if there are no alerts at this time for the cities mentioned below.<br>
+Sacramento:<br>
+<iframe id="datamain" src="https://cdnres.willyweather.com/widget/warning/dataView.html?id=118674" width=100% height=90 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+San Francisco:<br>
+<iframe id="datamain" src="https://cdnres.willyweather.com/widget/warning/dataView.html?id=118714" width=100% height=90 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+Los Angeles:<br>
+<iframe id="datamain" src="https://cdnres.willyweather.com/widget/warning/dataView.html?id=118715" width=100% height=90 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<IMG SRC="https://s.w-x.co/staticmaps/wu/wu/wxtype1200_cur/usbfl/animate.png" BORDER=1 width="100%" height="100%"><br>
+<iframe id="datamain" src="https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?num=40&type=N0Q&mapx=400&mapy=240&brand=wui&delay=15&frame=0&scale=0.5&transx=0&transy=0&severe=1&smooth=0&centerx=400&centery=240&station=DAX&rainsnow=1&lightning=1&noclutter=0&showlabels=1&showstorms=99" width=100% height=510 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?num=40&type=N0Q&mapx=400&mapy=240&brand=wui&delay=15&frame=0&scale=0.5&transx=0&transy=0&severe=1&smooth=0&centerx=400&centery=240&station=SOX&rainsnow=1&lightning=1&noclutter=0&showlabels=1&showstorms=99" width=100% height=510 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<center>The above radar information comes from<br>
+The Weather Channel Weather Underground USA Radar:<br>
+<A href="https://www.wunderground.com/radar/us">https://www.wunderground.com/radar/us</A><br></center>
+<br><iframe id="datamain" src="https://forecast.io/embed/#lat=38.5791&lon=-121.4910&name=Sacramento, CA" width=100% height=250 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<center>Temperature Maps from Dark Sky:</center>
+<iframe id="datamain" src="https://maps.darksky.net/@temperature,38.797,-120.823,9?customization=true" width=100% height=1200 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://maps.darksky.net/@temperature,38.552,-120.827,7?customization=true" width=100% height=1200 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<center>Temperature and Warning Maps from Windy:</center>
+<iframe width="590" height="700" src="https://embed.windy.com/embed2.html?lat=36.191&lon=-120.125&detailLat=35.951&detailLon=-121.553&width=590&height=700&zoom=7&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1" frameborder="0"></iframe><br>
+<iframe width="590" height="700" src="https://embed.windy.com/embed2.html?lat=36.191&lon=-120.125&detailLat=35.951&detailLon=-121.553&width=590&height=700&zoom=7&level=surface&overlay=capAlerts&product=capAlerts&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1" frameborder="0"></iframe><br>
+<iframe id="datamain" src="https://forecast.weather.gov/MapClick.php?zoneid=CAZ017" width=100% height=1600 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<p>The Sacramento forecast below is specifically for the main downtown area of Sacramento, and will give more of a precise prediction on the chances of rain and precipitation.<br></p>
+<iframe id="datamain" src="https://forecast.weather.gov/MapClick.php?lat=38.5793&lon=-121.4909" width=100% height=2000 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+</p>
+<p>
+<center>
+<strong>California City Distances</strong><br>
+Near the middle area of California, going from north to south, is Sacramento, San Francisco,<br>
+and then San Jose.<br>
+Sacramento, going south west to San Francisco is 88 miles with tolls, or 95 miles without tolls.<br>
+San Francisco, going south east to San Jose is about 48 miles away.<br>
+Sacramento to San Jose is 120 miles.<br>
+<br>
+Near the south end of the state is Los Angeles.<br>
+San Francisco to Los Angeles is 383 miles with tolls, or 388 miles without tolls.<br>
+Sacramento to Los Angeles is 386 miles.<br>
+<br>
+South of Los Angeles, at the south west corner of Califonia is San Diego.<br>
+Los Angeles, going south to San Diego is 120 miles.<br>
+<br>
+Disneyland is in Anaheim, which is in Orange County, California.<br>
+The distance from Los Angeles, going south to Disneyland in Anaheim is 26 miles.<br>
+<br>
+</center></p><p>
+<br>
+<strong>National Oceanic and Atmospheric Administration (NOAA): National Weather Service (NWS): Weather Forecasts:</strong><br />
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ081">Yreka and Central Siskiyou County Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ006">San Francisco Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ513">San Jose Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ041">Los Angeles Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ043">San Diego Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=CAZ554">Anaheim Weather Forecast</A><br>
+<br>
+<!-- weather widget start --><a target="_blank" href="https://www.booked.net/weather/yreka-1350,1491,18455,1078,1072,18163,1958,18353,1362,18360"><img src="https://w.bookcdn.com/weather/picture/2_1350,1491,18455,1078,1072,18163,1958,18353,1362,18360_0_1_009fde_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png?scode=2&domid=w209&anc_id=56257"  alt="booked.net"/></a><!-- weather widget end -->
+<br>
+</p><hr><p>
+<br>
+<center>Fire, Weather & Avalanche Center: California Fire Map</center><br>
+<iframe id="datamain" src="https://www.fireweatheravalanche.org/fire/state/california" width=100% height=1200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>Action News Now is the shared news brand for<br>
+television stations KHSL, KNVN, the CW, and Telemundo in the Chico-Redding, CA Area:</center><br>
+<iframe id="datamain" src="https://www.actionnewsnow.com/news/local/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>Sacramento Bee Newspaper</center><br />
+<iframe id="datamain" src="https://www.sacbee.com/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br><p>
+NEWS:&nbsp; Sacramento Bee Newspaper:&nbsp; Food & Drink:&nbsp; Map of Sacramento's Farmers Markets<br>
+<a href="https://www.sacbee.com/food-drink/article174204406.html">https://www.sacbee.com/food-drink/article174204406.html</a><br>
+<br></p>
+<br>
+<hr>
+<br>
+<center>California News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/california" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>Sacramento News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/sacramento" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<br><p>
+<br>
+Many of these news sources require a USA IP Address.<br>
+Use a VPN or proxy service to change your IP Address.<br>
+The free proxy service mentioned below is fast and easy, but it may display adult ads.<br>
+If a story is blocked (not available in your region), do this...<br>
+1. Copy the URL of the story.<br>
+2. Right-click on the 4everproxy link below and open it in a new window.<br>
+3. Make sure to select a United States location in the proxy app.<br>
+4. Paste the news story URL into the proxy app.<br>
+5. The proxy should take you around the website's IP Address blockade and you will be able to view the story.<br>
+Again, use caution, because this free proxy may display adult ads.<br>
+<br>
+PROXY:&nbsp; The 4everproxy Network<br />
+<a href="https://www.4everproxy.com/">https://www.4everproxy.com/</a><br />
+<br>
+</p>
+<br>
+<p>
+<center>Sacramento and California News from Sacramento's KCRA, TV Channel 3 (LINKS TO KCRA STORIES MAY BE BLOCKED DUE TO YOUR IP ADDRESS -- USE A VPN OR PROXY TO BYPASS):</center><br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.kcra.com/topstories-rss",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<hr>
+<br>
+<center>Top Sacramento, California and National News from Sacramento's KOVR, TV Channel 13:</center><br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://sacramento.cbslocal.com/category/news/local/feed/",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<hr>
+<br>
+<center>Folsom Telegraph Newspaper</center><br>
+<iframe id="datamain" src="https://goldcountrymedia.com/live-content/the-folsom-telegraph/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br></p>
+<hr>
+<p><br>
+<center>San Francisco News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/san-francisco" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>San Francisco Examiner Newspaper:</center><br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://www.sfexaminer.com/feed/",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<hr>
+<br>
+<center>California News from KGO-TV San Francisco:</center><br>
+<iframe id="datamain" src="https://abc7news.com/state/" width=100% height=2400 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>San Francisco News from KGO-TV San Francisco:</center><br>
+<iframe id="datamain" src="https://abc7news.com/san-francisco/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>San Jose and South Bay Area News from KGO-TV San Francisco:</center><br>
+<iframe id="datamain" src="https://abc7news.com/south-bay/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.sfchronicle.com/local/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.nbcbayarea.com/news/california/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://abc30.com/state/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>Los Angeles News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/los-angeles" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>KABC-TV Los Angeles</center><br />
+<iframe id="datamain" src="https://abc7.com/los-angeles/" width=100% height=2400 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.dailynews.com/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br>
+<center>Orange County Register Newspaper -- California News</center><br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.ocregister.com/common/rss/rss.php?catID=18808",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<iframe id="datamain" src="https://www.10news.com/news" width=100% height=2400 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.nbcsandiego.com/news/local/" width=100% height=2400 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.kusi.com/local-san-diego-news/" width=100% height=4800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<hr>
+<br><p>
+Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i4ks2ahc/n136/tluk/fs18/bo2/pd2/tt0/ta1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+<br>
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/fs18/bo2/tt0/ta1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+<br>
+Exact Time right now in Los Angeles:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i4ks2fb0/n137/fs18/bo2/pd2/tt0/ta1/tb1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br></p>
+</center>
+<hr>
+<p>For additional news, see also the following news pages: <a href="newspg.html">Newspaper</a>, <a href="newspg4.html">Oregon News</a>, <a href="newspg7.html">MidWest News</a>, <a href="newspg5.html">Health News</a>, <a href="newspg2.html">Christian News</a> or <A href="newspg3.html">Technology News</a>.<br>
+</p>
+<br />
+<br />
+
+<p></p>
+<h2>&nbsp;</h2>
+<p>&nbsp;</p>
+    <!-- end .content --></div>
+  <div class="footer">
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+    <p>&nbsp;</p>
+    <p>###</p>
+    <p><!-- end .footer --></p>
+    <p>&nbsp;</p>
+  </div>
+  <!-- end .container --></div>
+  
+  <!-- *********************************************************
+     * You may use this code for free on any web page provided that 
+     * these comment lines and the following credit remain in the code.
+     * Floating Div from https://www.javascript-fx.com
+     ********************************************************  -->
+<div id="divTopLeft"     style="position:absolute">
+<!-- Start - put your content below here --->
+    
+    <table border=1 bgcolor="grey" background="img/decor.jpg"><tr><td>
+      <p><span style="background-color: #FFFFFF"><b><a href=#PGTOP>Top of Page</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">Overview</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quicksurf2.html">QuickSurf</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="newspg.html">Newspaper</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="hot.html">Hot Links</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="drawer.html">Top Drawer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span></p>
+</td></tr></table>
+
+<!-- End   - put your content above here --->
+</div>
+
+<script type="text/javascript">
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function JSFX_FloatDiv(id, sx, sy)
+{
+	var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+	var px = document.layers ? "" : "px";
+	window[id + "_obj"] = el;
+	if(d.layers)el.style=el;
+	el.cx = el.sx = sx;el.cy = el.sy = sy;
+	el.sP=function(x,y){this.style.left=x+px;this.style.top=y+px;};
+
+	el.floatIt=function()
+	{
+		var pX, pY;
+		pX = (this.sx >= 0) ? 0 : ns ? innerWidth : 
+		document.documentElement && document.documentElement.clientWidth ? 
+		document.documentElement.clientWidth : document.body.clientWidth;
+		pY = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+		document.documentElement.scrollTop : document.body.scrollTop;
+		if(this.sy<0) 
+		pY += ns ? innerHeight : document.documentElement && document.documentElement.clientHeight ? 
+		document.documentElement.clientHeight : document.body.clientHeight;
+		this.cx += (pX + this.sx - this.cx)/8;this.cy += (pY + this.sy - this.cy)/8;
+		this.sP(this.cx, this.cy);
+		setTimeout(this.id + "_obj.floatIt()", 40);
+	}
+	return el;
+}
+JSFX_FloatDiv("divTopLeft", 600,95).floatIt();
+</script>
+<!-- ********************************************************* -->
+  
+</body>
+</html>
+<noscript><table background="img/decor.jpg"><td><font color="#ffffff"><plaintext> 

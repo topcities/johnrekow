@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Quicksurf 77c -- Section 17 -- Type-7 Password Encoder/Decoder</title>
+
+  <style type="text/css">
+      .input,.select { font-family:monospace; font-size:small; white-space:nowrap; padding:0px; border:1px solid #404040; background-color:#E0E0E0; color:#404040; }
+      .button { font-family:monospace; font-size:small; white-space:nowrap; background-color:#404040; color:#FFFFFF; }
+      h1,h2 { font-family:monospace; white-space:nowrap; background-color:#FFFFFF; color:#404040; }
+      td { font-family:monospace; font-size:small; white-space:nowrap; background-color:#FFFFFF; color:#404040; }
+      .body,body { text-decoration:none; font-family:monospace; font-size:small; background-color:#FFFFFF; color:#404040; }
+      table { border:0px solid #FFFFFF; }
+  </style>
+  <script language="JavaScript" type="text/javascript">
+<!-- 
+  var x = "dsfd;kfoA,.iyewrkldJKDHSUBsgvca69834ncxv9873254k;fg87";
+
+  function encrypt(){
+  with (document.f){
+    var o = s.value.length == 2 ? s.value : Math.ceil(53 * Math.random());
+    e.value = String.fromCharCode(48 + o/10) + String.fromCharCode(48 + o % 10);
+    for (var i = 0; i < d.value.length; i++, o++) {
+      var h = ((d.value.charCodeAt(i) ^ x.charCodeAt(o % 53)).toString(16)).toUpperCase();
+      e.value += (h.length == 1 ? "0" : "") + h;
+    }
+    e.size = Math.max(e.value.length + 2, 64);
+    d.size = e.size / 2;
+  }
+  }
+
+  var rxe = new RegExp('^([0-9]([0-9][0-9A-F]*)?)?$');
+  function decrypt(){
+  with (document.f){
+    d.value = "";
+    e.value = e.value.toUpperCase();
+    while (e.value.length > 0 && !e.value.match(rxe))
+      e.value = e.value.substring(0, e.value.length - 1);
+    if (e.value.length & 1 || e.value.length < 4) return;
+    o = e.value.substring(0, 2);
+    for (var i = 2; i < e.value.length; i+= 2, o++)
+      d.value += String.fromCharCode(parseInt(e.value.charAt(i) + e.value.charAt(i + 1), 16) ^ x.charCodeAt(o % 53));
+    e.size = Math.max(e.value.length + 2, 64);
+    d.size = e.size / 2;
+  }
+  }
+
+  var rxs = new RegExp('^([0-5]|[0-4][0-9]|5[0-2])$');
+  function setsalt(){
+  with (document.f){
+    while (s.value.length > 0 && !s.value.match(rxs))
+      s.value = s.value.substring(0, s.value.length - 1);
+    if (s.value.length == 2) encrypt();
+  }
+  }
+
+  function clearFields() {
+  with (document.f){
+    e.value = d.value = s.value = "";
+    e.size = 64;
+    d.size = e.size / 2;
+  }
+  }
+  //-->
+  </script>
+
+  
+</head>
+
+<body>
+  <h1>Section 17 -- <br>Cisco Type-7 <br>Password Encoder/Decoder</h1>
+  <noscript><h2>Your browser has JavaScript disabled, rendering this page useless.</h2></noscript>
+  <hr>
+  <form name="f" method="post" id="f">
+<a class="body" onmouseover="this.style.backgroundColor='#808080'" onmouseout="this.style.backgroundColor='#FFFFFF'" title="Select for copying" href="javascript:document.f.e.focus();document.f.e.select();">Encoded:</a><br>
+<input size="64" id="e" class="input" maxlength="2002" onkeyup="decrypt()" type="text"><br>
+  <a class="body" onmouseover="this.style.backgroundColor='#808080'" onmouseout="this.style.backgroundColor='#FFFFFF'" title="Select for copying" href="javascript:document.f.d.focus();document.f.d.select();">Decoded:</a><br>
+<input size="32" id="d" class="input" maxlength="1000" onkeyup="encrypt()" type="text"><br>
+                    Salt:<br>
+<input size="2" id="s" class="input" maxlength="2" onkeyup="setsalt()" type="text" title="A two-digit number, 52 or less"><br>
+<br>
+<input class="button" onmouseover="this.style.backgroundColor='#808080'" onmouseout="this.style.backgroundColor='#404040'" value="Clear All" name="reset" type="button" onclick="clearFields()"><br>
+<br>
+  </form>
+  <hr>
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 

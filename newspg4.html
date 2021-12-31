@@ -1,0 +1,568 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Oregon News Page</title>
+
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background-color: #F00;
+	background-image: url(img/decor.jpg);
+	background-repeat: repeat;
+}
+</style>
+
+<style type="text/css">
+<!--
+span.label {color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c1 {cursor:hand;color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c2 {cursor:hand;color:red;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 13px Arial}
+span.c3 {cursor:hand;color:#b0b0b0;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 12px Arial}
+-->
+</style>
+
+<script type="text/javascript">
+
+
+<!-- Begin
+function maxDays(mm, yyyy){
+var mDay;
+	if((mm == 3) || (mm == 5) || (mm == 8) || (mm == 10)){
+		mDay = 30;
+  	}
+  	else{
+  		mDay = 31
+  		if(mm == 1){
+   			if (yyyy/4 - parseInt(yyyy/4) != 0){
+   				mDay = 28
+   			}
+		   	else{
+   				mDay = 29
+  			}
+		}
+  }
+return mDay;
+}
+function changeBg(id){
+	if (eval(id).style.backgroundColor != "yellow"){
+		eval(id).style.backgroundColor = "yellow"
+	}
+	else{
+		eval(id).style.backgroundColor = "#ffffff"
+	}
+}
+function writeCalendar(){
+var now = new Date
+var dd = now.getDate()
+var mm = now.getMonth()
+var dow = now.getDay()
+var yyyy = now.getFullYear()
+var arrM = new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+var arrY = new Array()
+	for (ii=0;ii<=4;ii++){
+		arrY[ii] = yyyy - 2 + ii
+	}
+var arrD = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
+
+var text = ""
+text = "<form name=calForm>"
+text += "<table border=1>"
+text += "<tr><td>"
+text += "<table width=100%><tr>"
+text += "<td align=left>"
+text += "<select name=selMonth onChange='changeCal()'>"
+	for (ii=0;ii<=11;ii++){
+		if (ii==mm){
+			text += "<option value= " + ii + " Selected>" + arrM[ii] + "</option>"
+		}
+		else{
+			text += "<option value= " + ii + ">" + arrM[ii] + "</option>"
+		}
+	}
+text += "</select>"
+text += "</td>"
+text += "<td align=right>"
+text += "<select name=selYear onChange='changeCal()'>"
+	for (ii=0;ii<=4;ii++){
+		if (ii==2){
+			text += "<option value= " + arrY[ii] + " Selected>" + arrY[ii] + "</option>"
+		}
+		else{
+			text += "<option value= " + arrY[ii] + ">" + arrY[ii] + "</option>"
+		}
+	}
+text += "</select>"
+text += "</td>"
+text += "</tr></table>"
+text += "</td></tr>"
+text += "<tr><td>"
+text += "<table border=1>"
+text += "<tr>"
+	for (ii=0;ii<=6;ii++){
+		text += "<td align=center><span class=label>" + arrD[ii] + "</span></td>"
+	}
+text += "</tr>"
+aa = 0
+	for (kk=0;kk<=5;kk++){
+		text += "<tr>"
+		for (ii=0;ii<=6;ii++){
+			text += "<td align=center><span id=sp" + aa + " onClick='changeBg(this.id)'>1</span></td>"
+			aa += 1
+		}
+		text += "</tr>"
+	}
+text += "</table>"
+text += "</td></tr>"
+text += "</table>"
+text += "</form>"
+document.write(text)
+changeCal()
+}
+function changeCal(){
+var now = new Date
+var dd = now.getDate()
+var mm = now.getMonth()
+var dow = now.getDay()
+var yyyy = now.getFullYear()
+var currM = parseInt(document.calForm.selMonth.value)
+var prevM
+	if (currM!=0){
+		prevM = currM - 1
+	}
+	else{
+		prevM = 11
+	}
+var currY = parseInt(document.calForm.selYear.value)
+var mmyyyy = new Date()
+mmyyyy.setFullYear(currY)
+mmyyyy.setMonth(currM)
+mmyyyy.setDate(1)
+var day1 = mmyyyy.getDay()
+	if (day1 == 0){
+		day1 = 7
+	}
+var arrN = new Array(41)
+var aa
+	for (ii=0;ii<day1;ii++){
+		arrN[ii] = maxDays((prevM),currY) - day1 + ii + 1
+	}
+	aa = 1
+	for (ii=day1;ii<=day1+maxDays(currM,currY)-1;ii++){
+		arrN[ii] = aa
+		aa += 1
+	}
+	aa = 1
+	for (ii=day1+maxDays(currM,currY);ii<=41;ii++){
+		arrN[ii] = aa
+		aa += 1
+	}
+	for (ii=0;ii<=41;ii++){
+		eval("sp"+ii).style.backgroundColor = "#FFFFFF"
+	}
+var dCount = 0
+	for (ii=0;ii<=41;ii++){
+		if (((ii<7)&&(arrN[ii]>20))||((ii>27)&&(arrN[ii]<20))){
+			eval("sp"+ii).innerHTML = arrN[ii]
+			eval("sp"+ii).className = "c3"
+		}
+		else{
+			eval("sp"+ii).innerHTML = arrN[ii]
+			if ((dCount==0)||(dCount==6)){
+				eval("sp"+ii).className = "c2"
+			}
+			else{
+				eval("sp"+ii).className = "c1"
+			}
+			if ((arrN[ii]==dd)&&(mm==currM)&&(yyyy==currY)){
+				eval("sp"+ii).style.backgroundColor="#90EE90"
+			}
+		}
+	dCount += 1
+		if (dCount>6){
+			dCount=0
+		}
+	}
+}
+//  End -->
+</script>
+
+
+
+
+</head>
+
+<body>
+<div class="container">
+  <div class="header"><!-- end .header -->
+    <a name="PGTOP">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+  </div>
+  <div class="content">
+    <h1>Oregon News Page</h1><p>
+        <p hspace="10">This is the Oregon News Page, featuring Portland and Medford, Oregon News, starting with Medford, Oregon weather.&nbsp; Turn off your speakers now, or unplug your headphones now.&nbsp; For best results, when you find an item that you wish to read more about, RIGHT-click on that item, and, "Open in New Window."&nbsp; Below this area, several different Oregon news websites are now being laid out side by side.&nbsp; After the websites below have finished loading, the clocks below will start ticking.<br />
+For additional news, read also the following news pages: <a href="newspg.html">Newspaper</a>, <a href="newspg6.html">California News</a>, <a href="newspg7.html">MidWest News</a>, <a href="newspg5.html">Health News</a>, <a href="newspg2.html">Christian News</a> or <A href="newspg3.html">Technology News</a>.<br>
+    </p>
+    <table>
+    <tr>
+    <td>
+    <table><tr><td>
+    <SCRIPT LANGUAGE="JavaScript">
+var Today=new Date();
+var ThisDay=Today.getDay();
+var ThisDate=Today.getDate();
+var ThisMonth=Today.getMonth()+1;
+var ThisYear=Today.getFullYear();  //included if you wish to insert the year
+function DayTxt (DayNumber) {
+var Day=new Array();
+Day[0]="Sunday";
+Day[1]="Monday";
+Day[2]="Tuesday";
+Day[3]="Wednesday";
+Day[4]="Thursday";
+Day[5]="Friday";
+Day[6]="Saturday";
+return Day[DayNumber];
+}
+var DayName=DayTxt(ThisDay);
+function MonthTxt (MonthNumber) {
+var Month=new Array();
+Month[1]="January";
+Month[2]="February";
+Month[3]="March";
+Month[4]="April";
+Month[5]="May";
+Month[6]="June";
+Month[7]="July";
+Month[8]="August";
+Month[9]="September";
+Month[10]="October";
+Month[11]="November";
+Month[12]="December";
+return Month[MonthNumber];
+}
+var MonthName=MonthTxt(ThisMonth);
+var d = new Date();
+var h = d.getHours();
+document.write("<TABLE BORDER=3 BGCOLOR=WHITE  WIDTH=100 HEIGHT=85 hspace=10 align=left>"+"<TD>"+"<p align=center>"+"<font size=-1 >"+DayName+"<br>"+"<font color=orangered size=+3 >"+ThisDate+"</font>"+"<br>"+MonthName+"<br>"+ThisYear+"<br>"+"</B>"+"</font>"+"</p>"+"</TD>"+"</TR>"+"</TABLE>");
+
+if (h < 2) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Yes, it's after midnight."+"</B>"+"</td></tr></table>");
+else if (h < 3) document.write("<table ALIGN=center border=0 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Up early or working late?"+"</B>"+"</td></tr></table>");
+else if (h < 7) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning! Up bright and early!"+"</B>"+"</td></tr></table>");
+else if (h < 12) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good morning!"+"</B>"+"</td></tr></table>");
+else if (h < 17) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good afternoon!"+"</B>"+"</td></tr></table>");
+else if (h < 23) document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; Good evening!"+"</B>"+"</td></tr></table>");
+else document.write("<table ALIGN=left border=1 marginwidth=30 marginheight=5 hspace=10 vspace=0><tr><td> </td><td>"+"<b>"+"&nbsp; A late good evening! Not much left of it now."+"</B>"+"</td></tr></table>");
+//  End -->
+
+</script>
+
+<br />
+</td></tr><tr><td>
+
+<script type="text/javascript">writeCalendar()</script>
+</td></tr></table>
+</td><td>
+Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvkrud/n136/tluk/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+Exact Time right now in Los Angeles:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvktuv/n137/tt0" width=290 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br />
+
+</td></tr><tr><td colspan="2">
+
+
+    </td></tr></table></p>
+    <p>
+<table BGCOLOR="WHITE" align="right">
+<tr><td colspan="2"><center>
+West Portland Temperature, near the Oregon Zoo, about 2 miles west of Downtown Portland:<br>
+<IMG SRC="https://tripcheck.com/RoadCams/cams/26Zoo_pid498.jpg" BORDER=1 width="100%" height="100%"><br>
+East Portland Temperature, near Powell Blvd and the I-205 Freeway, about 8 miles east of Downtown Portland:<br>
+<IMG SRC="https://tripcheck.com/RoadCams/cams/i205powl_pid497.jpg" BORDER=1 width="100%" height="100%"><br>
+I-84 near Troutdale, 16 miles east of downtown Portland:<br>
+<IMG SRC="https://tripcheck.com/RoadCams/cams/i84@257th_pid1583.JPG" BORDER=1 width="100%" height="100%"><br>
+Temperature at Jacksonville Hill (8 miles SW from Medford, Oregon):<br>
+<IMG SRC="https://www.tripcheck.com/RoadCams/cams/Jacksonville%20Hill%20WB_pid1980.JPG" BORDER=1 width="100%" height="100%"><br>
+Downtown Medford, Oregon temperature:<br>
+<IMG SRC="https://tripcheck.com/RoadCams/cams/I-5%20at%20Medford%20Viaduct_pid3621.JPG" BORDER=1 width="100%" height="100%"><br>
+<iframe id="datamain" src="https://sirocco.accuweather.com/nx_mosaic_640x480_public/sir/inmasirOR_.gif" width=100% height=500 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?num=40&type=N0Q&mapx=400&mapy=240&brand=wui&delay=15&frame=0&scale=0.5&transx=0&transy=0&severe=1&smooth=0&centerx=400&centery=240&station=RTX&rainsnow=1&lightning=1&noclutter=0&showlabels=1&showstorms=99" width=100% height=510 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?num=40&type=N0Q&mapx=400&mapy=240&brand=wui&delay=15&frame=0&scale=0.5&transx=0&transy=0&severe=1&smooth=0&centerx=400&centery=240&station=MAX&rainsnow=1&lightning=1&noclutter=0&showlabels=1&showstorms=99" width=100% height=510 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<center>The above radar information comes from<br>
+The Weather Channel Weather Underground USA Radar:<br>
+<A href="https://www.wunderground.com/radar/us">https://www.wunderground.com/radar/us</A><br></center>
+<br>
+Temperature and Warning Maps from Windy:<br>
+<iframe width="590" height="700" src="https://embed.windy.com/embed2.html?lat=43.700&lon=-123.739&detailLat=43.700&detailLon=-123.739&width=590&height=700&zoom=7&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1" frameborder="0"></iframe><br>
+<iframe width="590" height="700" src="https://embed.windy.com/embed2.html?lat=43.700&lon=-123.739&detailLat=43.700&detailLon=-123.739&width=590&height=700&zoom=7&level=surface&overlay=capAlerts&product=capAlerts&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1" frameborder="0"></iframe><br>
+Temperature Maps from Dark Sky:<br>
+<iframe id="datamain" src="https://maps.darksky.net/@temperature,45.383,-118.758,6?customization=true" width=100% height=800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://maps.darksky.net/@temperature,45.480,-122.646,10?customization=true" width=100% height=800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://maps.darksky.net/@temperature,42.335,-123.023,10?customization=true" width=100% height=800 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://forecast.io/embed/#lat=42.3264&lon=-122.8719&name=Medford, Oregon" width=100% height=250 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br><p>
+The WillyWeather website ( <a href="https://www.willyweather.com/">https://www.willyweather.com/</a> ) will occasionally publish alerts on this page in the area below.<br>
+The area below here will have blank and empty spots if there are no alerts at this time for the cities mentioned below.<br>
+Portland:<br>
+<iframe id="datamain" src="https://cdnres.willyweather.com/widget/warning/dataView.html?id=118673" width=100% height=90 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+Medford:<br>
+<iframe id="datamain" src="https://cdnres.willyweather.com/widget/warning/dataView.html?id=118672" width=100% height=90 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://forecast.weather.gov/MapClick.php?zoneid=ORZ026" width=100% height=1400 marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>KPTV Portland TV Channel 12: Portland Seven-Day Weather Forecast:</center><br>
+<img src="https://cdn.lmgcorporate.com/kptv/weather/ibs_web_7-day.jpg" width=100% height=100% marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://www.kajo.com/weather/index.php" width=100% height=1800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>KDRV TV Channel 12, Medford, Oregon Weather:</center><br>
+<img src="https://ftp2.kdrv.com/newserver_7DAYvalley%20-%202.jpg" width=100% height=100% marginwidth=10 marginheight=0 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+</td></tr><tr><td colspan="2">
+<p>
+<br>
+The Weather Channel Weather Underground USA Radar Stations: <A href="https://www.wunderground.com/weather-radar/united-states-regional/nv/reno">SW</A>, <A href="https://www.wunderground.com/weather-radar/united-states-regional/or/redmond">NW</A><br />
+<br>
+<strong>National Oceanic and Atmospheric Administration (NOAA): National Weather Service (NWS): Weather Forecasts:</strong><br />
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=ORZ006">Portland, Oregon Weather Forecast</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=ORZ002">Newport Weather Forecast (Central Oregon Coast)</A><br>
+<br>
+<A href="https://forecast.weather.gov/MapClick.php?zoneid=ORZ021">Bandon Weather Forecast (South Central Oregon Coast)</A><br>
+<br>
+<!-- weather widget start --><a target="_blank" href="https://www.booked.net/weather/vancouver-2397,1095,3603,1384,3577,3600,3563"><img src="https://w.bookcdn.com/weather/picture/2_2397,1095,3603,1384,3577,3600,3563_0_1_009fde_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png?scode=2&domid=w209&anc_id=72529"  alt="booked.net"/></a><!-- weather widget end -->
+<br>
+<br>
+</p><hr><p>
+<br>
+<center><a href="http://www.flashalertportland.net/">FlashAlert Portland</a> -- Longview to Salem, Astoria to The Dalles</center><br />
+<iframe id="datamain" src="http://www.flashalertportland.net/closures-cats.html" width=100% height=1200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="http://www.flashalertportland.net/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center><a href="http://flashalertmedford.net/">FlashAlert Medford</a> -- Medford, Klamath Falls, and Grants Pass</center><br />
+<iframe id="datamain" src="http://flashalertmedford.net/closures-cats.html" width=100% height=1200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="http://flashalertmedford.net/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+</p><hr>
+</td></tr><tr><td colspan="2">
+<center>Medford, Oregon News, harvested by Google News:</center><br />
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://news.google.com/news/rss/headlines/search?q=Medford%2C%20Oregon",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "20",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "Off",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "15",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+</p><hr><p>
+<br>
+<iframe id="datamain" src="https://www.flashalert.net/news.html?id=1002" width=100% height=880 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>Fire, Weather & Avalanche Center: Oregon Fire Map</center><br />
+<iframe id="datamain" src="https://www.fireweatheravalanche.org/fire/state/oregon" width=100% height=1200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://experience.arcgis.com/experience/6329d5e4e13748b9b9f7f33f06a3c376/" width=100% height=1200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br></center>
+</td></tr><tr><td colspan="2"><center>
+<iframe id="datamain" src="https://www.columbian.com/news/northwest/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://www.columbian.com/news/local/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>News Releases from the Portland Police Bureau:</center><br>
+<iframe id="datamain" src="https://www.portlandoregon.gov/police/news/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>Portland Tribune Newspaper -- Portland Metro News from Pamplin Media Group:</center><br />
+<iframe id="datamain" src="https://portlandtribune.com/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>Washington and Oregon News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/washington" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://apnews.com/hub/oregon" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>Portland News from the Associated Press (AP):</center><br />
+<iframe id="datamain" src="https://apnews.com/hub/portland" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>Oregon Coast Daily News from Yaquina Bay Communications Radio:</center><br />
+<iframe id="datamain" src="https://oregoncoastdailynews.com/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<br></p><hr><p>
+Many of these news sources require a USA IP Address.<br>
+Use a VPN or proxy service to change your IP Address.<br>
+The free proxy service mentioned below is fast and easy, but it may display adult ads.<br>
+If a story is blocked (not available in your region), do this...<br>
+1. Copy the URL of the story.<br>
+2. Right-click on the 4everproxy link below and open it in a new window.<br>
+3. Make sure to select a United States location in the proxy app.<br>
+4. Paste the news story URL into the proxy app.<br>
+5. The proxy should take you around the website's IP Address blockade and you will be able to view the story.<br>
+Again, use caution, because this free proxy may display adult ads.<br>
+<br>
+PROXY:&nbsp; The 4everproxy Network<br />
+<a href="https://www.4everproxy.com/">https://www.4everproxy.com/</a><br /></p>
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.oregoncoastbreakingnews.com/blog-feed.xml",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://rssfeeds.kgw.com/kgw/northcoast",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://rssfeeds.kgw.com/kgw/centralcoast",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.koin.com/local/oregon-coast/feed",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.koin.com/feed/",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://www.kxl.com/feed/",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://rssfeeds.kgw.com/kgw/local",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "https://rssfeeds.kgw.com/kgw/southernoregon",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<br>
+<center>The Oregonian Newspaper, Advance Local Media, Oregonian Media Group,<br>
+Top News Stories from Vancouver, Washington; Portland, Oregon, and the Pacific Northwest:</center><br>
+<iframe id="datamain" src="https://www.oregonlive.com/news/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://www.oregonlive.com/clark-county/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://www.oregonlive.com/portland/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://www.oregonlive.com/pacific-northwest-news/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<iframe id="datamain" src="https://fox26medford.com/category/regional-news/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br />
+<HR SIZE=10 width="33%" NOSHADE>
+<HR SIZE=10 width="66%" NOSHADE>
+<HR SIZE=10 width="100%" NOSHADE>
+</td></tr><tr><td colspan="2"><center>
+<a name="NMEDF"></a><h2>Medford News</h2><br />
+<br>
+<iframe id="datamain" src="https://www.kajo.com/news/news.php" width=100% height=3200 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://fox26medford.com/category/local_news/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://mailtribune.com/news/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<iframe id="datamain" src="https://www.mailtribune.com/news/happening-now/" width=100% height=2400 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<center>KOBI, Virtual and VHF Digital TV Channel 5 -- Medford, Oregon News</center><br>
+<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'https://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://kobi5.com/feed",rssmikle_frame_width: "598",rssmikle_frame_height: "400",frame_height_by_article: "30",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "off",scrolldirection: "up",scrollstep: "10",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "128",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "on",rssmikle_item_description_length: "512",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "30",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:598px;"><a href="https://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->
+<br>
+<br>
+<iframe id="datamain" src="https://www.kdrv.com/news/local" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+<br>
+<br>
+</center>
+</td></tr><tr><td colspan="2">
+<center>
+<A href="https://gacc.nifc.gov/nwcc/information/firemap.aspx">Map of Forest Fires in Oregon</A><br />
+<A href="https://www.calfire.ca.gov/general/firemaps">Map of Forest Fires in California</A><br />
+<br />
+<A href="https://www.crimemapping.com/map.aspx?aid=eae6dfcd-875f-41ea-a349-a0291b1dfc5b">Central Point Crime Map</A><br />
+<A href="https://www.crimemapping.com/map.aspx?aid=261a7ab9-db55-4253-8b00-26d7be0f18d0">Medford Crime Map</A><br />
+<br>
+<br>
+Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i4ks2ahc/n136/tluk/fs18/bo2/pd2/tt0/ta1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+<br>
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/fs18/bo2/tt0/ta1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+<br>
+Exact Time right now in Los Angeles:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i4ks2fb0/n137/fs18/bo2/pd2/tt0/ta1/tb1" width=98% height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+<br>
+</center>
+</td></tr><tr><td colspan="2"><center>
+<iframe id="datamain" src="https://www.opb.org/" width=100% height=4800 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br>
+</center>
+</td></tr>
+</table>
+</center></p>
+<hr>
+<br>
+<br>
+<br>
+<br>
+<p>For additional news, see also the following news pages: <a href="newspg.html">Newspaper</a>, <a href="newspg6.html">California News</a>, <a href="newspg7.html">MidWest News</a>, <a href="newspg5.html">Health News</a>, <a href="newspg2.html">Christian News</a> or <A href="newspg3.html">Technology News</a>.<br>
+</p>
+<br />
+<br />
+
+<p></p>
+<h2>&nbsp;</h2>
+<p>&nbsp;</p>
+    <!-- end .content --></div>
+  <div class="footer">
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+    <p>&nbsp;</p>
+    <p>###</p>
+    <p><!-- end .footer --></p>
+    <p>&nbsp;</p>
+  </div>
+  <!-- end .container --></div>
+  
+  <!-- *********************************************************
+     * You may use this code for free on any web page provided that 
+     * these comment lines and the following credit remain in the code.
+     * Floating Div from https://www.javascript-fx.com
+     ********************************************************  -->
+<div id="divTopLeft"     style="position:absolute">
+<!-- Start - put your content below here --->
+    
+          <table border=1 bgcolor="grey" background="img/decor.jpg"><tr><td>
+      <p><span style="background-color: #FFFFFF"><b><a href=#PGTOP>Top of Page</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">Overview</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quicksurf2.html">QuickSurf</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="newspg.html">Newspaper</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="hot.html">Hot Links</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="drawer.html">Top Drawer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span></p>
+</td></tr></table>
+
+<!-- End   - put your content above here --->
+</div>
+
+<script type="text/javascript">
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function JSFX_FloatDiv(id, sx, sy)
+{
+	var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+	var px = document.layers ? "" : "px";
+	window[id + "_obj"] = el;
+	if(d.layers)el.style=el;
+	el.cx = el.sx = sx;el.cy = el.sy = sy;
+	el.sP=function(x,y){this.style.left=x+px;this.style.top=y+px;};
+
+	el.floatIt=function()
+	{
+		var pX, pY;
+		pX = (this.sx >= 0) ? 0 : ns ? innerWidth : 
+		document.documentElement && document.documentElement.clientWidth ? 
+		document.documentElement.clientWidth : document.body.clientWidth;
+		pY = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+		document.documentElement.scrollTop : document.body.scrollTop;
+		if(this.sy<0) 
+		pY += ns ? innerHeight : document.documentElement && document.documentElement.clientHeight ? 
+		document.documentElement.clientHeight : document.body.clientHeight;
+		this.cx += (pX + this.sx - this.cx)/8;this.cy += (pY + this.sy - this.cy)/8;
+		this.sP(this.cx, this.cy);
+		setTimeout(this.id + "_obj.floatIt()", 40);
+	}
+	return el;
+}
+JSFX_FloatDiv("divTopLeft", 600,95).floatIt();
+</script>
+<!-- ********************************************************* -->
+  
+</body>
+</html>
+<noscript><table background="img/decor.jpg"><td><font color="#ffffff"><plaintext> 

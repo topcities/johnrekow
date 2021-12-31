@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<META HTTP-EQUIV="Refresh" CONTENT="241; URL=rest1.html">
+<meta http-equiv="Expires" content="Tue, 04 Dec 2007 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Time & Temp Only- Frame 1</title>
+<script lang="JavaScript">
+
+
+function Display(min, sec) {
+	var disp;
+	if (min <= 9) disp = " 0";
+	else disp = " ";
+	disp += min + ":";
+	if (sec <= 9) disp += "0" + sec;
+	else disp += sec;
+	return (disp);
+}
+
+
+function Down() {
+
+		sec--;
+		if (sec == -4) { sec = 2; min--; }
+			//document.timerform.clock.value = Display(min, sec);
+	window.status = "This frame will refresh in" + Display(min, sec) + ". ";
+		if (min == 4 && sec == 5) {
+			//alert("Your session has timed out.");
+			window.status = "Refreshing...";
+			window.location.href = 'rest1.html';
+		}
+		else{
+			down = setTimeout("Down()", 1000);
+		}
+}
+    min = 4;
+	sec = 2;
+	Down();
+</script>
+
+<script language="JavaScript" type="text/javascript"> function goTo() {	document.location.href="rest1.html";}  window.onload=function(){	setTimeout(function(){ goTo(); },241000);}	</script>
+
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+
+<style type="text/css">
+body {
+	background-color: white;
+	background-image: white;
+	background-repeat: repeat;
+}
+</style>
+
+</head>
+
+<body>
+
+  <div class="header"><!-- end .header --></div>
+<center>
+    Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvkrud/n136/tluk/tt0" width=330 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<script type="text/javascript" src="https://moonphases.co.uk/js/widget.js" id="moonphase_widget" widget="tiny" lat="" lng="" date="" tz=""></script>
+Fayetteville, Arkansas Temperature, by The Dark Sky Company:<br>
+<script type='text/javascript' src='https://darksky.net/widget/small/36.0619,-94.1611/us12/en.js?width=100%&height=60&title=Fayetteville, AR&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us'></script><br>
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/tt0" width=330 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+</center><br />
+
+</body>
+</html>
+<noscript><table background="img/decor.jpg"><td><font color="#ffffff"><plaintext> 
