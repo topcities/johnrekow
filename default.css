@@ -1,0 +1,196 @@
+@charset "utf-8";
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-color: #F00;
+	background-image: url(img/decor.jpg);
+	left: 5px;
+}
+
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+	text-align: left;
+	left: 5px;
+}
+.container .sidebar1 h2 {
+	text-align: center;
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #000099;
+	text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #660066;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+
+/* ~~this fixed width container surrounds the other divs~~ */
+.container {
+	margin: 0 auto;
+	background-color: #F00;
+	background-image: url(img/decor.jpg);
+}
+
+/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
+.header {
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-color: #05355e;
+	border-right-color: #05355e;
+	border-bottom-color: #05355e;
+	border-left-color: #05355e;
+	background-color: #FF0;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-weight: bolder;
+	color: #F00;
+	font-size: 1.5em;
+}
+.headernavbar {
+	background-color: #6699cc;
+	color: #ff9900;
+	background-image: url(img/decor.jpg);
+	text-decoration: underline overline;
+	left: 600px;
+}
+
+
+
+.sidebar1 {
+	float: left;
+	width: 229px;
+	padding-bottom: 5px;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-color: #05355e;
+	border-right-color: #05355e;
+	border-bottom-color: #05355e;
+	border-left-color: #05355e;
+	background-color: #FFE9CC;
+	font-size: 0.85em;
+	font-style: normal;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.content {
+	float: left;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-color: #05355e;
+	border-right-color: #05355e;
+	border-bottom-color: #05355e;
+	border-left-color: #05355e;
+	font-size: 0.8em;
+	background-color: #FFF;
+	padding-top: 5px;
+	padding-right: 10;
+	padding-bottom: 5px;
+	padding-left: 10;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #000;
+	width: 600px;
+}
+.container .content h1 {
+	text-align: center;
+}
+
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+ul.nav {
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #666; /* this creates the space between the navigation on the content below */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* this creates the button separation */
+}
+.headernavbar a ,.headernavbar a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	display: inline-block;
+	text-decoration: none;
+	background-color: #000;
+	color: #FFF;
+	width: 120px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	background-image: none;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+.headernavbar a:hover,.headernavbar a:active,.headernavbar a:focus  { /* this changes the background and text color for both mouse and keyboard navigators */
+	color: #FF0;
+	background-color: #FF0;
+	font-family: "Arial Black", Gadget, sans-serif;
+	background-image: url(img/decor.jpg);
+}
+
+/* ~~ The footer ~~ */
+.footer {
+	padding: 10px 0;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-color: #05355e;
+	border-right-color: #05355e;
+	border-bottom-color: #05355e;
+	border-left-color: #05355e;
+	background-color: #F00;
+	font-size: 0.8em;
+	color: #FFF;
+	text-align: center;
+	background-image: url(img/decor.jpg);
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.container .footer p {
+	text-align: center;
+	margin: 0px;
+	background-image: none;
+}
+
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
