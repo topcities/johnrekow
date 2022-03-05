@@ -1,0 +1,126 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<HEAD>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>HexLamp</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<style type="text/css">
+html, body, svg {
+  width: 100%;
+  height: 100%;
+  margin: 0; padding: 0;
+  display: block;
+}
+
+body:hover [filter],
+body:active [filter]
+{filter: none;}
+
+#p {
+  fill: black;
+  fill-opacity: 0.2;
+  stroke: white;
+  stroke-width: 2.3px;
+  stroke-dasharray: 200 188.5;
+  animation: stroke-color 11s infinite linear;
+}
+#p .wrapper, #p use {
+  animation: draw 4s infinite linear;  
+}
+#p use:nth-child(3){
+  fill: white;
+  fill-opacity: 0.1;
+  animation-delay: -2s;
+}
+
+:root {
+  animation: back-color 11s infinite linear;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 388.5;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes stroke-color {
+  0%      {stroke: hsl(  0,100%,70%);}
+  16.667% {stroke: hsl( 60,100%,70%);}
+  33.333% {stroke: hsl(120,100%,70%);}
+  50%     {stroke: hsl(180,100%,70%);}
+  66.667% {stroke: hsl(240,100%,70%);}
+  83.333% {stroke: hsl(300,100%,70%);}
+  100%    {stroke: hsl(360,100%,70%);}
+}
+@keyframes back-color {
+  0%      {background: hsl(  0,80%,15%);}
+  16.667% {background: hsl( 60,80%,15%);}
+  33.333% {background: hsl(120,80%,15%);}
+  50%     {background: hsl(180,80%,15%);}
+  66.667% {background: hsl(240,80%,15%);}
+  83.333% {background: hsl(300,80%,15%);}
+  100%    {background: hsl(360,80%,15%);}
+}
+</style>
+</head>
+<body>
+<svg>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="2"/>
+    <feComposite in2="SourceGraphic"
+                 operator="out" result="glow" />
+    <feFlood flood-color="white" flood-opacity="0.2" />
+    <feComposite in2="SourceGraphic"
+                 operator="atop" result="light" />
+    <feComposite in="glow" in2="light" />    
+  </filter>
+  <pattern id="p" patternUnits="userSpaceOnUse"
+           width="180px" height="120px"
+           patternTransform="scale(1,0.8660254)">
+    <g filter="url(#glow)">
+      <g class="wrapper">
+        <path id="hex" pathLength="388.5"
+                 d="M-30,-60 30,-60 60,0
+                         30,60 -30,60 -60,0Z"
+                 transform="scale(0.935)" />
+      </g>
+      <use xlink:href="#hex" x="0" y="+120" />
+      <use xlink:href="#hex" x="+90" y="+60" />
+      <use xlink:href="#hex" x="+180" y="0" />
+      <use xlink:href="#hex" x="+180" y="120" />
+    </g>
+  </pattern>
+  <rect fill="url(#p)" width="100%" height="100%"/>
+</svg>
+<br>
+<br>
+<br>
+<h1> </h1><br>
+<br>
+<br>
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
