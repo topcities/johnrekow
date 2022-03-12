@@ -1,0 +1,203 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp Noise</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+
+<style type="text/css">
+body{
+  padding: 0px;
+  margin: 0px;
+  background: #2e2e2e;
+  color: #909090;
+  font: 20px arial, sans-serif;
+  overflow: hidden;
+}
+
+</style>
+
+
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<canvas id="TVStatic"></canvas>
+
+<!--
+
+for(let bit = 0; bit < 16; bit++)
+  imageData32[ptr++] = (random & bits[bit]) ? -1 : -16777216;	
+
+"1,702,976 pixels per frame. 17.847 milliseconds per frame. 95,420,855 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 17.787 milliseconds per frame. 95,742,733 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 17.556 milliseconds per frame. 97,002,506 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 17.723 milliseconds per frame. 96,088,473 pixels per second (if not capped at 60 FPS)."
+
+
+
+
+imageData32[ptr++] = (random & 1) ? -1 : -16777216;
+imageData32[ptr++] = (random & 2) ? -1 : -16777216;
+....
+imageData32[ptr++] = (random & 16384) ? -1 : -16777216;
+imageData32[ptr++] = (random & 32768) ? -1 : -16777216;
+
+"1,702,976 pixels per frame. 15.111 milliseconds per frame. 112,697,770 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 14.881 milliseconds per frame. 114,439,621 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 14.894 milliseconds per frame. 114,339,734 pixels per second (if not capped at 60 FPS)."
+"1,702,976 pixels per frame. 15.123 milliseconds per frame. 112,608,345 pixels per second (if not capped at 60 FPS)."        
+
+
+
+"1400 x 900 resolution. 1,260,000 pixels per frame. 11.023 milliseconds per frame. 114,306,450 pixels per second (if not capped at 60 FPS). "
+"1400 x 900 resolution. 1,260,000 pixels per frame. 11.131 milliseconds per frame. 113,197,377 pixels per second (if not capped at 60 FPS). "
+"1400 x 900 resolution. 1,260,000 pixels per frame. 11.777 milliseconds per frame. 106,988,197 pixels per second (if not capped at 60 FPS). "
+
+
+-->
+<!-- partial -->
+<script>  
+// Graphic things.
+const c = document.getElementById("TVStatic");
+let ctx = c.getContext("2d");
+c.width = 2800;
+c.height = 1800;
+const resizeCanvasToFillWindow = false;
+
+let imageData = ctx.getImageData(0, 0, c.width, c.height);
+let imageData32 = new Uint32Array(imageData.data.buffer);
+let random = new Date().getTime() >>> 0;
+
+// Timing things.
+// Collect this many time stats, then average them for displaying in the console.
+const timesLength = 100; 
+// Set up the array with 0's so we can average against a part filled array.
+const times = Array(timesLength).fill(0); 
+// Location of the next time element we'll use for storage.
+let timePtr = 0;
+// width x height of canvas (same as imageData32.length)
+let pixelsPerFrame = imageData32.length;
+
+
+if(resizeCanvasToFillWindow){
+  fillWindow();
+  window.addEventListener("resize", fillWindow, true);
+}
+
+function fillWindow(){
+  const width = window.innerWidth;
+  const height = window.innerHeight
+  c.width = width ? width : 1;
+  c.height = height ? height : 1;
+  imageData = ctx.getImageData(0, 0, c.width, c.height);
+  imageData32 = new Uint32Array(imageData.data.buffer);
+  pixelsPerFrame = imageData32.length;
+}
+
+function drawTVStatic(){
+  let ptr = 0;
+  do{
+    // XOR shift pseudo random integer
+    random ^= random << 13;
+    random ^= random >> 17;
+    random ^= random << 5;
+    // Byte 1
+    imageData32[ptr++] = (random & 1) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 2) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 4) ? -1 : -16777216;    
+    imageData32[ptr++] = (random & 8) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 16) ? -1 : -16777216;   
+    imageData32[ptr++] = (random & 32) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 64) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 128) ? -1 : -16777216;
+    // Byte 2
+    imageData32[ptr++] = (random & 256) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 512) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 1024) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 2048) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 4096) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 8192) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 16384) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 32768) ? -1 : -16777216;
+    // Byte 3
+    imageData32[ptr++] = (random & 65536) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 131072) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 131072) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 262144) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 524288) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 1048576) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 2097152) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 4194304) ? -1 : -16777216;
+    // Byte 4
+    imageData32[ptr++] = (random & 8388608) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 16777216) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 33554432) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 67108864) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 134217728) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 268435456) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 536870912) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 1073741824) ? -1 : -16777216;
+    // Byte 5 (2 bits, bit 33 and 34)
+    imageData32[ptr++] = (random & 2147483648) ? -1 : -16777216;
+    imageData32[ptr++] = (random & 4294967296) ? -1 : -16777216;
+    
+  }while(ptr < imageData32.length);
+  ctx.putImageData(imageData, 0, 0)
+}
+
+
+function timeThisFrame(){
+  const t0 = performance.now();
+  
+  drawTVStatic();
+  
+  const t1 = performance.now();
+  times[timePtr++] = t1 - t0;
+  if(timePtr === timesLength) timePtr = 0;
+
+  if(timePtr === 0) {
+    let averageMillisecondsPerFrame = times.reduce((a, b) => a + b, 0)
+    averageMillisecondsPerFrame /= timesLength;
+    const pixelsPerMillisecond = pixelsPerFrame / averageMillisecondsPerFrame;
+    const pixelsPerSecond = Math.round(pixelsPerMillisecond * 1000);
+    const displayAverage = averageMillisecondsPerFrame.toFixed(3);
+    let report = `${c.width} x ${c.height} resolution. `;
+    report += `${pixelsPerFrame.toLocaleString()} pixels per frame. `;
+    report += `${displayAverage.toLocaleString()} milliseconds per frame. `;
+    report += `${pixelsPerSecond.toLocaleString()} pixels per second (if not capped at 60 FPS). `;
+    console.log(report);
+  }
+  requestAnimationFrame(timeThisFrame);
+}
+
+
+
+requestAnimationFrame(timeThisFrame);
+
+</script>
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
