@@ -1,0 +1,235 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<HEAD>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT>
+<title>SoundTest2</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<style type="text/css">
+body {
+  background: #000;
+  color: #eee;
+  font-family: Verdana, sans-serif;
+  margin: 4em;
+  font-size: 2vw;
+}
+
+div {
+  user-select: none;
+  cursor: pointer;
+  background: gray;
+  font-size: 2em;
+  width: 5em;
+  height: 2em;
+  line-height: 2em;
+  margin: 1em;
+}
+
+td {width: 8em;}
+td:first-child {
+  text-align: right;
+  padding-right: 0.5em;
+}
+td:nth-child(2) {width: 12em;}
+td:last-child {padding-left: 0.5em;}
+td > input, td > select {width: 100%;}
+.no:hover {background: red;}
+.yes:hover {background: green;}
+
+</style>
+
+
+
+</head>
+<body onload="init()">
+<br>
+<h1>Sound Test 2</h1>
+<h2>Random Tone Generator</h2>
+		<table>
+			<tr id="volume">
+				<td>Volume</td>
+				<td><input type="range" min="0" max="100" value="20" oninput="setValues(false)"/></td>
+   		     <td><span></span>%</td>
+			</tr>
+			<tr id="freq1">
+				<td>Frequency 1</td>
+				<td><input type="range" min="50" max="10000" value="200" oninput="setValues(true)"/></td>
+				<td><span></span>Hz</td>
+			</tr>
+			<tr id="freq2">
+				<td>Frequency 2</td>
+				<td><input type="range" min="50" max="10000" value="800" oninput="setValues(true)"/></td>
+				<td><span></span>Hz</td>
+			</tr>
+			<tr id="nosc">
+				<td>#oscillators</td>
+				<td><input type="range" min="1" max="24" value="12" oninput="setValues(true)"/></td>
+				<td><span></span></td>
+			</tr>
+			<tr id="time">
+				<td>Note duration</td>
+				<td><input type="range" min="1" max="100" value="10" oninput="setValues(true)"/></td>
+				<td><span></span>0 ms</td>
+			</tr>
+			<tr>
+				<td>Presets:</td>
+				<td><select id="presets" width="100%" oninput="applyPreset()">
+					<option value="-1">(none)</option>
+				</select></td>
+				<td></td>
+			</tr>
+		</table>
+		<div class="yes" id="running" onclick="running=!running;setValues(false);">START</div>
+
+<span style="background-color: #FFFFFF">
+<br><FONT color=red>
+If it does not work at first, click the Start button,<br>
+and select a choice in the Presets drop-down menu.<br>
+Do that a few more times, and it should start working.<br></font>
+</span>
+<br>
+
+
+
+
+<script>  
+var running = false, f1, f2, resetLoop = () => {}, loopTime = 100;
+var ctx = new AudioContext(), osc = [], gain = ctx.createGain();
+
+function rndf() {return f1 + (f2 - f1) * Math.random();}
+
+function init() {
+  initPresets();
+  setValues(false);
+  gain.connect(ctx.destination);
+  let n = 0, setLoop = () => setInterval(() => osc[n++ % osc.length].frequency.value = rndf(), loopTime), loop = setLoop();
+  resetLoop = function() {
+    clearInterval(loop);
+    loop = setLoop();
+  }
+}
+
+function setValues(toCustom) {
+  let setVal = id => (q => q("span").innerText = q("input").value)(x => document.getElementById(id).querySelector(x));
+  let nosc = setVal("nosc");
+  gain.gain.value = (setVal("volume") * running) / (1000 * Math.max(Math.sqrt(nosc), 1));
+  f1 = 1 * setVal("freq1");
+  f2 = 1 * setVal("freq2");
+  while (osc.length < nosc) {
+  	let o = ctx.createOscillator();
+  	o.frequency.value = rndf();
+  	o.connect(gain);
+  	o.start(ctx.currentTime);
+    osc.push(o);
+  }
+  while (osc.length > nosc) osc.pop().disconnect();
+  let loopTime2 = 10 * setVal("time");
+  if (loopTime2 != loopTime) {
+  	loopTime = loopTime2;
+  	resetLoop();
+  }
+  if (toCustom) document.getElementById("presets").value = -1;
+  document.getElementById("running").innerText = running ? "STOP" : "START";
+  document.getElementById("running").className = running ? "no" : "yes";
+}
+
+const presets = [
+  {name: "Default", f1: 200, f2: 800, no: 12, nd: 10},
+  {name: "Jazzy", f1: 91, f2: 969, no: 2, nd: 19},
+  {name: "Hell", f1: 200, f2: 800, no: 12, nd: 10},
+  {name: "Morning", f1: 100, f2: 500, no: 6, nd: 15},
+  {name: "Dizzy", f1: 50, f2: 1050, no: 18, nd: 1},
+  {name: "Windy", f1: 75, f2: 225, no: 24, nd: 15},
+  {name: "Speed", f1: 147, f2: 603, no: 1, nd: 5},
+  {name: "Calm", f1: 81, f2: 414, no: 3, nd: 72}
+];
+
+function initPresets() {
+  let n = 0;
+  for (p of presets) {
+  	let o = document.createElement("option");
+  	o.innerText = p.name;
+  	o.value = n++;
+  	document.getElementById("presets").appendChild(o);
+  }
+}
+
+function applyPreset() {
+  let p = document.getElementById("presets").value;
+  if (p < 0) return;
+  let preset = presets[p], setVal = (id, val) => document.getElementById(id).querySelector("input").value = val;
+  setVal("freq1", preset.f1);
+  setVal("freq2", preset.f2);
+  setVal("nosc", preset.no);
+  setVal("time", preset.nd);
+  setValues(false);
+}
+
+</script>
+
+<div id="divTopLeft"     style="position:absolute">
+<!-- Start - put your content below here --->
+    
+    <table border=1 bgcolor="grey" background="img/decor.jpg"><tr><td>
+      <p><span style="background-color: #FFFFFF"><b><a href=#PGTOP>Top of Page</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">Overview</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quicksurf2.html">QuickSurf</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="newspg.html">Newspaper</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="hot.html">Hot Links</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="drawer.html">Top Drawer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span></p>
+</td></tr></table>
+
+<!-- End   - put your content above here --->
+</div>
+
+<script type="text/javascript">
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function JSFX_FloatDiv(id, sx, sy)
+{
+	var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+	var px = document.layers ? "" : "px";
+	window[id + "_obj"] = el;
+	if(d.layers)el.style=el;
+	el.cx = el.sx = sx;el.cy = el.sy = sy;
+	el.sP=function(x,y){this.style.left=x+px;this.style.top=y+px;};
+
+	el.floatIt=function()
+	{
+		var pX, pY;
+		pX = (this.sx >= 0) ? 0 : ns ? innerWidth : 
+		document.documentElement && document.documentElement.clientWidth ? 
+		document.documentElement.clientWidth : document.body.clientWidth;
+		pY = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+		document.documentElement.scrollTop : document.body.scrollTop;
+		if(this.sy<0) 
+		pY += ns ? innerHeight : document.documentElement && document.documentElement.clientHeight ? 
+		document.documentElement.clientHeight : document.body.clientHeight;
+		this.cx += (pX + this.sx - this.cx)/8;this.cy += (pY + this.sy - this.cy)/8;
+		this.sP(this.cx, this.cy);
+		setTimeout(this.id + "_obj.floatIt()", 40);
+	}
+	return el;
+}
+JSFX_FloatDiv("divTopLeft", 600,95).floatIt();
+</script>
+<!-- ********************************************************* -->
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
