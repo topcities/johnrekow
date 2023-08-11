@@ -1,0 +1,81 @@
+User-agent: GPTBot
+Disallow: /
+
+User-agent: baiduspider
+Disallow: /
+
+User-agent: naverbot
+Disallow: /
+
+User-agent: seznambot
+Disallow: /
+
+User-agent: teoma
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: Yeti
+Disallow: /
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: msnbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Googlebot-Mobile
+Disallow: /
+
+User-agent: Mediapartners-Google
+Disallow: /
+
+User-agent: Adsbot-Google
+Disallow: /
+
+User-agent: Applebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Discordbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: facebookexternalhit
+Disallow: /
+
+User-agent: facebookcatalog
+Disallow: /
+
+User-agent: LinkedInBot
+Disallow: /
+
+User-agent: Pinterestbot
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+
+User-agent: TelegramBot
+Disallow: /
+
+User-agent: Twitterbot
+Disallow: /
+
+User-agent: *
+Disallow: /
+
