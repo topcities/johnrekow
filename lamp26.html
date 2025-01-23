@@ -1,0 +1,212 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 26 - Shadows</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<style>
+body {
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+}
+canvas {
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+</style>
+
+
+
+</head>
+<body>
+<canvas id="c" overflow="hidden"></canvas>
+
+
+
+
+<script>
+class Point {
+        constructor(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.r = 1 + Math.random() * 3;
+            this.speed = .15 + Math.random() * .25;
+            this.angle = Math.random() * 360;
+            this.color = color;
+          
+            this.xstep = Math.cos(this.angle * Math.PI / 180.0) * this.speed;
+            this.ystep = Math.sin(this.angle * Math.PI / 180.0) * this.speed;
+        }
+
+        update() {
+            let xstep = this.xstep;
+            let ystep = this.ystep;
+
+            if(this.x + this.r > w) {
+                xstep = -xstep;
+                this.x = w - this.r - 0.1;
+            }
+            if(this.x - this.r < 0) {
+                xstep = -xstep;
+                this.x = this.r + 0.1;
+            }
+
+            if(this.y + this.r > h) {
+                ystep = -ystep;
+                this.y = h - this.r - 0.1;
+            }
+            if(this.y - this.r < 0) {
+                ystep = -ystep;
+                this.y =  this.r + 0.1;
+            }
+
+            this.x += xstep;
+            this.y += ystep;
+
+            this.xstep = xstep;
+            this.ystep = ystep;
+        }
+    }
+
+    const w = 252;
+    const h = 159;
+    let c, ctx, image;
+    let frame = 0;
+
+    function init() {
+        c = document.querySelector('#c');
+        ctx = c.getContext('2d');
+        c.width = w;
+        c.height = h;
+        image = ctx.createImageData(w, h);
+    }
+
+    let colors = [
+        [255, 255, 0],
+        [100, 255, 100],
+        [0, 255, 255],
+        [100, 150, 255],
+        [55, 250, 100],      
+    ];
+    let points = [];
+    for(let p=0; p<5; p++) {
+        let xp = w/2;
+        let yp = h/2;
+        points[p] = new Point(xp, yp, colors[p]);
+    }
+
+    function updateImageData()
+    {
+        let n, i = 0;
+        for(let y=0; y<h; y++) {
+            for(let x=0; x<w; x++) {
+
+                let dist = 0;
+                let cr = 0, cg = 0, cb = 0;
+                let maxdist = 0;
+                for(n=0; n<5; n++) {                  
+                    let dx = Math.abs(x - points[n].x);
+                    let dy = Math.abs(y - points[n].y);
+                    let d = Math.sqrt(dx*dx + dy*dy);
+                    if(d > maxdist) maxdist = d;
+                }
+                for(n=0; n<5; n++) {
+                    let dx = Math.abs(x - points[n].x);
+                    let dy = Math.abs(y - points[n].y);
+                    let dd = Math.sqrt(dx * dx + dy*dy);
+                    let d = 1 / dd;
+                    d = d * d * d;
+                    dist += (d * points[n].r * 100);
+                  
+                    let multx = Math.sin((x + frame*3) / 180);
+                    let multy = Math.cos((y + frame*5) / 180);
+                    let mult = 5 + (multx * multy) * 10;
+                  
+                    let cf = 1 - dd / maxdist;
+                    let a = cf * mult * 3.14159;
+                    cf = Math.cos(a);
+                    cr += points[n].color[0] * cf;
+                    cg += points[n].color[1] * cf;
+                    cb += points[n].color[2] * cf;
+                }
+                if(dist > 255) dist = 255;
+
+                cr = Math.round(cr);
+                if(cr > 255) cr = 255;
+                cg = Math.round(cg);
+                if(cg > 255) cg = 255;
+                cb = Math.round(cb);
+                if(cb > 255) cb = 255;
+              
+                image.data[i + 0] = cr;
+                image.data[i + 1] = cg;
+                image.data[i + 2] = cb;
+                image.data[i + 3] = 255;
+                i += 4;
+
+            }   
+        }
+    }
+
+    function updatePoints()
+    {
+        for(let i=0; i<5; i++) {
+            points[i].update();
+        }
+    }
+
+    const tick = time => {
+        frame++;
+      
+        updatePoints();
+
+        updateImageData();
+        updatePoints();
+        ctx.putImageData(image, 0, 0);
+
+        requestAnimationFrame(tick);
+    };
+
+    init();
+    tick();
+
+
+</script>
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
