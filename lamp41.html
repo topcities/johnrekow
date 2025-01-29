@@ -1,0 +1,178 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 41 - Frosty</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<style type="text/css">
+* {
+  background: black;
+  margin: 0;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+<script>
+const canvas = document.createElement("canvas");
+const c = canvas.getContext("2d");
+ 
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+document.body.append(canvas); 
+ 
+const TWO_PI = 2 * Math.PI;
+ 
+class Dot {
+  constructor(id, x, y, theta, parent) {
+    this.x = x;
+    this.y = y;
+    this.t = theta;
+    this.vx = Math.cos(this.t) * Math.random() * 2;
+    this.vy = Math.sin(this.t) * Math.random() * 2;
+    this.life = 30;
+    this.col = parent.col;
+ 
+    if (Math.random() < 0.005) this.other = true;
+    if (this.other) {
+      this.life = 1000;
+      this.t = Math.random() * 7;
+      this.vx = Math.cos(this.t) * Math.random() * 2;
+      this.vy = Math.sin(this.t) * Math.random() * 2;
+      this.col = "black";
+    }
+    this.iter = 0;
+    this.parent = parent;
+    this.id = id;
+    this.alpha = 0.25;
+ 
+    if (Math.random() < 0.3) this.alpha = 0.25;
+  }
+ 
+  draw() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.iter++;
+    if (this.iter > this.life) {
+      delete this.parent.dots[this.id];
+    }
+    c.fillStyle = this.col;
+    c.globalAlpha = this.alpha;
+    if (!this.no) this.alpha -= 0.00125;
+    c.fillRect(this.x, this.y, this.parent.size, this.parent.size);
+  }
+}
+ 
+class Stain {
+  constructor(x = innerWidth, y = innerHeight) {
+    this.x = x / 2;
+    this.y = y / 2;
+    this.num = 1;
+    this.step = TWO_PI / this.num;
+ 
+    this.size = 1 + Math.random() * Math.random() * 2;
+    this.rad = Math.random() * 300;
+    this.dots = {};
+    this.dotId = 0;
+    this.col = Math.random() < 0.8 ? "white" : "black";
+    this.to = Math.random() * 7;
+    this.S = 20 + Math.random() * 50;
+    this.R = 100 + Math.random() * 300;
+    this.rr = 50 + Math.random() * 300;
+    this.dir = Math.random() < 0.6 ? 1 : Math.random() * 10 - 5;
+    this.v = 1;
+    this.tt = 0;
+    if (Math.random() * 0.25) this.v = Math.random() * 5;
+  }
+ 
+  draw() { 
+    const circ = this.rad * TWO_PI;
+    this.rad -= this.v;
+ 
+    this.step = TWO_PI / circ;
+ 
+    if (this.rad > 0) {
+      for (let i = 1; i <= this.R; i += this.S) {
+        let t = (i * this.step + this.to) * this.dir;
+        let x = this.x + this.rad * Math.cos(t);
+        let y = this.y + this.rad * Math.sin(t);
+        this.dots[this.dotId] = new Dot(this.dotId, x, y, t, this);
+        this.dotId++;
+      }
+    }
+    for (let i in this.dots) {
+      if (this.dots[i]) this.dots[i].draw();
+    }
+  }
+}
+ 
+onresize = e => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  c.fillStyle = "black";
+  c.fillRect(0, 0, innerWidth, innerHeight)
+}
+ 
+onresize()
+ 
+let ss = [new Stain()];
+ 
+function loop() {
+  if (Math.random() < 0.05) {
+    ss.push(
+      new Stain(Math.random() * innerWidth * 2, Math.random() * innerHeight * 2)
+    );
+  }
+  ss.forEach((s) => s.draw());
+  c.globalAlpha = 0.05;
+  c.drawImage(canvas, 0, 3, canvas.width + 0.2, canvas.height - 6);
+  c.globalAlpha = 1;
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+
+
+
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
