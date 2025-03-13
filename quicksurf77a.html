@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Quicksurf 77a -- Section 15 -- Arris POTD Generator</title>
+
+
+<SCRIPT LANGUAGE="JavaScript"> 
+/*
+ * Arris password of the day generator. For a full list of the supported
+ * modem models, visit the project homepage.
+ *
+ * Author: RaCrl Pedro Fernandes Santos
+ * Project homepage: http://www.borfast.com/projects/arris-password-of-the-day-generator/
+ *
+ */
+
+// TODO: Add some testing, just for fun.
+
+function ArrisPwGen(startdate, enddate, new_seed) {
+    "use strict";
+
+    var password_count = 0;
+    var one_day_in_milliseconds = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+    // Check how many passwords we're going to generate.
+    if (arguments.length >= 2) {
+        password_count = Math.ceil((enddate - startdate + 1) / one_day_in_milliseconds);
+    } else if (arguments.length === 1) {
+        password_count = 1;
+    }
+
+    // See if we have a valid number of passwords
+    if ((password_count < 1) || (password_count > 365)) {
+        throw 'Invalid dates. I need dates that span a year at most';
+    }
+
+
+    var seed = new_seed || 'MPSJKMDHAI',
+        seedeight = seed.substr(0, 8),
+        seedten = seed;
+    
+    console.log('seed: ', seed);
+
+    var table1 = [
+        [15, 15, 24, 20, 24],
+        [13, 14, 27, 32, 10],
+        [29, 14, 32, 29, 24],
+        [23, 32, 24, 29, 29],
+        [14, 29, 10, 21, 29],
+        [34, 27, 16, 23, 30],
+        [14, 22, 24, 17, 13]
+    ];
+
+    var table2 = [
+        [0, 1, 2, 9, 3, 4, 5, 6, 7, 8],
+        [1, 4, 3, 9, 0, 7, 8, 2, 5, 6],
+        [7, 2, 8, 9, 4, 1, 6, 0, 3, 5],
+        [6, 3, 5, 9, 1, 8, 2, 7, 4, 0],
+        [4, 7, 0, 9, 5, 2, 3, 1, 8, 6],
+        [5, 6, 1, 9, 8, 0, 4, 3, 2, 7]
+    ];
+
+    var alphanum = [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+        'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    ];
+
+    var list1 = [],
+        list2 = [],
+        list3 = [],
+        list4 = [],
+        list5 = [],
+        year,
+        month,
+        day_of_month,
+        day_of_week,
+        iter,
+        i,
+        date;
+
+    // Now let's generate one password for each day
+    var password_list = {};
+    for (iter = 0; iter < password_count; iter++) {
+        // For each iteration advance the date one day
+        date = new Date(startdate + (iter * one_day_in_milliseconds));
+
+        // Last two digits of the year
+        year = parseInt(date.getFullYear().toString(10).substr(2, 2), 10);
+
+        // Number of the month (no leading zero; January == 0)
+        month = date.getMonth() + 1;
+
+        // Day of the month
+        day_of_month = date.getDate();
+
+        // Day of the week. Normally 0 would be Sunday but we need it to be Monday.
+        day_of_week = date.getDay() - 1;
+        if (day_of_week < 0) {
+            day_of_week = 6;
+        }
+
+
+        // Now build the lists that will be used by each other.
+
+        // list1
+        for (i = 0; i <= 4; i++) {
+            list1[i] = table1[day_of_week][i];
+        }
+        list1[5] = day_of_month;
+        if (((year + month) - day_of_month) < 0) {
+            list1[6] = (((year + month) - day_of_month) + 36) % 36;
+        } else {
+            list1[6] = ((year + month) - day_of_month) % 36;
+        }
+        list1[7] = (((3 + ((year + month) % 12)) * day_of_month) % 37) % 36;
+
+        // list2
+        for (i = 0; i <= 7; i++) {
+            list2[i] = (seedeight.substr(i, 1).charCodeAt(0)) % 36;
+        }
+
+        // list3
+        for (i = 0; i <= 7; i++) {
+            list3[i] = (((list1[i] + list2[i])) % 36);
+        }
+        list3[8] = (list3[0] + list3[1] + list3[2] + list3[3] + list3[4] +
+        list3[5] + list3[6] + list3[7]) % 36;
+        var num8 = (list3[8] % 6);
+        list3[9] = Math.round(Math.pow(num8, 2));
+
+        // list4
+        for (i = 0; i <= 9; i++) {
+            list4[i] = list3[table2[num8][i]];
+        }
+
+        // list5
+        for (i = 0; i <= 9; i++) {
+            list5[i] = ((seedten.substr(i, 1).charCodeAt(0)) + list4[i]) % 36;
+        }
+
+
+        // Finally, build the password of the day.
+        var password_of_the_day = [];
+        var len = list5.length;
+        for (i = 0; i < len; i++) {
+            password_of_the_day[i] = alphanum[list5[i]];
+        }
+        password_list[date.getTime()] = password_of_the_day.join('');
+    }
+
+    return password_list;
+}
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript"> 
+window.onload = function () {
+    "use strict";
+
+    // Start and end date elements
+    var start_year = document.getElementById('start-year'),
+        start_month = document.getElementById('start-month'),
+        start_day = document.getElementById('start-day'),
+
+        end_year = document.getElementById('end-year'),
+        end_month = document.getElementById('end-month'),
+        end_day = document.getElementById('end-day'),
+
+
+        // Store the table template in memory
+        table = document.getElementById('password-list'),
+        table_parent = table.parentNode,
+        table_template = table.cloneNode(true),
+
+        // Dance the funky chicken when the user clicks the magic button
+        go = document.getElementById('go');
+
+
+    // Pre-populate dates with today's date
+    var today = new Date();
+    start_year.value = end_year.value = today.getFullYear();
+    // In JS January == 0 but that's not user friendly
+    start_month.value = end_month.value = today.getMonth() + 1;
+    start_day.value = end_day.value = today.getDate();
+
+    go.onclick = function () {
+        // Get the Date objects for the dates entered and pass their timestamps
+        // to the password generator
+        var new_seed = document.getElementById('new_seed');
+        var start_date = new Date(start_year.value, start_month.value - 1, start_day.value, 0, 0, 0, 0),
+            end_date = new Date(end_year.value, end_month.value - 1, end_day.value, 0, 0, 0, 0),
+            passwords = ArrisPwGen(start_date.getTime(), end_date.getTime(), new_seed.value);
+
+
+        // UI elements.
+        var table_guts = document.createDocumentFragment(),
+            row,
+            col1,
+            col2;
+
+        // Clear the previous table and get a reference to the new one
+        table_parent.removeChild(table);
+        table_parent.appendChild(table_template.cloneNode(true));
+        table = document.getElementById('password-list');
+
+        for(var pass in passwords) {
+            if (passwords.hasOwnProperty(pass)) {
+                row = document.createElement('tr');
+
+                col1 = document.createElement('td');
+                col1.textContent = (new Date(parseInt(pass, 10))).toLocaleDateString();
+                row.appendChild(col1);
+
+                col2 = document.createElement('td');
+                col2.textContent = passwords[pass];
+                row.appendChild(col2);
+
+                table_guts.appendChild(row);
+            }
+        }
+
+        table.appendChild(table_guts);
+    };
+};
+</SCRIPT>
+
+
+
+<style type="text/css">#arris-generator #start-date{float:left;width:45%;font-size:14px;}#arris-generator #end-date{float:right;width:45%;font-size:14px;}#arris-generator #seed{float:left;width:45%;font-size:14px;}#arris-generator #password-list{width:500px;margin:auto;margin-top:20px;border-spacing:0;}#arris-generator th:first-child{border-right:2px solid grey;}#arris-generator th{width:50%;border-bottom:2px solid gray;margin:0;padding:8px;}#arris-generator td{border-bottom:2px solid gray;padding:8px;}#arris-generator td:first-child{border-right:2px solid gray;}#arris-generator #go{margin:15px;font-size:20px;padding:4px 10px 4px 10px;}#arris-generator #footer{text-align:center;margin:35px;}
+</style>
+
+
+
+
+
+
+
+
+</head>
+<body>
+<h1>Section 15 -- Arris Password Of The Day (POTD) Generator</h1><br>
+<div id="arris-generator">
+<form>
+<fieldset id="start-date">
+<legend>Start date</legend>
+<label for="start-year">Year</label><input type="text" id="start-year" size="4"/>
+<label for="start-month">Month</label><input type="text" id="start-month" size="3"/>
+<label for="start-day">Day</label><input type="text" id="start-day" size="3"/>
+</fieldset>
+<fieldset id="end-date">
+<legend>End date</legend>
+<label for="end-year">Year</label><input type="text" id="end-year" size="4"/>
+<label for="end-month">Month</label><input type="text" id="end-month" size="3"/>
+<label for="end-day">Day</label><input type="text" id="end-day" size="3"/>
+</fieldset>
+<fieldset id="seed">
+<legend>Seed</legend>
+<input type="text" name="new_seed" id="new_seed" value="MPSJKMDHAI"/> This allows you to try a different seed for the password generator. May be useful to test if you found the seed for newer Arris modem models. If you're unsure as to what you should do with this, leave it as is.
+</fieldset>
+<input type="button" id="go" value="Go!"/>
+</form>
+<div id="table-parent">
+<br>
+<table id="password-list">
+<tr>
+<th>Date</th><th>Password</th>
+</tr>
+</table>
+</div>
+<br>
+Default Seed:<br>
+MPSJKMDHAI<br>
+Other Seeds:<br>
+technician<br>
+T!m3W4rn3rC4bl3<br>
+ABCDEFGHIJ<br>
+BACKDOOR<br>
+COMCAST1<br>
+MJIEXDBCAHY<br>
+<br>
+user=technician<br>
+pass=T!m3W4rn3rC4bl3
+<br>
+Arris Modem Administrative Interface Login (Default IP Shown can be customised)<br>
+<a href="http://192.168.100.1/cgi-bin/tech_support_cgi">http://192.168.100.1/cgi-bin/tech_support_cgi</a><br>
+<br>
+<a href="http://192.168.0.1/router.data">http://192.168.0.1/router.data</a><br>
+<br>
+<br>
+
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
