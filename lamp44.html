@@ -1,0 +1,137 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 44 - Patience</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+  }
+  canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<canvas id="polineCanvas"></canvas>
+<script>
+/*
+  Offline Poline-like gradient animation
+  Replicates the soft colour transitions
+  using internal math and no dependencies.
+*/
+
+const canvas = document.getElementById("polineCanvas");
+const ctx = canvas.getContext("2d");
+let w, h, t = 0;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+// Helper: convert HSL to RGB
+function hslToRgb(h, s, l) {
+  h /= 360;
+  s /= 100;
+  l /= 100;
+  const hue2rgb = (p, q, t) => {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+  };
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  const p = 2 * l - q;
+  const r = hue2rgb(p, q, h + 1 / 3);
+  const g = hue2rgb(p, q, h);
+  const b = hue2rgb(p, q, h - 1 / 3);
+  return [r * 255, g * 255, b * 255];
+}
+
+// Generate smooth gradient colours
+function generateGradientColors(baseHue, count = 5) {
+  const colors = [];
+  for (let i = 0; i < count; i++) {
+    const h = (baseHue + i * 60 + Math.sin(t * 0.002 + i) * 20) % 360;
+    const s = 60 + Math.sin(t * 0.001 + i * 2) * 20;
+    const l = 55 + Math.cos(t * 0.0015 + i) * 20;
+    colors.push(`hsl(${h}, ${s}%, ${l}%)`);
+  }
+  return colors;
+}
+
+function draw() {
+  t += 1;
+  const baseHue = (t * 0.05) % 360;
+  const colors = generateGradientColors(baseHue, 5);
+
+  const gradient = ctx.createLinearGradient(0, 0, w, h);
+  const step = 1 / (colors.length - 1);
+  colors.forEach((c, i) => gradient.addColorStop(i * step, c));
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, w, h);
+
+  // Add slight radial overlay for soft edges
+  const radial = ctx.createRadialGradient(
+    w / 2, h / 2, Math.min(w, h) * 0.1,
+    w / 2, h / 2, Math.max(w, h) * 0.8
+  );
+  radial.addColorStop(0, "rgba(255,255,255,0.05)");
+  radial.addColorStop(1, "rgba(0,0,0,0.4)");
+  ctx.fillStyle = radial;
+  ctx.fillRect(0, 0, w, h);
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 

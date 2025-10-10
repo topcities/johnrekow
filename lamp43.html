@@ -1,0 +1,672 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 43 - ColourDial</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<style>
+/* --- styles --- */
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#383a42;background:#fafafa}.hljs-comment,.hljs-quote{color:#a0a1a7;font-style:italic}.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4}.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e45649}.hljs-literal{color:#0184bb}.hljs-addition,.hljs-attribute,.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#50a14f}.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801}.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#4078f2}.hljs-built_in,.hljs-class .hljs-title,.hljs-title.class_{color:#c18401}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-link{text-decoration:underline}
+
+button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-block}progress,sub,sup{vertical-align:baseline}html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0} menu,article,aside,details,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{}button,select{text-transform:none}[type=submit], [type=reset],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}[hidden],template{display:none}/*# sourceMappingURL=normalize.min.css.map */
+
+body {
+  min-height: 100vh;
+  background: #fff;
+  --bgc: #e7e1d8;
+  background: var(--bgc);
+  font-family: "Aboreto", cursive;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body:has(.dark) {
+  --bgc: #202126;
+}
+
+body:has(.trans.dark) {
+  --bgc: transparent;
+  background: #202126;
+}
+
+body:has(.trans) {
+  --bgc: transparent;
+  background: #e7e1d8;
+}
+
+.scene {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.inner {
+  width: 75vmin;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.inner::after {
+  content: "";
+  position: absolute;
+  inset: 0.15rem;
+  background: repeating-radial-gradient(#202126 0 1px, transparent 1px 3px, #e7e1d8 3px 3.5px);
+  border-radius: 50%;
+  mix-blend-mode: overlay;
+  display: none;
+  -webkit-mask-image: radial-gradient(transparent 10%, black 50%);
+          mask-image: radial-gradient(transparent 10%, black 50%);
+}
+
+.notches.inner::after {
+  display: block;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 50% * var(--iR));
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(var(--s));
+  border-radius: 50%;
+  background: conic-gradient(var(--g));
+  /*
+  animation: 10s move infinite linear;
+  animation-delay: calc(-1s * var(--iR));*/
+}
+.ring:nth-child(1) {
+  transform: translate(-50%, -50%) scale(1);
+  width: 200vmax;
+}
+
+.invert-scale .ring {
+  transform: translate(-50%, -50%) scale(calc(var(--s) - var(--iR) / 2));
+}
+.invert-scale .ring:nth-child(1) {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.show-rings .ring {
+  box-shadow: 0 0 0 1px #000;
+}
+.show-rings .ring:nth-child(1) {
+  box-shadow: none;
+}
+
+.show-rings.dark .ring {
+  box-shadow: 0 0 0 1px #fff;
+}
+.show-rings.dark .ring:nth-child(1) {
+  box-shadow: none;
+}
+
+.blur .ring:nth-child(1) {
+  box-shadow: none;
+  filter: blur(40px);
+}
+
+@-webkit-keyframes move {
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+  }
+}
+.labels {
+  position: absolute;
+  inset: -5%;
+}
+
+.labels__label {
+  position: absolute;
+  height: 50%;
+  width: 5%;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) rotate(calc(var(--i) * 360deg));
+}
+.labels__label::after {
+  content: "";
+  position: absolute;
+  width: 0.5px;
+  background: #000;
+  left: 50%;
+  top: 5%;
+  bottom: 90%;
+  transform: translateX(-50%);
+}
+
+.show-rings .labels__label::after {
+  bottom: 45.9%;
+}
+
+.dark .labels__label::after {
+  background: #fff;
+}
+
+a {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  color: #202126;
+  font-size: 0.8rem;
+  max-width: 30ch;
+  color: inherit;
+  text-decoration: none;
+  transform: translateY(calc(100% - 3rem));
+  transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1);
+}
+a p {
+  font-family: "Work Sans";
+  line-height: 1.6;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(5rem);
+  transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 50ms, 200ms opacity linear 100ms;
+}
+a span {
+  font-family: "Aboreto", cursive;
+}
+a:hover {
+  transform: translateY(0);
+}
+a:hover p {
+  opacity: 1;
+  transform: translateY(0);
+}
+a strong {
+  font-size: 1rem;
+}
+
+:has(.dark) a {
+  color: #fff;
+}
+
+button {
+  position: absolute;
+  right: 1.05rem;
+  bottom: 1.05rem;
+  width: 0.82rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  box-shadow: inset 0 0 0 1px #202126;
+  background: transparent;
+}
+button::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  transform: scale(0);
+  transition: 200ms transform cubic-bezier(0.3, 0.7, 0, 1);
+  box-shadow: 0 0 0 1px #202126;
+}
+button:hover::after {
+  transform: scale(1);
+}
+
+body:has(.dark) button {
+  box-shadow: inset 0 0 0 1px #e7e1d8;
+}
+body:has(.dark) button::after {
+  box-shadow: 0 0 0 1px #e7e1d8;
+}
+</style>
+</head>
+<body>
+  <div class="scene">
+    <div class="inner" data-world></div>
+  </div>
+  <button aria-label=" "></button>
+
+<script>
+/* ---- Inlined Poline + positionFunctions (so the page works offline) ---- */
+
+console.clear();
+
+/* Utility helpers */
+function clamp01(x){ return Math.min(1, Math.max(0, Number(x) || 0)); }
+function lerp(a,b,t){ return a + (b - a) * t; }
+// Hue shortest-path interpolation (degrees)
+function hueLerp(h1,h2,t){
+  h1 = ((h1 % 360) + 360) % 360;
+  h2 = ((h2 % 360) + 360) % 360;
+  let d = ((h2 - h1 + 540) % 360) - 180;
+  return ((h1 + d * t) % 360 + 360) % 360;
+}
+function hslToCss(hsl){
+  const [h,s,l] = hsl;
+  return `hsl(${Math.round(h)}, ${Math.round(clamp01(s) * 100)}%, ${Math.round(clamp01(l) * 100)}%)`;
+}
+// Fallback: return same as hsl CSS (we don't compute true LCH here).
+function hslToCssLchFallback(hsl){
+  return hslToCss(hsl);
+}
+
+const positionFunctions = {
+  linearPosition: t => clamp01(t),
+  exponentialPosition: (t,k=5) => {
+    t = clamp01(t);
+    const exp = Math.exp;
+    return (exp(k * t) - 1) / (exp(k) - 1);
+  },
+  quadraticPosition: t => Math.pow(clamp01(t), 2),
+  cubicPosition: t => Math.pow(clamp01(t), 3),
+  quarticPosition: t => Math.pow(clamp01(t), 4),
+  sinusoidalPosition: t => 0.5 - 0.5 * Math.cos(clamp01(t) * Math.PI),
+  asinusoidalPosition: t => {
+    t = clamp01(t);
+    return (Math.asin(2 * t - 1) + Math.PI / 2) / Math.PI;
+  },
+  arcPosition: t => {
+    t = clamp01(t);
+    return Math.sqrt(1 - Math.pow(1 - t, 2));
+  },
+  smoothStepPosition: t => {
+    t = clamp01(t);
+    return t * t * (3 - 2 * t);
+  }
+};
+
+class Poline {
+  constructor(opts = {}){
+    const {
+      anchorColors = null,
+      numPoints = 4,
+      positionFunction = positionFunctions.sinusoidalPosition,
+      positionFunctionX = null,
+      positionFunctionY = null,
+      positionFunctionZ = null,
+      closedLoop = false,
+      invertLightness = false
+    } = opts;
+
+    this.numPoints = Math.max(1, Math.floor(numPoints) || 4);
+    this.positionFunction = positionFunction || positionFunctions.sinusoidalPosition;
+    this.positionFunctionX = positionFunctionX || null;
+    this.positionFunctionY = positionFunctionY || null;
+    this.positionFunctionZ = positionFunctionZ || null;
+    this.closedLoop = !!closedLoop;
+    this.invertLightness = !!invertLightness;
+
+    this.anchorColors = Array.isArray(anchorColors) && anchorColors.length >= 2
+      ? anchorColors.map(a => normalizeHSL(a))
+      : [ randomHSL(), randomHSL() ];
+
+    this._cachedColors = null;
+  }
+
+  /* anchors alias */
+  set anchors(a){
+    this.anchorColors = (Array.isArray(a) ? a.map(x => normalizeHSL(x)) : this.anchorColors);
+    this._cachedColors = null;
+  }
+  get anchors(){ return this.anchorColors; }
+
+  /* Add an anchor (supports {xyz:[x,y,z]} or an HSL array) */
+  addAnchorPoint(point){
+    if (!point) return;
+    if (Array.isArray(point)){
+      this.anchorColors.push(normalizeHSL(point));
+    } else if (point.xyz && Array.isArray(point.xyz)){
+      const [x=0,y=0,z=0] = point.xyz;
+      const h = ((x * 360) % 360 + 360) % 360;
+      const s = clamp01(y);
+      const l = clamp01(z);
+      this.anchorColors.push([h, s, l]);
+    } else if (point.hsl && Array.isArray(point.hsl)){
+      this.anchorColors.push(normalizeHSL(point.hsl));
+    } else if (point.color && Array.isArray(point.color)){
+      this.anchorColors.push(normalizeHSL(point.color));
+    }
+    this._cachedColors = null;
+  }
+
+  /* returns computed colors as [h,s,l] (s,l in 0..1) */
+  get colors(){
+    if (!this._cachedColors) this._cachedColors = this._buildColors();
+    return this._cachedColors;
+  }
+
+  /* fallback LCH CSS (here we use HSL fallback) */
+  get colorsCSSlch(){
+    return this.colors.map(c => hslToCssLchFallback(c));
+  }
+
+  /* HSL CSS array */
+  get colorsCSS(){
+    return this.colors.map(c => hslToCss(c));
+  }
+
+  /* mutate anchors by hue shift */
+  shiftHue(deltaDegrees = 0){
+    this.anchorColors = this.anchorColors.map(([h,s,l]) => [ (h + deltaDegrees) % 360, s, l ]);
+    this._cachedColors = null;
+  }
+
+  /* sample color along palette (pos 0..1) */
+  getColorAt(pos){
+    pos = clamp01(pos);
+    const palette = this.colors;
+    if (palette.length === 0) return null;
+    const idx = pos * (palette.length - 1);
+    const i0 = Math.floor(idx);
+    const i1 = Math.min(palette.length - 1, i0 + 1);
+    const t = idx - i0;
+    const c0 = palette[i0], c1 = palette[i1];
+    return [
+      hueLerp(c0[0], c1[0], t),
+      lerp(c0[1], c1[1], t),
+      lerp(c0[2], c1[2], t)
+    ];
+  }
+
+  _buildColors(){
+    const anchors = this.anchorColors;
+    if (!Array.isArray(anchors) || anchors.length < 2) return [];
+    const segCount = this.closedLoop ? anchors.length : anchors.length - 1;
+    const out = [];
+    out.push(anchors[0].slice());
+    for (let s = 0; s < segCount; s++){
+      const a = anchors[s];
+      const b = anchors[(s + 1) % anchors.length];
+      for (let i = 0; i < this.numPoints; i++){
+        const tRaw = (i + 1) / (this.numPoints + 1);
+        const fx = (this.positionFunctionX || this.positionFunction);
+        const fy = (this.positionFunctionY || this.positionFunction);
+        const fz = (this.positionFunctionZ || this.positionFunction);
+        const tx = fx(tRaw), ty = fy(tRaw), tz = fz(tRaw);
+        const h = hueLerp(a[0], b[0], tx);
+        const sVal = lerp(a[1], b[1], ty);
+        let lVal = lerp(a[2], b[2], tz);
+        if (this.invertLightness) lVal = 1 - lVal;
+        out.push([h, clamp01(sVal), clamp01(lVal)]);
+      }
+      if (!(s === segCount - 1 && !this.closedLoop)) {
+        out.push(b.slice());
+      }
+    }
+    // dedupe adjacent identical
+    const dedup = [];
+    for (let i = 0; i < out.length; i++){
+      const cur = out[i], prev = dedup[dedup.length - 1];
+      if (!prev || !hslEqual(prev, cur)) dedup.push(cur);
+    }
+    return dedup;
+  }
+}
+
+/* helpers used by Poline */
+function normalizeHSL(x){
+  if (!Array.isArray(x)) return randomHSL();
+  const h = Number(x[0]) || 0;
+  const s = clamp01(Number(x[1]) ?? 1);
+  const l = clamp01(Number(x[2]) ?? 0.5);
+  return [ ((h % 360) + 360) % 360, s, l ];
+}
+function randomHSL(){
+  return [ Math.floor(Math.random() * 360), 0.6 + Math.random() * 0.4, 0.3 + Math.random() * 0.4 ];
+}
+function hslEqual(a,b){
+  return Math.round(a[0]) === Math.round(b[0]) &&
+         Math.abs(a[1] - b[1]) < 1e-6 &&
+         Math.abs(a[2] - b[2]) < 1e-6;
+}
+
+/* ---- End Poline inline ---- */
+
+/* --- code adjusted to use the inlined Poline & positionFunctions --- */
+
+const $w = document.querySelector("[data-world]");
+
+let poline = new Poline({
+  numPoints: 10
+});
+
+let hueSection = 10;
+let lightnessLevels = 3;
+let isSmoothGradient = true;
+let invertLight = false;
+let speed = 0.75;
+let direction = 1;
+let rndPerSection = [];
+
+const createLabels = steps => {
+  const $wrap = document.createElement("div");
+  $wrap.classList.add("labels");
+  for (let i = 0; i < steps; i++) {
+    const $label = document.createElement("div");
+    $label.classList.add("labels__label");
+    $label.style.setProperty("--i", i / steps);
+    $wrap.appendChild($label);
+  }
+  return $wrap;
+};
+
+const newSettings = () => {
+  direction = Math.random() < .5 ? 1 : -1;
+  hueSection = 10 + Math.floor(Math.random() * 10);
+  hueSection = 3 + Math.round(Math.random() * 45);
+  if (Math.random() < 0.15) {
+    hueSection = 100 + Math.round(Math.random() * 240);
+  }
+  lightnessLevels = 3 + Math.floor(Math.random() * 10);
+  isSmoothGradient = Math.random() < 0.5;
+  invertLight = Math.random() < 0.5;
+
+  poline = new Poline({
+    numPoints: 10,
+    positionFunctionX: Math.random() < 0.5 ? positionFunctions.smoothStepPosition : positionFunctions.sinusoidalPosition
+  });
+
+  const additionalAnchors = Math.random() < 0.3 ? Math.round(Math.random() * 2) : 2;
+
+  for (let i = 0; i < additionalAnchors; i++) {
+    poline.addAnchorPoint({ xyz: [Math.random(), Math.random(), Math.random()] });
+  }
+
+  $w.classList.remove("trans");
+  if (Math.random() < 0.5) {
+    $w.classList.toggle("dark");
+  }
+  if (Math.random() < 0.1) {
+    $w.classList.add("trans");
+  }
+  if (Math.random() < 0.5) {
+    $w.classList.toggle("show-rings");
+  }
+  if (invertLight && Math.random() < 0.2) {
+    $w.classList.add("blur");
+  } else {
+    $w.classList.remove("blur");
+  }
+
+  if (
+    Math.random() < 0.25 &&
+    isSmoothGradient &&
+    !$w.classList.contains("dark"))
+  {
+    $w.classList.add("notches");
+  } else {
+    $w.classList.remove("notches");
+  }
+
+  if (Math.random() < 0.1) {
+    $w.classList.add("invert-scale");
+  } else {
+    $w.classList.remove("invert-scale");
+  }
+
+  speed = Math.random();
+
+  $w.style.setProperty(
+    "--s",
+    Math.random() < 0.75 ? 1 : 0.5 + Math.random() * 0.5);
+
+  rndPerSection = new Array(lightnessLevels).fill("").map((_, i) => Math.random());
+};
+
+const gradientStepsForSegment = colorSegments => {
+  let l = colorSegments.length;
+
+  const gradStops = colorSegments.map((colors, i) => {
+    const nextStep = (i + 1) / l;
+    const currentStep = i / l;
+    const segmentRange = nextStep - currentStep;
+    if (!colors) {
+      if (isSmoothGradient) {
+        return `var(--bgc)`;
+      } else {
+        return `var(--bgc) ${currentStep * 100}% ${nextStep * 100}%`;
+      }
+    } else {
+      const cl = colors.length;
+      return colors.
+      map((c, j) => {
+        const nextSubStep = (j + 1) / cl;
+        const currentSubStep = j / cl;
+
+        if (isSmoothGradient) {
+          return `${c.css}`;
+        } else {
+          return `${c.css} ${
+            (currentStep + currentSubStep * segmentRange) * 100
+          }% ${
+            (currentStep + segmentRange - currentSubStep * segmentRange) * 100
+          }%`;
+        }
+      }).
+      join();
+    }
+  });
+
+  if (isSmoothGradient) {
+    gradStops.push(gradStops[0]);
+  }
+
+  return gradStops.join();
+};
+
+function doIt() {
+  $w.innerHTML = "";
+  let hueSlice = 360 / hueSection;
+  let lightnessSlice = 1 / lightnessLevels;
+
+  const hueSections = new Array(hueSection).fill("").map((_, i) => (i + 1) * hueSlice);
+  const lightnessSections = new Array(lightnessLevels).fill("").map((_, i) =>
+    invertLight ? 1 - (i + 1) / lightnessLevels : (i + 1) / lightnessLevels
+  );
+
+  let colors = poline.colors.map((color, i) => {
+    return {
+      values: color,
+      css: poline.colorsCSSlch[i],
+      css: poline.colorsCSS[i]
+    };
+  });
+
+  lightnessSections.forEach((lightnessSection, i) => {
+    const currentSegmentLightness = colors.filter(
+      (c) =>
+        c.values[2] <= lightnessSection &&
+        lightnessSection - lightnessSlice <= c.values[2]
+    );
+
+    const segementedHuesForLightness = hueSections.
+    map((hueSection) =>
+      currentSegmentLightness.filter(
+        (c) =>
+          c.values[0] <= hueSection && hueSection - hueSlice <= c.values[0]
+      )
+    ).
+    map(a => a.length > 0 ? a : null);
+
+    const gradientSteps = gradientStepsForSegment(segementedHuesForLightness);
+
+    const $ring = document.createElement("div");
+    $ring.classList.add("ring");
+    $ring.style.setProperty("--i", i);
+    $ring.style.setProperty("--iR", (i + 1) / lightnessLevels);
+    $ring.style.setProperty("--g", gradientSteps);
+    $ring.style.setProperty("--rnd", rndPerSection[i]);
+    $w.appendChild($ring);
+
+    return segementedHuesForLightness;
+  });
+
+  $w.appendChild(createLabels(hueSection));
+}
+
+newSettings();
+doIt();
+
+document.documentElement.addEventListener("click", () => {
+  newSettings();
+  doIt();
+});
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  setInterval(() => {
+    poline.shiftHue(speed * direction);
+    doIt();
+  }, 16.66);
+}
+
+document.querySelector("button").addEventListener("click", e => {
+  e.stopPropagation();
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen && document.exitFullscreen();
+  }
+});
+</script>
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
