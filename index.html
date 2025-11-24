@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<META HTTP-EQUIV="Refresh" CONTENT="315; URL=resting.html">
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>John Rekow Jr.'s Homepage - Overview</title>
+<script lang="JavaScript">
+
+
+function Display(min, sec) {
+	var disp;
+	if (min <= 9) disp = " 0";
+	else disp = " ";
+	disp += min + ":";
+	if (sec <= 9) disp += "0" + sec;
+	else disp += sec;
+	return (disp);
+}
+
+
+function Down() {
+
+		sec--;
+		if (sec == -1) { sec = 59; min--; }
+			//document.timerform.clock.value = Display(min, sec);
+	window.status = "This page will fall asleep in" + Display(min, sec) + ". ";
+		if (min == 5 && sec == 15) {
+			//alert("Your session has timed out.");
+			window.status = "Falling asleep...";
+			window.location.href = 'resting.html';
+		}
+		else{
+			down = setTimeout("Down()", 1000);
+		}
+}
+    min = 5;
+	sec = 15;
+	Down();
+</script>
+
+<script language="JavaScript" type="text/javascript"> function goTo() {	document.location.href="resting.html";}  window.onload=function(){	setTimeout(function(){ goTo(); },315000);}	</script>
+
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background-color: #F00;
+	background-image: url(img/decor.jpg);
+	background-repeat: repeat;
+}
+</style>
+
+<!-- Code for Your Computer Clock is next -->
+<!-- Requires the onload code in the body tag -->
+<script type="text/javascript"> 
+function display_c() {
+    var refresh = 10; // Refresh rate in milliseconds (100 times per second)
+    mytime = setTimeout(display_ct, refresh);
+}
+
+function display_ct() {
+    var x = new Date();
+    var milliseconds = x.getMilliseconds();
+    var hundredths = Math.floor(milliseconds / 10);
+
+    // Formatting the full date and time string including milliseconds
+    var timeString = x.toString().slice(0, 24) + '.' + hundredths.toString().padStart(2, '0') + ' ' + x.toString().slice(25);
+
+    document.getElementById('ct').innerHTML = timeString;
+    display_c();
+}
+</script>
+
+</head>
+
+<body onload="display_ct()">
+<div class="container">
+  <div class="header"><!-- end .header -->
+    <a name="PGTOP">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+  </div>
+  <div class="content">
+    <h1>Overview    </h1>
+            <p style="text-align: center"><span style="font-family: Arial">Welcome!</span></p>
+<hr><center>
+<small><FONT color="darkred"><span style="font-family: Arial">Your Computer Clock: <span id="ct"></span></FONT></small><br>
+<table>
+<tr><td>
+<div class="findiptitle">Your IP Address:</div><div id="findipwidget"></div><div class="findiplink" id="findipurl">Powered by <a href="http://www.find-ip.net/" target="_blank">Find-IP.net</a></div><script defer src="https://api.find-ip.net/widget.js?width=240&"></script>
+</td><td valign="top">
+<br>
+Exact Time right now in London:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvkrud/n136/tluk/tt0" width=300 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+Exact Time right now in Chicago:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i7rbd5xv/n64/tt0" width=300 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+<br>
+Exact Time right now in Los Angeles:<br />
+<iframe id="datamain" src="https://free.timeanddate.com/clock/i2hvktuv/n137/tt0" width=300 height=40 marginwidth=10 marginheight=5 hspace=0 vspace=0 frameborder=1 scrolling=yes></iframe><br />
+</td></tr></table></center>
+<hr />
+<p>
+Other Sites:&nbsp;&nbsp;<a href="https://voice.google.com/u/0/">Google Voice</a> &#x2022;&#x25CF;&#x2022; <a href="http://mail.google.com/mail/u/0/">Google Mail</a> &#x2022;&#x25CF;&#x2022; <a href="data:text/html,%20%3Chtml%20contenteditable%3E">TempText Code</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="https://www.amazon.com/gp/goldbox">Amazon</a> &#x2022;&#x25CF;&#x2022; <a href="https://www.bitchute.com/">BitChute</a> &#x2022;&#x25CF;&#x2022; <a href="https://odysee.com/">Odysee</a> &#x2022;&#x25CF;&#x2022; <a href="https://www.brighteon.com/">Brighteon</a> &#x2022;&#x25CF;&#x2022; <a href="https://mail.protonmail.com/login">ProtonMail</a> &#x2022;&#x25CF;&#x2022; <a href="https://chat.openai.com/">ChatGPT</a> &#x2022;&#x25CF;&#x2022; <a href="https://m.uber.com/go/home">Uber</a> &#x2022;&#x25CF;&#x2022; <a href="about:blank">Blank</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="https://play.xumo.com/live-guide/">Xumo <small><code>TV</code></small></a> &#x2022;&#x25CF;&#x2022; <a href="http://www.fonefinder.net/">FoneFinder</a> &#x2022;&#x25CF;&#x2022; <a href="https://tools.usps.com/go/ZipLookupAction_input">USPS ZipCode</a> &#x2022;&#x25CF;&#x2022; <a href="https://web.telegram.org/">Telegram</a> &#x2022;&#x25CF;&#x2022; Proxies:&nbsp;&nbsp; <a href="https://www.proxysite.com/">ProxySite</a>, <a href="https://freeproxy.win/">Didsoft</a> &#x2022;&#x25CF;&#x2022;<br>
+CraigsList: <a href="http://geo.craigslist.org/iso/us/mo">Missouri</a>, <a href="http://geo.craigslist.org/iso/us/ar">Arkansas</a> &#x2022;&#x25CF;&#x2022; Calculators: <a href="https://www.wolframalpha.com/">WolframAlpha</a>, <a href="https://mathsolver.microsoft.com/en">Microsoft MathSolver</a>,<br>
+Calculators: <a href="https://www.onlineconversion.com/">OnlineConversion</a>, <a href="https://www.asknumbers.com/">AskNumbers</a>, <a href="https://calculator-converter.com/">Calculator-Converter</a> &#x2022;&#x25CF;&#x2022; <a href="https://duck.ai/">DuckAI</a> &#x2022;&#x25CF;&#x2022;<br>
+Weather: <a href="https://forecast.weather.gov/MapClick.php?zoneid=MOZ095">Nixa</a>, <a href="https://forecast.weather.gov/MapClick.php?zoneid=ARZ010">Fayetteville</a> &#x2022;&#x25CF;&#x2022; Maps: <a href="https://maps.apple.com/place?address=United+States">Apple</a>,  <a href="https://www.bing.com/maps?cp=30.773303%7E-84.861522&lvl=3.3">Bing</a>,  <a href="https://www.mapquest.com/search/united%20states%20springfield">MapQuest</a>,  <a href="https://www.openstreetmap.org/search?query=united+states#map=4/40.88/-91.80">OpenStreetMap</a>,  <a href="https://www.google.co.uk/maps/place/United+States/">Google</a><br>
+</p><hr><p>
+<strong>My Homepage Contents:&nbsp;&nbsp;</strong><a href="index.html">Overview</a> &#x2022;&#x25CF;&#x2022; <a href="toolpg1.html">Tools A-L</a> &#x2022;&#x25CF;&#x2022; <a href="toolpg2.html">Tools M-V</a> &#x2022;&#x25CF;&#x2022; <a href="toolpg3.html">Tools W-Z</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf2.html">QuickSurf</a> &#x2022;&#x25CF;&#x2022; <a href="newspg.html">Newspaper</a> &#x2022;&#x25CF;&#x2022; <a href="hot.html">HOT LINKS</a> &#x2022;&#x25CF;&#x2022; <a href="drawer.html">Top Drawer</a> &#x2022;&#x25CF;&#x2022; <a href="newspg5.html">Health News</a> &#x2022;&#x25CF;&#x2022; <a href="notepad.html">TempText Page</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="newspg7.html">MidWest News</a> &#x2022;&#x25CF;&#x2022; <a href="newspg3.html">Technology News</a> &#x2022;&#x25CF;&#x2022; <a href="saver.html">Chicago Time</a> &#x2022;&#x25CF;&#x2022; <a href="shopping.html">Shopping</a> &#x2022;&#x25CF;&#x2022; <a href="telly.html">T&#x65;&#x6C;&#x65;&#x76;&#x69;&#x73;&#x69;&#x6F;&#x6E;</a> &#x2022;&#x25CF;&#x2022; <a href="fade.html">Fade</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="newspg2.html">Christian News</a> &#x2022;&#x25CF;&#x2022; <a href="yhwh0.html">Christian Page</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf5.html">Parallel Bible</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf417.html">MidWest Cams</a> &#x2022;&#x25CF;&#x2022; <a href="osagelenape.html">MidWest Links</a> &#x2022;&#x25CF;&#x2022; <br>
+<a href="kidspg.html">Gazelle</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf0.html">Wage Table</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf1.html">Phonebook</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf3.html">PC Navigator</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf7.html">Cryptogram</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf4.html">Calendar</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="printtest.html">Print Test</a> &#x2022;&#x25CF;&#x2022; <a href="study.html">Study</a> &#x2022;&#x25CF;&#x2022; <a href="rand.html">Random Web</a> &#x2022;&#x25CF;&#x2022; <a href="parlour.html">Parlour</a> &#x2022;&#x25CF;&#x2022; <a href="quicksurf8.html">Reference &amp; Utilities</a> &#x2022;&#x25CF;&#x2022; <a href="scroll.html">Scroll</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="calculator.html">Calculator</a> &#x2022;&#x25CF;&#x2022; <a href="mediatest.html">Media Test</a> &#x2022;&#x25CF;&#x2022; <a href="whiteboard.html">Whiteboard</a> &#x2022;&#x25CF;&#x2022; <a href="mediatest2.html">Sound Test</a> &#x2022;&#x25CF;&#x2022; <a href="mediatest3.html">Sound Test 2</a> &#x2022;&#x25CF;&#x2022; <a href="frenchwheel.html">Wheel</a> &#x2022;&#x25CF;&#x2022;<br>
+<a href="clockdown.html">Countdown</a> &#x2022;&#x25CF;&#x2022; 
+<a href="mediatest4.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a page that displays an animated line based on the audio that is entering into your microphone. This page will not function unless you allow and enable your Microphone in this web browser and also in your operating system. For example, in Windows 11, your microphone must be switched on in Windows Settings, Privacy & security, App permissions, Microphone. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">MicLine</a> &#x2022;&#x25CF;&#x2022; 
+<a href="mediatest5.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a page that displays a number based on the audio that is entering into your microphone. This page will not function unless you allow and enable your Microphone in this web browser and also in your operating system. For example, in Windows 11, your microphone must be switched on in Windows Settings, Privacy & security, App permissions, Microphone. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">MicNumber</a> &#x2022;&#x25CF;&#x2022; 
+<a href="mediatest6.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a page that displays animated bars based on the audio that is entering into your microphone. This page will not function unless you allow and enable your Microphone in this web browser and also in your operating system. For example, in Windows 11, your microphone must be switched on in Windows Settings, Privacy & security, App permissions, Microphone. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">MicBars</a> &#x2022;&#x25CF;&#x2022; 
+<a href="quicksurf81.html">Last Hour LI</a> &#x2022;&#x25CF;&#x2022; <a href="match.html">Concentrate</a> &#x2022;&#x25CF;&#x2022;<br>
+Clocks: 
+<a href="funclock1.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an animated clock with gears, set from your computer clock. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">GearClock</a>, 
+<a href="funclock2.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of a clock with binary dots, set from your computer clock. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">DotClock</a>, 
+<a href="funclock3.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing a simple display of your computer clock. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">SimpleClock</a>, 
+<a href="clockmerge.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing all three clocks together, all set using your computer clock. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Merge</a> &#x2022;&#x25CF;&#x2022;
+Lamps: 
+<a href="lamp29.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of swirling dots with connecting lines. Tap or click anywhere on the page to add more dots. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">DotLines</a>, 
+<a href="lamp30.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an animated image that cycles through the four seasons of the year. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Seasons</a>, 
+<a href="lamp31.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an abstract, slow dance animation with neon lights and colours. To switch it to a rapid, nervously fast dance animation, on touchscreens, hold down two fingers, or press the lowercase letter V. To switch it back to the slow dance again, press the lowercase letter G. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">NeonDance</a><br>
+Lamps: 
+<a href="funlamp1.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with moving, soft colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Dim</a>, 
+<a href="funlamp2.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with moving, bright colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Bright</a>, 
+<a href="bowlamp.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with gradually changing colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Bow</a>, 
+<a href="firelamp2.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of two simulated candles with background colours of firelight. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Candle2</a>, 
+<a href="hexlamp.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animated, hexagon pattern. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Hex</a>, 
+<a href="funlamp3.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a random-like, unpredictable wavy animation. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Wave</a>, 
+<a href="funlamp4.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with rapidly flashing colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Disco</a>, 
+<a href="funlamp5.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with animated dots and lines. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Dots</a>, 
+<a href="funlamp6.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation looking like water through shattered glass. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Shattered</a>, 
+<a href="lampnoise.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a brighter, jittery white noise, TV static animation. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">JitterNoise</a>, 
+<a href="lampnoise2.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a softer, steady white noise, TV static animation. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">SoftNoise</a><br>
+Lamps: 
+<a href="lampnoise3.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a steady, TV static animation in colour (with the colourburst kept on). On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">ColourNoise</a>, 
+<a href="lamptest1.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that creates a still image that simulates a TV colour bar test pattern, with less brightness and a shorter, standard bottom. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Test1</a>, 
+<a href="lamptest2.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that creates a still image that simulates a TV colour bar test pattern, with brighter colours and a taller, non-standard bottom. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Test2</a>, 
+<a href="lamptest3.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that creates a still image that simulates a TV colour bar test pattern, with grid lines and circles. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Test3</a>, 
+<a href="lamptest4.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that creates a still image that replicates the 1978 TV Colour Bar Signal Specification for the National Television System Committee (NTSC) Television (without castellations) as defined by the EIA-189A standard, released in 1978 by the Electronic Industries Association (EIA) in the United States, in coordination with the SMPTE (Society of Motion Picture and Television Engineers). On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Test4</a>, 
+
+<a href="lampdraw.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank, white page that you can draw on. On Windows computers, press F11 to make the page fill your screen, and then, before you start drawing, press F5 to Refresh and enable the drawing area for your full screen. Later, press F11 again to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Draw</a>, 
+<a href="lamp10.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation with swarms of swirls. Just watch, or hold down the Left-Click to attract, hold down the Right-click to repulse, or hold down the Mouse-wheel to calm the nearby swirls. Click on Open Controls in the top right corner to see more options. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Swirls</a>, 
+<a href="lamp11.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a webpage that creates a fictional computer screen that pretends to display fictional messages about automated activities. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Pretend</a>, 
+<a href="lamp27.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank webpage with an adjustable animation of flashing dots in a grid pattern. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">DotGrid</a>, 
+<a href="lamp28.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank webpage with a black, curvy shade design, placed over moving stripes. Click anywhere in the page to display or change the black shade design. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Shade</a>, 
+<a href="funlamp7.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank webpage with an abstract animation of glowing lights with bilateral symmetry, which is one side being a mirror reflection of the other. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Bilateral</a><br>
+Lamps: 
+<a href="lamp12.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of deep, moving, changing colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">SlowDance</a>, 
+<a href="firelamp7.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing seven simulated candles. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Candle7</a>, 
+<a href="lamp13.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of light, bright, blurry, rotating colours, spinning slowly around like a pinwheel. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Pinwheels</a>, 
+<a href="lamp14.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of blurry firelight. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">FireBlur</a>, 
+<a href="lamp15.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of flickering patterns in a simulated, snowy TV signal. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Flicker</a>,
+<a href="lamp16.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with fictional, animated graphs displaying randomly-generated values. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Graphs</a>, 
+<a href="lamp17.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that simulates a German ElektroKardioGramm (EKG) with beeping sounds. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Pulse</a>, 
+<a href="funlamp8.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation that simulates a Lava Lamp. Click on the page, or hold down the mouse button and drag around the page, to change the length and direction of the smudges and smears. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">LavaLamp</a><br>
+Lamps: 
+<a href="lamp19.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of textures and shapes zooming in and out. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">ShapeZoom</a>, 
+<a href="lamp20.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation that simulates travelling through outer space. For acceleration, tap or click the black box at the bottom of the page. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Space</a>, 
+<a href="lamp21.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation that simulates an old computer screen saver. Click anywhere on the page to add additional flying artefacts. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Retro</a>, 
+<a href="lamp22.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation of a graph that continually scrolls horizontally. The graph data is fictional and randomly-generated by the webpage.  On Windows computers, press F11 and then press F5 to make the graph fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">GraphScroll</a>, 
+<a href="lamp23.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation of blinking light patterns. To change the grid of light patterns, move your mouse or finger around the page, hover, click, drag the mouse, tap or finger-swipe around the page.  On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">BlinkGrid</a>, 
+<a href="lamp24.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation of Red, Green and Blue (RGB) light patterns. To cycle through the six pre-set patterns, tap or click anywhere on the page, or press the spacebar. This animation may not perfectly fit all screen sizes. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">RGBTV</a>, 
+<a href="lamp25.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page that randomly generates musical notes. The random selection, and the speed that they are played, is restricted and slow, imitating the behaviour of the kind of music randomly played by wind chimes. You may need to tap or click on the page two times to turn on the sound. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Chimes</a>, 
+<a href="lamp18.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation that simulates travelling through abstract, black globs, with a sandy background. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Sandy</a>, 
+<a href="lamp26.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page showing an animation of dancing or moving shadows. This animation may not perfectly fit all screen sizes. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Shadows</a><br>
+Lamps: 
+<a href="lamp32.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an abstract animation of electrons moving around a circuit board. Click anywhere on the page to draw a new board. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Circuit</a>, 
+<a href="lamp33.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an animated ocean of colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">OilOcean</a>, 
+<a href="lamp34.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page filled with a grid of white blocks. Use your mouse to draw across them, or click on them to change them to black. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">BlockDraw</a>, 
+<a href="lamp35.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animated, repeating tour of a Mandelbrot two-dimensional mathematical model. Click anywhere on the page to pause the tour. Click the circle in the top-left corner to change the colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Tour</a>, 
+<a href="lamp36.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of moving, vertical columns of light. Click anywhere on the page to change the colours. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Verticals</a>, 
+<a href="lamp42.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of moving, vertical columns of light, based on a season of the year. Click anywhere on the page to change the seasonal theme. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Vertinox</a>, 
+<a href="lamp41.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of black, white and grey lines and patterns. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Frosty</a>, 
+<a href="lamp45.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of fireflies. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Fireflies</a><br>
+Lamps: 
+<a href="lamp37.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an animation having waves of Red, Green and Blue (RGB) colours.  On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">RGB-Waves</a>, 
+<a href="lamp38.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a swirling animation of twinkling and blinking lights and stars.  On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Celebrate</a>, 
+<a href="lamp39.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page of an animated sketch of abstract lines with changing colours.  On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Sketching</a>, 
+<a href="lamp40.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of a slow and calm electrical current. The current will be attracted to your mouse. Scroll the page up and down to adjust the colour of the current. You can also use the Up-Arrow and Down-Arrow keys to scroll the page up and down. The vertical scrollbar is on the right side as always, but it will be all black on this page. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">ElectriCalm</a>, 
+<a href="lamp43.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with an animation of colours moving around a circular grid. Click on the page to change the animation. On Windows computers, to make the page fill your screen, you can turn the full screen mode on and off either by pressing the F11 key, or if you click the box in the bottom-right corner, use the Escape (Esc) key to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">ColourDial</a>, 
+<a href="lamp44.html" onclick = "if (! confirm('Tapping or clicking OK will take you to a blank page with a very slow animation that cycles through diagonal colour gradients, changing the colours very slowly. On Windows computers, press F11 to make the page fill your screen, and then press F11 again later to exit the full screen mode. Use your browser\'s Back button to return to this Overview page.')) { return false; }">Patience</a><br>
+</p>
+<hr />
+<p><strong>
+John Rekow Jr.'s Homepage is at five locations:<br>
+GitHub Topcities (British Indian Ocean Territory; San Francisco, California):&nbsp; <a href="https://topcities.github.io/johnrekow/">https://topcities.github.io/johnrekow/</a><br>
+Somee.com (Charlotte, North Carolina):&nbsp; <a href="http://johnrekow.somee.com/">http://johnrekow.somee.com/</a><br>
+Lycos Angelfire Realm 2 (Waltham, Massachusetts):&nbsp; <a href="http://www.angelfire.com/realm2/johnrekow/">http://www.angelfire.com/realm2/johnrekow/</a><br>
+Netlify (Ashburn, Virginia; London, UK):&nbsp; <a href="https://johnrekow.netlify.app/">https://johnrekow.netlify.app/</a><br>
+Cloudflare (San Francisco, California; Montreal, Quebec, Canada):&nbsp; <a href="http://johnrekow.pages.dev/">http://johnrekow.pages.dev/</a><br>
+</strong></p>
+<hr />
+    <p><center>
+<table><tr><td>
+<IMG SRC="https://tools.ip2location.com/200x200.png" BORDER=1>
+</td><td>
+<a href="https://www.wieistmeineip.de/cometo/?en"><img src="https://www.wieistmeineip.de/ip-address/?size=125x125" border="0" width="125" height="125" alt="IP" /></a>
+</td></tr></table></center><br>
+</p><hr><p>
+    Contact Information:<br />
+    <br />
+    Email is preferred, and has the greatest chance of ensuring a fast reply.<br />
+    <br />
+          Email:  <a href="mailto:johnrekow@gmx.co.uk?subject=Hello%20John%21%20%20Brilliant%20Website%21&body=%0dI%20don%27t%20remember%20typing%20this%0dor%20this%0dhere.">johnrekow@gmx.co.uk</a>
+    <br />
+or click the button below to copy the email address into your clipboard...<br>
+<button data-clipboard-text="johnrekow@gmx.co.uk">johnrekow@gmx.co.uk</button><br>
+    <br />
+    <br />
+Leave a Voice Mail Message:<br />
+<br>
+<a href="tel:9163652715">916-365-2715</a><br>
+<br>
+or click the button below to copy the phone number into your clipboard...<br>
+<button data-clipboard-text="9163652715">9163652715</button><br>
+<br />
+      </p>
+    <p>Disclaimer: Whilst the content of this website has been prepared responsibly and carefully, the website author and its webhost make no warranty as to the content, accuracy, timeliness or completeness of the information, or that the information in this website may be relied upon for any reason. Neither the website author nor its webhost are responsible or liable for any losses or damage of whatsoever kind arising from your reliance on or use of information provided in this website.<br /><br>
+<br>
+<a href="resting.html"><IMG SRC="img/decor.jpg" BORDER=1 width="100%" height="100%"></a><br>
+</p>
+<BR>
+<h2>&nbsp;</h2>
+<p>&nbsp;</p>
+    <!-- end .content --></div>
+  <div class="footer">
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+    <p>&nbsp;</p>
+    <p>###</p>
+    <p><!-- end .footer --></p>
+    <p>&nbsp;</p>
+  </div>
+  <!-- end .container --></div>
+
+<!-- buttoncopy start --->
+
+<script>  
+/*!
+ * clipboard.js v1.5.5
+ * https://zenorocha.github.io/clipboard.js
+ *
+ * Licensed under MIT by Zeno Rocha
+ * 
+ * both scripts ,,, this one and the short script after this one ,,,
+ * needed at end of body only ,,, example of button code is like this
+ * <button data-clipboard-text="text that gets copied into clipboard">Label Displayed on Button</button>
+ * 
+ * 
+ */
+!function(t){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var e;e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,e.Clipboard=t()}}(function(){var t,e,n;return function t(e,n,r){function o(a,c){if(!n[a]){if(!e[a]){var s="function"==typeof require&&require;if(!c&&s)return s(a,!0);if(i)return i(a,!0);var u=new Error("Cannot find module '"+a+"'");throw u.code="MODULE_NOT_FOUND",u}var l=n[a]={exports:{}};e[a][0].call(l.exports,function(t){var n=e[a][1][t];return o(n?n:t)},l,l.exports,t,e,n,r)}return n[a].exports}for(var i="function"==typeof require&&require,a=0;a<r.length;a++)o(r[a]);return o}({1:[function(t,e,n){var r=t("matches-selector");e.exports=function(t,e,n){for(var o=n?t:t.parentNode;o&&o!==document;){if(r(o,e))return o;o=o.parentNode}}},{"matches-selector":2}],2:[function(t,e,n){function r(t,e){if(i)return i.call(t,e);for(var n=t.parentNode.querySelectorAll(e),r=0;r<n.length;++r)if(n[r]==t)return!0;return!1}var o=Element.prototype,i=o.matchesSelector||o.webkitMatchesSelector||o.mozMatchesSelector||o.msMatchesSelector||o.oMatchesSelector;e.exports=r},{}],3:[function(t,e,n){function r(t,e,n,r){var i=o.apply(this,arguments);return t.addEventListener(n,i),{destroy:function(){t.removeEventListener(n,i)}}}function o(t,e,n,r){return function(n){n.delegateTarget=i(n.target,e,!0),n.delegateTarget&&r.call(t,n)}}var i=t("closest");e.exports=r},{closest:1}],4:[function(t,e,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.function=function(t){var e=Object.prototype.toString.call(t);return"[object Function]"===e}},{}],5:[function(t,e,n){function r(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!c.string(e))throw new TypeError("Second argument must be a String");if(!c.function(n))throw new TypeError("Third argument must be a Function");if(c.node(t))return o(t,e,n);if(c.nodeList(t))return i(t,e,n);if(c.string(t))return a(t,e,n);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList")}function o(t,e,n){return t.addEventListener(e,n),{destroy:function(){t.removeEventListener(e,n)}}}function i(t,e,n){return Array.prototype.forEach.call(t,function(t){t.addEventListener(e,n)}),{destroy:function(){Array.prototype.forEach.call(t,function(t){t.removeEventListener(e,n)})}}}function a(t,e,n){return s(document.body,t,e,n)}var c=t("./is"),s=t("delegate");e.exports=r},{"./is":4,delegate:3}],6:[function(t,e,n){function r(t){var e;if("INPUT"===t.nodeName||"TEXTAREA"===t.nodeName)t.focus(),t.setSelectionRange(0,t.value.length),e=t.value;else{t.hasAttribute("contenteditable")&&t.focus();var n=window.getSelection(),r=document.createRange();r.selectNodeContents(t),n.removeAllRanges(),n.addRange(r),e=n.toString()}return e}e.exports=r},{}],7:[function(t,e,n){function r(){}r.prototype={on:function(t,e,n){var r=this.e||(this.e={});return(r[t]||(r[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){function r(){o.off(t,r),e.apply(n,arguments)}var o=this;return r._=e,this.on(t,r,n)},emit:function(t){var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),r=0,o=n.length;for(r;o>r;r++)n[r].fn.apply(n[r].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),r=n[t],o=[];if(r&&e)for(var i=0,a=r.length;a>i;i++)r[i].fn!==e&&r[i].fn._!==e&&o.push(r[i]);return o.length?n[t]=o:delete n[t],this}},e.exports=r},{}],8:[function(t,e,n){"use strict";function r(t){return t&&t.__esModule?t:{"default":t}}function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}n.__esModule=!0;var i=function(){function t(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}return function(e,n,r){return n&&t(e.prototype,n),r&&t(e,r),e}}(),a=t("select"),c=r(a),s=function(){function t(e){o(this,t),this.resolveOptions(e),this.initSelection()}return t.prototype.resolveOptions=function t(){var e=arguments.length<=0||void 0===arguments[0]?{}:arguments[0];this.action=e.action,this.emitter=e.emitter,this.target=e.target,this.text=e.text,this.trigger=e.trigger,this.selectedText=""},t.prototype.initSelection=function t(){if(this.text&&this.target)throw new Error('Multiple attributes declared, use either "target" or "text"');if(this.text)this.selectFake();else{if(!this.target)throw new Error('Missing required attributes, use either "target" or "text"');this.selectTarget()}},t.prototype.selectFake=function t(){var e=this;this.removeFake(),this.fakeHandler=document.body.addEventListener("click",function(){return e.removeFake()}),this.fakeElem=document.createElement("textarea"),this.fakeElem.style.position="absolute",this.fakeElem.style.left="-9999px",this.fakeElem.style.top=(window.pageYOffset||document.documentElement.scrollTop)+"px",this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,document.body.appendChild(this.fakeElem),this.selectedText=c.default(this.fakeElem),this.copyText()},t.prototype.removeFake=function t(){this.fakeHandler&&(document.body.removeEventListener("click"),this.fakeHandler=null),this.fakeElem&&(document.body.removeChild(this.fakeElem),this.fakeElem=null)},t.prototype.selectTarget=function t(){this.selectedText=c.default(this.target),this.copyText()},t.prototype.copyText=function t(){var e=void 0;try{e=document.execCommand(this.action)}catch(n){e=!1}this.handleResult(e)},t.prototype.handleResult=function t(e){e?this.emitter.emit("success",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)}):this.emitter.emit("error",{action:this.action,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})},t.prototype.clearSelection=function t(){this.target&&this.target.blur(),window.getSelection().removeAllRanges()},t.prototype.destroy=function t(){this.removeFake()},i(t,[{key:"action",set:function t(){var e=arguments.length<=0||void 0===arguments[0]?"copy":arguments[0];if(this._action=e,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function t(){return this._action}},{key:"target",set:function t(e){if(void 0!==e){if(!e||"object"!=typeof e||1!==e.nodeType)throw new Error('Invalid "target" value, use a valid Element');this._target=e}},get:function t(){return this._target}}]),t}();n.default=s,e.exports=n.default},{select:6}],9:[function(t,e,n){"use strict";function r(t){return t&&t.__esModule?t:{"default":t}}function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function i(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}function a(t,e){var n="data-clipboard-"+t;if(e.hasAttribute(n))return e.getAttribute(n)}n.__esModule=!0;var c=t("./clipboard-action"),s=r(c),u=t("tiny-emitter"),l=r(u),f=t("good-listener"),d=r(f),h=function(t){function e(n,r){o(this,e),t.call(this),this.resolveOptions(r),this.listenClick(n)}return i(e,t),e.prototype.resolveOptions=function t(){var e=arguments.length<=0||void 0===arguments[0]?{}:arguments[0];this.action="function"==typeof e.action?e.action:this.defaultAction,this.target="function"==typeof e.target?e.target:this.defaultTarget,this.text="function"==typeof e.text?e.text:this.defaultText},e.prototype.listenClick=function t(e){var n=this;this.listener=d.default(e,"click",function(t){return n.onClick(t)})},e.prototype.onClick=function t(e){var n=e.delegateTarget||e.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new s.default({action:this.action(n),target:this.target(n),text:this.text(n),trigger:n,emitter:this})},e.prototype.defaultAction=function t(e){return a("action",e)},e.prototype.defaultTarget=function t(e){var n=a("target",e);return n?document.querySelector(n):void 0},e.prototype.defaultText=function t(e){return a("text",e)},e.prototype.destroy=function t(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)},e}(l.default);n.default=h,e.exports=n.default},{"./clipboard-action":8,"good-listener":5,"tiny-emitter":7}]},{},[9])(9)});
+
+</script>
+
+    <script>
+    var btns = document.querySelectorAll('button');
+    var clipboard = new Clipboard(btns);
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+    </script>
+
+<!-- buttoncopy end --->
+
+<!-- *********************************************************
+     * You may use this code for free on any web page provided that 
+     * these comment lines and the following credit remain in the code.
+     * Floating Div from http://www.javascript-fx.com
+     ********************************************************  -->
+<div id="divTopLeft"     style="position:absolute">
+<!-- Start - put your content here --->
+    
+    <table border=1 bgcolor="grey" background="img/decor.jpg"><tr><td>
+      <p><span style="background-color: #FFFFFF"><b><a href=#PGTOP>Top of Page</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> Overview </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="quicksurf2.html">QuickSurf</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="newspg.html">Newspaper</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="hot.html">Hot Links</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="drawer.html">Top Drawer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span></p>
+</td></tr></table>
+<!-- End   - put your content here --->
+</div>
+
+<script type="text/javascript">
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function JSFX_FloatDiv(id, sx, sy)
+{
+	var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+	var px = document.layers ? "" : "px";
+	window[id + "_obj"] = el;
+	if(d.layers)el.style=el;
+	el.cx = el.sx = sx;el.cy = el.sy = sy;
+	el.sP=function(x,y){this.style.left=x+px;this.style.top=y+px;};
+
+	el.floatIt=function()
+	{
+		var pX, pY;
+		pX = (this.sx >= 0) ? 0 : ns ? innerWidth : 
+		document.documentElement && document.documentElement.clientWidth ? 
+		document.documentElement.clientWidth : document.body.clientWidth;
+		pY = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+		document.documentElement.scrollTop : document.body.scrollTop;
+		if(this.sy<0) 
+		pY += ns ? innerHeight : document.documentElement && document.documentElement.clientHeight ? 
+		document.documentElement.clientHeight : document.body.clientHeight;
+		this.cx += (pX + this.sx - this.cx)/8;this.cy += (pY + this.sy - this.cy)/8;
+		this.sP(this.cx, this.cy);
+		setTimeout(this.id + "_obj.floatIt()", 40);
+	}
+	return el;
+}
+JSFX_FloatDiv("divTopLeft", 600,95).floatIt();
+</script>
+<!-- ********************************************************* -->
+  
+
+
+</body>
+</html>
+<noscript><table background="img/decor.jpg"><td><font color="#ffffff"><plaintext> 
