@@ -1,0 +1,995 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 46 - GalleryMH</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: violet;
+  border-radius: 4px;
+  box-shadow: 
+    inset 2px 2px 2px indigo,
+    inset -2px -2px 2px indigo;
+}
+
+::-webkit-scrollbar-track {
+  --s: 10px; /* control the size */
+  --_s: 0 0/var(--s) var(--s);
+  background:
+      radial-gradient(#0000 50%, #0002 54%, violet 57%) var(--_s),
+      radial-gradient(circle at 40% 30%, #0000 4%, #000 90%) var(--_s),
+      repeating-conic-gradient(violet 0 25%, white 0 50%) 0 0/calc(2*var(--s)) calc(2*var(--s));
+}
+
+body {
+  margin: 0;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: auto;
+  object-fit: contain;
+}
+
+body > * {
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+}
+
+body:has(.fullscreen) {
+  cursor: cell;
+}
+
+#titles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em 1em;
+}
+
+.card {
+  position: relative;
+  width: 150px;
+  aspect-ratio: 1;
+  font: 900 24px/1 system-ui;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 1px grey,
+    0 0 2px white,
+    0 -5px 4px violet,
+    2px -10px 6px indigo,
+    -2px -10px 8px blue;
+}
+
+.card:not(.fullscreen) {
+  --sign: 1;
+  transition: scale 300ms ease-out 100ms;
+  box-shadow:
+  0 calc(var(--sign) * 1px)   2px  0 grey,
+  0 calc(var(--sign) * 2px)   4px  0 white,
+  0 calc(var(--sign) * 4px)   8px  0 violet,
+  0 calc(var(--sign) * 8px)  16px  0 indigo,
+  0 calc(var(--sign) * 16px) 32px  0 blue;
+}
+
+.card::after {
+  content: attr(data-title);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  translate: 0 25%; 
+}
+
+.card:hover:not(.fullscreen) {
+  --sign: -1;
+  cursor: pointer;
+  scale: 1.05;
+}
+
+.card:hover:not(.fullscreen)::after {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.card.fullscreen::after,
+.card:hover.fullscreen::after {
+  translate: 0 0;
+}
+
+.card.fullscreen {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100lvh; 
+  transition: all 200ms ease-out;
+}
+
+#titles:has(.fullscreen) .card:not(.fullscreen) {
+  position: absolute;
+  left: -100vw;
+}
+
+@media (min-width: 600px) {
+  .card {
+    width: 550px;
+    aspect-ratio: 2;
+    font-size: 4.5em;
+  }
+
+  .card.fullscreen {
+    border-radius: unset;
+    box-shadow: unset;
+  }
+
+  #titles {
+    gap: 3em;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 600px) {
+  .card::after {
+    transition: all 400ms linear 300ms;
+  }
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+<div id="titles"></div>
+<script type="x-shader/x-vertex">#version 300 es
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  in vec2 position;
+  out vec2 texcoord;
+
+  void main(void) {
+    texcoord = position;
+    gl_Position = vec4(position, 0, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Garry">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T time
+  #define S smoothstep
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y)),
+    p = uv*20.;
+
+    vec3 col = vec3(0);
+
+    for (int i=0; i<3; i++) {
+      float k=float(i+1), t=T*k;
+      uv += vec2(
+        sin(t+uv.y*1.5),
+        cos(t+uv.x*1.5)
+      )*.02;
+      col[i] += sin(k+length(p)/length(uv)-T);
+      uv *= .95;
+    }
+
+    col = sqrt(col);
+    col = pow(col, vec3(.4545));
+    col = mix(col, vec3(S(1.,.0, length(fwidth(col)))), -.125);
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Lenny">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T time
+  #define S smoothstep
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y));
+    vec3 col = vec3(0);
+
+    for (int i=0; i<3; i++) {
+      float k=float(i+1), t=T*k;
+      uv += vec2(
+        sin(t+uv.y*1.5),
+        cos(t+uv.x*.5)
+      )*.02;
+      col[i] += sin(k+length(uv*20.)-T);
+      uv *= .918;
+    }
+
+    col = sqrt(col);
+    col = pow(col, vec3(.4545));
+    col = mix(col, vec3(S(1.,.0, length(fwidth(col)))), -.125);
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Sammy">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T time
+  #define S smoothstep
+
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y)),
+    p=uv*15.;
+    vec3 col = vec3(0);
+
+    for (int i=0; i<3; i++) {
+      float k=float(i+1), t=T*k;
+      uv = vec2(.76*cos(atan(uv.y,uv.x)*3.),1);
+      col[i] += sin(length(p)/length(uv)-T);
+    }
+
+    col = sqrt(col);
+    col = pow(col, vec3(.4545));
+    col = mix(col, vec3(S(1.,.0, length(fwidth(col)))), -.125);
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Lizzy">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T (time)
+  #define S smoothstep
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y)),
+    p=uv*20.;
+    vec3 col = vec3(0);
+
+    for (int i=0; i<3; i++) {
+      float k=float(i+1), t=T*k;
+      uv += vec2(
+        sin(t+uv.y*1.5),
+        cos(t+uv.x*.5)
+      )*.02;
+      col[i] += sin((3.-k)+length(p)/exp(length(uv))-T);
+      uv *= .918;
+    }
+
+    col = sqrt(col);
+    col = pow(col, vec3(.4545));
+    col = mix(col, vec3(S(1.,.0, length(fwidth(col)))), -.125);
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Rarely">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T (time)
+  #define S smoothstep
+
+  float rnd(vec2 p) {
+    return fract(
+      sin(dot(p, p.yx + vec2(234, 543))) * 345678.);
+  }
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y)),
+    p = uv;
+    
+    vec3 col = vec3(0);
+    uv *= 5.;
+
+    for (float n=3., i=.0; i<n; i++) {
+      uv.y -= T;
+      uv.x += sin(T+p.y*1.3)*.3;
+      vec2 gv = fract(uv)-.5, id = floor(uv);
+      float k = (i+1.)/n;
+      col += .025/length(gv)+step(length(gv)-.4,.0);
+      col *= k*vec3(rnd(id),rnd(id+12.),rnd(id+78.));
+      uv *= .9;
+    }
+
+    col -= 1.-col;
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Opened">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T (time)
+  #define S smoothstep
+
+  float rnd(vec2 p) {
+    return fract(sin(dot(p,p.yx+vec2(234,543)))*345678.);
+  }
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y)),
+    p = uv;
+
+    vec3 col = vec3(0);
+    uv *= 15.;
+
+    for (float n=6., i=.0; i<n; i++) {
+      vec2 st = uv*1.5-.5, gv = fract(st)-.5, id = floor(st);
+      gv.x += cos(T+p.y*1.5)*.45;
+
+      float t=floor(10.*fract(T*.5));
+      col += .25/length(gv)/exp(length(uv));
+      col *= vec3(rnd(id+t),rnd(id+12.+t),rnd(id+78.+t));
+      uv *= .8;
+    }
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Curved">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+  
+  #define T mod(40.+time, 180.)
+  #define S smoothstep
+ 
+  #define TICK (fract(T * .025))
+
+  mat2 rot(float a) {
+    float c = cos(a),
+      s = sin(a);
+    return mat2(c, -s, s, c);
+  }
+
+  float rnd(vec2 p) {
+    return fract(sin(dot(p, p.yx + vec2(234.78, 543.12))) * 345678.);
+  }
+
+  float box(vec3 p, vec3 s, float r) {
+    p = abs(p) - s;
+
+    return length(max(p, .0)) +
+      min(.0, max(max(p.x, p.y), p.z)) - r;
+  }
+
+  vec3 map(vec3 p) {
+    const float n = 3.;
+    vec2
+    g = (fract(p.xz / n) - .5) * n,
+    id = floor(p.xz / n);
+    p.xz = g;
+
+    float h = clamp(rnd(id) * 2.5, .2, 2.5),
+    w = clamp(1. - rnd(id), .5, 1.),
+    bld = box((p - vec3(0, h, 0)) + .0125, vec3(w, h, w), .0125);
+
+    return vec3(bld * .25, id);
+  }
+
+  float getao(vec3 p, vec3 n, float dist) {
+    return clamp(map(p + n * dist).x / dist, .0, 1.);
+  }
+
+  vec3 norm(vec3 p) {
+    float h = 1e-2;
+    vec2 k = vec2(-1, 1);
+
+    return normalize(
+      k.xyy * map(p + k.xyy * h).x +
+      k.yxy * map(p + k.yxy * h).x +
+      k.yyx * map(p + k.yyx * h).x +
+      k.xxx * map(p + k.xxx * h).x
+    );
+  }
+
+  vec3 dir(vec2 uv, vec3 ro, vec3 t, float z) {
+    vec3 up = vec3(0, 1, 0),
+      f = normalize(t - ro),
+      r = normalize(cross(up, f)),
+      u = cross(f, r),
+      c = f * z,
+      i = c + uv.x * r + uv.y * u,
+      d = normalize(i);
+
+    return d;
+  }
+
+  void cam(inout vec3 p) {
+    if (TICK > .5) {
+      p.yz *= rot(-.45-.25*(sin(T*.1)*.5+.5));
+      p.xz *= rot(2.7 + sin(T * .05));
+    } else {
+      p.yz *= rot(-.25-.25*(sin(.78+T*.1)*.5+.5));
+      p.xz *= rot(.38-cos(T * .1) * .5);
+    }
+  }
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y));  
+    vec3 col=vec3(0),
+    tg = vec3(0, .125, T * 3.),
+    ro = vec3(0, 0, -.1);
+    
+    cam(ro);
+    ro += tg;
+    
+    vec3 rd = dir(uv, ro, tg, .8),
+    p = ro;
+    
+    const float steps = 800., maxd = 13.;
+    float dd = .0;
+    bool near = false;
+    
+    for (float i = .0; i < steps; i++) {
+      vec3 d = map(p);
+    
+      if (d.x < 4e-2) break;
+    
+      if (near && d.x > 7e-2) {
+        vec2 id = d.yz;
+        col += vec3(rnd(id), rnd(id + 12.), rnd(id + 78.));
+        break;
+      }
+    
+      if (d.x < 7e-2) {
+        near = true;
+      }
+    
+      if (dd > maxd) {
+        dd = maxd;
+        break;
+      }
+    
+      p += rd * d.x;
+      dd += d.x;
+    }
+
+    col = mix(vec3(0), col, exp(1.-2e-3 * dd * dd * dd));
+
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Kitten">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T time
+  #define S smoothstep
+  
+  #define hue(a) (.24+.6*cos(10.3*(a)+vec3(0,83,21)))
+
+  mat2 rot(float a) {
+    float c=cos(a), s=sin(a);
+
+    return mat2(c,-s,s,c);
+  }
+
+  float helix(vec3 p, float s) {
+    p.xz *= rot(p.y*.3-T*.2);
+    vec2 x = vec2(1.25,0);
+    float a = length(p.xz+x)-s,
+    b = length(p.xz-x)-s;
+
+    return min(a,b);
+  }
+
+  float map(vec3 p) {
+    p.x += .5*sin(3.*p.y+T*.4);
+    float d = helix(p,1.);
+
+    return d;
+  }
+
+  void cam(inout vec3 p) {
+    if (resolution.x > resolution.y) {
+      p.xy *= rot(1.5707);
+    }
+  }
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y));
+    vec3 col = vec3(0),
+    p = vec3(0, 0, -6),
+    rd = normalize(vec3(uv, 1));
+
+    cam(p);
+    cam(rd);
+
+    const float steps = 400., maxd = 40.;
+    float dd = .0;
+
+    for (float i = .0; i < steps; i++) {
+      float d = map(p) * .5;
+
+      if (d < 1e-3) {
+        col += (steps - i) / steps;
+        col *= hue(dd + 6.) * 1.8;
+
+        break;
+      }
+
+      if (d > maxd) {
+        break;
+      }
+
+      p += rd * d;
+      dd += d;
+    }
+
+    col = mix(vec3(1), col, exp(-125e-5 * dd * dd * dd * dd));
+    
+    fragColor = vec4(col, 1);
+  }
+</script>
+<script type="x-shader/x-fragment" data-title="Shards">#version 300 es
+  /*********
+   * made by Matthias Hurrle (@atzedent)
+   */
+  #ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+  #else
+  precision mediump float;
+  #endif
+
+  out vec4 fragColor;
+  in vec2 texcoord;
+
+  uniform vec2 resolution;
+  uniform float time;
+
+  #define T time
+  #define S smoothstep
+
+  #define hue(a) (.34+.4*cos(4.*(a)+vec3(0,83,21)))
+
+  mat2 rot(float a) {
+    float s=sin(a), c=cos(a);
+    return mat2(c,-s,s,c);
+  }
+
+  float map(vec3 p) {
+    float f = 1., d = 5e5, t = 1.+floor(10.*fract(T*.005));
+
+    for (float i= .0; i<5.; i++) {
+      p.xz *= rot(t/f);
+      p = abs(p+.009)-.75*f;
+      d = min(d,length(max(p,.0))+min(.0,max(max(p.x,p.y),p.z))-.009);
+      f *= .65;
+    }
+
+    return -d;
+  }
+
+  void cam(inout vec3 p) {
+    p.y += sin(T*.1)*.2;
+    p.yz *= rot(sin(T*.1));
+    p.xz *= rot(T*.05);
+  }
+
+  void main(void) {
+    vec2 uv = texcoord * (resolution / max(resolution.x, resolution.y));
+
+    vec3 col = vec3(0),
+    p = vec3(0),
+    rd = normalize(vec3(uv, 1));
+
+    cam(p);
+    cam(rd);
+
+    const float steps = 1000., maxd = 5.;
+    float dd = .0, at = .0;
+
+    for (float i = .0; i < steps; i++) {
+      float d = map(p);
+
+      if (d < 9e-4) {
+        col += (steps - i) / steps;
+        col *= hue(dd);
+        break;
+      }
+
+      if (dd > maxd) {
+        dd = maxd;
+        break;
+      }
+
+      p += rd * d;
+      dd += d;
+      at += .05 * (.05 / dd);
+    }
+
+    col = pow(col, vec3(.4545));
+    col = mix(col, vec3(.1, 01, .01), at);
+    col = clamp(col * col * col * (col * (6. * col - 15.) + 10.), .0, 1.);
+    
+    fragColor = vec4(col, 1);
+  }
+</script>
+
+
+
+<script>
+/*********
+ * made by Matthias Hurrle (@atzedent) 
+ */
+const dpr = window.devicePixelRatio
+
+function compile(shader, source) {
+  gl.shaderSource(shader, source)
+  gl.compileShader(shader);
+
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(shader))
+  }
+}
+
+let gl, programs = [], vertices, buffer;
+
+function setup() {
+  gl = canvas.getContext("webgl2")
+  
+  const vs = gl.createShader(gl.VERTEX_SHADER)
+  const vertexSource = document.querySelector('script[type="x-shader/x-vertex"]').innerText
+  
+  compile(vs, vertexSource)
+
+  let files = Array.from(document.querySelectorAll('script[type="x-shader/x-fragment"]'))
+  let shaders = files.map(p => p.innerText)
+
+  for (let i=0; i<3; i++) {
+    shaders = [...shaders, ...shaders]
+  }
+
+  programs = shaders.map(() => gl.createProgram())
+
+  for (let i = 0; i < shaders.length; i++) {
+    let addr = gl.createShader(gl.FRAGMENT_SHADER)
+    let program = programs[i]
+
+    const a = document.createElement("div")
+    a.classList.add("card")
+    a.dataset.title = files[i%files.length].dataset.title
+    window.titles.appendChild(a)
+    program.clip = a
+
+    compile(addr, shaders[i])
+
+    gl.attachShader(program, vs)
+    gl.attachShader(program, addr)
+    gl.linkProgram(program)
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error(gl.getProgramInfoLog(program))
+    }
+  }
+
+  vertices = [
+            -1., -1., 1.,
+            -1., -1., 1.,
+            -1., 1., 1.,
+            -1., 1., 1.,
+        ]
+
+  gl.enable(gl.SCISSOR_TEST)
+  buffer = gl.createBuffer()
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
+
+  for (let program of programs) {
+    const position = gl.getAttribLocation(program, "position")
+
+    gl.enableVertexAttribArray(position)
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0)
+
+    // uniforms come here...
+    program.resolution = gl.getUniformLocation(program, "resolution")
+    program.time = gl.getUniformLocation(program, "time")
+  }
+}
+
+function dispose() {
+  if (gl) {
+    const ext = gl.getExtension("WEBGL_lose_context")
+    if (ext) ext.loseContext()
+    gl = null
+  }
+}
+
+function draw(now, program, full) {
+  const element = program.clip
+  const rect = element.getBoundingClientRect();
+
+  if (rect.bottom < 0 || rect.top > gl.canvas.clientHeight ||
+    rect.right < 0 || rect.left > gl.canvas.clientWidth) {
+    if (!full) return; // it's off screen
+  }
+
+  let width = Math.ceil(rect.width * dpr);
+  let height = Math.ceil(rect.height * dpr);
+  const left = Math.ceil(rect.left * dpr);
+  const bottom = Math.floor(canvas.height - rect.bottom * dpr);
+
+  if (!full) {
+    gl.viewport(left, bottom, width, height);
+    gl.scissor(left, bottom, width, height);
+  } else {
+    gl.viewport(0,0,canvas.width, canvas.height)
+    gl.scissor(0,0,canvas.width,canvas.height)
+    width = canvas.width
+    height= canvas.height
+  }
+  gl.clearColor(0, 0, 0, 1)
+  gl.clear(gl.COLOR_BUFFER_BIT)
+  gl.useProgram(program)
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+  // uniforms come here...
+  gl.uniform2f(program.resolution, width, height)
+  gl.uniform1f(program.time, now * 1e-3)
+
+  gl.drawArrays(gl.TRIANGLES, 0, vertices.length * .5)
+}
+
+let handle, then = 0, iter = 0, fullBg = true
+
+function loop(now) {
+  if (now - then > 4000) {
+    then = now
+    iter++
+  }
+
+  gl.canvas.style.transform = `translateY(${window.scrollY}px)`;
+
+  if (fullBg) {
+    draw(now, programs[iter%programs.length], true)
+  }
+
+  for (let program of programs) {
+    draw(now, program, false)
+  }
+
+  handle = requestAnimationFrame(loop)
+}
+
+function init() {
+  dispose()
+  setup()
+  resize()
+  loop(0)
+}
+
+function resize() {
+  const {
+    innerWidth: width,
+    innerHeight: height
+  } = window
+
+  canvas.width = Math.ceil(width * dpr)
+  canvas.height = Math.ceil(height * dpr)
+}
+
+window.onresize = resize
+
+let timeout, scrollY = 0, activeEl
+
+function execute(fn, delayed) {
+  if (delayed) {
+    timeout = setTimeout(fn, delayed)
+  } else {
+    fn()
+  }
+}
+
+const fullscreen = "fullscreen"
+
+function goFull(element) {
+  element.classList.add(fullscreen)
+  scrollY = window.scrollY
+  fullBg = false
+  window.scrollTo(0, 0)
+  activeEl = null
+}
+
+window.onpointerdown = e => {
+  if (e.target.classList.contains("card")) {
+    if (e.target.classList.contains(fullscreen)) {
+      e.target.classList.remove(fullscreen)
+      window.scrollTo(0, scrollY)
+      fullBg = true
+      activeEl = null
+    } else {
+      const immediately = activeEl === e.target
+      
+      execute(
+        ()=>goFull(e.target),
+        e.pointerType === "touch" && !immediately ? 800 : 0
+      )
+      activeEl = e.target
+    }
+  } 
+}
+window.onpointermove = e => {
+  if (Math.abs(e.movementY) < 5) return
+  if (timeout) {
+    clearTimeout(timeout)
+  }
+  activeEl = null
+}
+window.onpointerup = e => {
+  if (timeout) {
+    clearTimeout(timeout)
+  }
+}
+
+function handleOrientation(query) {
+  if (query.matches) {
+    window.scrollTo(0, 0)
+  }
+}
+
+const orient = window.matchMedia('(orientation: portrait)')
+orient.addEventListener("change", handleOrientation)
+
+init()
+
+</script>
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
