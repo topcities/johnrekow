@@ -1,0 +1,259 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Lamp 47 - SpiralMH</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+
+<style>
+html, body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: block;
+}
+
+/* Fully remove all UI elements */
+#controls,
+.controls,
+.editor,
+#error,
+#indicator {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+</style>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<script type="x-shader/x-fragment">#version 300 es
+precision highp float;
+out vec4 O;
+uniform float time;
+uniform vec2 resolution;
+
+#define FC gl_FragCoord.xy
+#define R resolution
+#define T time
+#define MN min(R.x,R.y)
+#define S smoothstep
+#define SE(v,a) S(fwidth(a),-.35,v-a)
+#define PI radians(180.)
+#define lum(a) dot(a,vec3(.21,.71,.07))
+#define hue(a)(.5+.5*sin(PI*(a)+vec3(1,2,3)))
+
+vec3 watermark() {
+	vec3 col=vec3(0);
+	float rel=R.x/R.y;
+	vec2 z=FC/R;
+	z.x*=rel;
+	z.x-=rel;
+	z+=vec2(.1,-.1);
+	float j=.025, id=round(z.y/j);
+	z.y-=clamp(round(z.y/j),-1.,1.)*j;
+	float bx=max(abs(z.x),abs(z.y)), rect=step(bx,.01), frame=rect-step(bx,.008);
+	return clamp(mix(col,rect*hue(cos(T*.2)-id*PI*2.),mix(frame,rect,.5)),.0,1.);
+}
+
+void main() {
+	vec3 wm = vec3(0.0);
+
+	vec2 uv=2.*FC-R, st=(FC-.5*R)/MN;
+
+	/* REMOVED BLACK BORDER LOGIC
+	if ((R.x>R.y) && (abs(st.x)>1. || abs(st.y)>.5)) {
+		O=max(O,vec4(bg,0));
+		return;
+	}
+	*/
+
+	uv*=mat2(cos(sin(T*.2)-vec4(0,11,33,0)))*exp(cos(T)*.321)*(.7+.5*cos(T*.5));
+	float d=length(uv)/MN;
+	uv=vec2(log(d),.205+atan(uv.x,uv.y))*8./PI;
+
+	vec2 p=uv;
+	uv.x+=floor(uv.y*.5)*.5-T*1.5;
+	uv=mod(uv,2.)-1.;
+	p+=sin(T*10.-p*vec2(10,30))*.01;
+
+	uv*=uv*uv*uv;
+	float l=dot(uv,uv);
+	l=abs(d-SE(l,.2));
+
+	vec3 col=hue(l*l-T*.5);
+	col=tanh(col*col)/(.01+.25*lum(vec3(distance(cos((p.x-T)*12.),sin(p.y*42.)))));
+	col=sqrt(col);
+
+	l=dot(abs(uv)/dot(p,4.5*p)-.9,st);
+	col=mix(2.*sqrt(hue(.1+l)/max(l*l*l*l,.1)),col,S(-.5,.5,length((FC-.5*R)/MN)));
+
+	col/=4.;
+	col=mix(vec3(.85),col,mix(.6,1.,fract(sin(dot(st, vec2(12.9898,78.233)))*345678.)));
+	col=max(col,.1);
+	col=mix(col,vec3(1),S(1e-5,-1e-2,dot(st,st)));
+
+	vec2 c=FC/R;
+	c*=1.-c.yx;
+	float vig=c.x*c.y*25.;
+	vig=S(.0,1.,pow(vig,.3));
+
+	col=mix(vec3(lum(col)),col,vig);
+	col=mix(vec3(0),col,vig);
+	col*=vec3(1.2*lum(col));
+	col=sqrt(col);
+
+	/* REMOVED BORDER FRAME LOGIC
+	if (R.x>R.y) {
+		float bs=MN*.05;
+		if (FC.x > R.x-bs || FC.x < bs || FC.y > R.y-bs || FC.y < bs) {
+			O=max(O,vec4(bg,0));
+			return;
+		}
+	}
+	*/
+
+	col=max(col,wm);
+	O=vec4(col,1);
+}
+</script>
+
+<script>
+let dpr = Math.max(1, window.devicePixelRatio)
+let renderer
+
+window.onload = () => {
+  const canvas = document.getElementById("canvas")
+  renderer = new Renderer(canvas, dpr)
+  renderer.setup()
+  renderer.init()
+  resize()
+  loop(0)
+  window.onresize = resize
+}
+
+function resize() {
+  const canvas = document.getElementById("canvas")
+  canvas.width = window.innerWidth * dpr
+  canvas.height = window.innerHeight * dpr
+  renderer.updateScale(dpr)
+}
+
+function loop(now) {
+  renderer.render(now)
+  requestAnimationFrame(loop)
+}
+
+class Renderer {
+  #vertexSrc = `#version 300 es
+  in vec4 position;
+  void main(){gl_Position=position;}`
+
+  constructor(canvas, scale) {
+    this.canvas = canvas
+    this.scale = scale
+    this.gl = canvas.getContext("webgl2")
+  }
+
+  updateScale(scale) {
+    this.scale = scale
+    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height)
+  }
+
+  setup() {
+    const gl = this.gl
+    const source = document.querySelector("script[type='x-shader/x-fragment']").textContent
+
+    this.vs = gl.createShader(gl.VERTEX_SHADER)
+    gl.shaderSource(this.vs, this.#vertexSrc)
+    gl.compileShader(this.vs)
+
+    this.fs = gl.createShader(gl.FRAGMENT_SHADER)
+    gl.shaderSource(this.fs, source)
+    gl.compileShader(this.fs)
+
+    this.program = gl.createProgram()
+    gl.attachShader(this.program, this.vs)
+    gl.attachShader(this.program, this.fs)
+    gl.linkProgram(this.program)
+  }
+
+  init() {
+    const gl = this.gl
+    const program = this.program
+
+    const vertices = new Float32Array([-1,1,-1,-1,1,1,1,-1])
+    const buffer = gl.createBuffer()
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
+
+    const position = gl.getAttribLocation(program, "position")
+    gl.enableVertexAttribArray(position)
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0)
+
+    this.resolution = gl.getUniformLocation(program, "resolution")
+    this.time = gl.getUniformLocation(program, "time")
+  }
+
+  render(now) {
+    const gl = this.gl
+    gl.useProgram(this.program)
+    gl.uniform2f(this.resolution, this.canvas.width, this.canvas.height)
+    gl.uniform1f(this.time, now * 0.001)
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+  }
+}
+</script>
+
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
