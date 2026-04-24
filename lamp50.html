@@ -1,0 +1,546 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+    <title>Lamp 50 - BallTower</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<style>
+html {
+  height: 100%;
+}
+body {
+  background: #999;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+</style>
+
+  </head>
+    
+  <body>
+  <!-- VertexShader code here -->
+<script id="vertexShader" type="x-shader/x-vertex">#version 300 es
+in vec4 vPosition;
+void main() {
+	gl_Position = vPosition;
+}
+</script>
+<!-- FragmentShader code here -->
+<script id="fragmentShader" type="x-shader/x-fragment">#version 300 es
+precision mediump float;
+out vec4 fragColor;
+
+uniform vec2 resolution;
+uniform float time;
+uniform vec4 mouse;
+uniform float zoom;
+
+#define MAX_STEPS 	100
+#define MAX_DIST	150.
+#define MIN_DIST	.001
+#define EPSILON		.0001
+
+#define PI 3.1415926535897
+
+// Change to 2 to for antialiasing
+#define AA 1
+#define ZERO (min(1,0))
+
+vec2 hash2(vec2 p) {
+	vec2 o = (p+0.5)/256.;
+  	return o;
+}
+
+float goldNoise(vec2 coord, float seed) {
+	float phi = 1.6180339887498 * 0000.1;
+  	float pi2 = PI * 0.1;
+  	float sq2 = 1.4142135623730 * 10000.;
+  	float temp = fract(
+    	sin(dot(coord*(seed+phi), vec2(phi, pi2))) * sq2
+  	);
+  return temp;
+}
+
+vec3 rotateX(vec3 x, float an) {
+    float c = cos(an); float s = sin(an);
+    return vec3(x.x, x.y * c - x.z * s, x.z * c + x.y * s);
+}
+
+vec3 rotateY(vec3 x, float an) {
+    float c = cos(an); float s = sin(an);
+    return vec3(x.x * c - x.z * s, x.y, x.z * c + x.x * s);
+}
+
+vec3 rotateZ(vec3 x, float an) {
+    float c = cos(an); float s = sin(an);
+    return vec3(x.x * c - x.y * s, x.y * c + x.x * s, x.z);
+}
+
+// handy mouse pos function - take in a vec3 like ro
+// simple pan and tilt and return that vec3
+vec3 get_mouse(vec3 ro) {
+    float x = (mouse.y / resolution.y * 1.0 - 0.5) * PI;
+    float y = -(mouse.x / resolution.x * 2.0 - 1.0) * PI;
+    float z = 0.0;
+    //vec3 mouse = vec3(x,y,z);
+	ro = rotateZ(ro, z);   
+    ro = rotateX(ro, x);
+    ro = rotateY(ro, y);
+
+    return ro;
+}
+  
+float sdBox(vec3 p,vec3 s) {
+    p = abs(p) - s;
+    return max(max(p.x,p.y),p.z);
+}
+
+float sdSphere(vec3 p, float r) {
+    return length(p)-r;    
+}
+
+float map(vec3 pos) {
+	// set up size for repetition
+  float size = 20.;
+	float rep_half = size/2.;
+  // get center vec and some movement
+  vec3 center = vec3(0.,0., 0.- time * 5.);
+  vec3 pp = pos-center;
+	// make the id's for beams
+    vec3 pi = vec3(
+        floor((pp + rep_half)/size)
+    );
+	// make vec and ids for balls
+    vec3 tt = pos-center;
+    vec3 ti = vec3(
+        floor((tt + rep_half)/size)
+    );
+
+    // SHAKKADOO!! movement change based on time mod
+    // hash/noise vector direction.
+    // Using a mod of time < segment flip direction
+    if(mod(time,6.)<2.){
+        //up-down
+        // fhs gets the hash of the other vec2 
+        // its not moving in.
+        float fhs = goldNoise(pi.xz, 312.);
+        if(fhs>.5){
+            tt.y += fract(time) * 20.;
+        } else {
+            tt.y -= fract(time) * 20.;
+        } 
+    } else if (mod(time,6.)<4.){
+        //left-right
+      	float fhs = goldNoise(pi.zy, 312.);
+        if(fhs>.5){
+            tt.x += fract(time) * 20.;
+        } else {
+            tt.x -= fract(time) * 20.;
+        }   
+    } else {
+        //back-forth
+      	float fhs = goldNoise(pi.xy, 312.);
+        if(fhs>.5){
+            tt.z += fract(time) * 20.;
+        } else {
+            tt.z -= fract(time) * 20.;
+        }   
+    }
+
+    pp =  mod(pp+rep_half,size) - rep_half;
+	  tt =  mod(tt+rep_half,size) - rep_half;
+    
+    float len = 11.;
+    float tx =  1.5;
+
+    //framework
+    float d1 = sdBox(abs(pp)-vec3(10.,10.,0.), vec3(tx,tx,len) );
+    float d2 = sdBox(abs(pp)-vec3(10.,0.,10.), vec3(tx,len,tx) );
+    float d3 = sdBox(abs(pp)-vec3(0.,10.,10.), vec3(len,tx,tx) );
+    d1 = min(min(d1,d3),d2);
+
+    //box clips
+	  d2 = sdBox(abs(pp)-vec3(10.,10.,10.), vec3(3.5) );
+    d3 = sdBox(abs(pp)-vec3(10.,10.,10.), vec3(2.5,4.5,2.5) );
+    d1 = min(d1,min(d2,d3));
+    
+    d2 = sdBox(abs(pp)-vec3(10.,10.,10.), vec3(2.5,2.5,4.5) );
+    d3 = sdBox(abs(pp)-vec3(10.,10.,10.), vec3(4.5,2.5,2.5) );
+    d1 = min(min(d1,d2),d3);
+    
+    //balls
+    float d4 = sdSphere(tt-vec3(0.,0.,0.),2.5);
+    if(d4<d1) d1 = d4;
+    
+    return d1;
+}
+
+/**
+	transparent marcher
+	just go to the maxstep
+	like ao plus dist
+	fun evil render below
+*/
+float trans_ray( in vec3 ro, in vec3 rd ) {
+    float depth = 0.;
+    for (int i = 0; i<MAX_STEPS; i++) {
+        vec3 p = ro + depth * rd;
+        float dist = map(p);
+        dist = max(abs(dist), MIN_DIST);
+        // make it look all dark and evil here
+        // dist = smoothstep(0.1,.9,max(abs(dist), MIN_DIST));
+        depth += abs(dist*.5);
+    }
+    return depth;
+}
+    
+mat3 get_camera(vec3 ro, vec3 ta, float rotation) {
+	vec3 cw = normalize(ta-ro);
+	vec3 cp = vec3(sin(rotation), cos(rotation),0.0);
+	vec3 cu = normalize( cross(cw,cp) );
+	vec3 cv = normalize( cross(cu,cw) );
+	return mat3( cu, cv, cw );
+}
+
+void main( ) {
+    vec3 color = vec3(0.);
+    vec2 uv;
+    // 
+  #if AA>1
+    for( int m=ZERO; m<AA; m++ )
+    for( int n=ZERO; n<AA; n++ )
+    {
+    	// pixel coordinates
+    vec2 o = vec2(float(m),float(n)) / float(AA) - 0.5;
+		uv = (2. * gl_FragCoord.xy - (resolution.xy+o))/resolution.y;
+	#else    
+    uv = (2. * gl_FragCoord.xy - resolution.xy )/resolution.y;
+	#endif
+
+	  float ftime = time * 5.5 / 1.75;
+    float ftm = .5 + .5 * sin(time*.1);
+    
+    vec3 ta = vec3(0.0,0.0,0.);
+    vec3 ro = get_mouse(vec3(0.0,0.0,-7.));
+    
+    mat3 cameraMatrix = get_camera(ro, ta, 0. );
+    vec3 rd = cameraMatrix * normalize( vec3(uv.xy, .85) );
+
+    float dist = trans_ray(ro, rd);
+    vec3 col = vec3(0.);
+    if(dist>MIN_DIST) {
+        vec3 shade = vec3(dist*.005); 
+        col = 1. * smoothstep(.1,1.,shade); 
+        //col *= vec3(1.,0.,0.);
+        col = pow(col, vec3(0.4545));
+        color += col;
+    }
+
+    color *= vec3(.4-rd.y,	.8, .8);
+        
+    // AA from NuSan
+    #if AA>1
+    	}
+    	color /= float(AA*AA);
+	#endif
+    
+    fragColor = vec4(color,1.0);
+}
+
+</script>
+
+<script>
+function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // Mouse Class //
+class Mouse {
+  constructor(element) {_defineProperty(this, "reset",
+
+    () => {
+      this.x =
+      ~~(document.documentElement.clientWidth, window.innerWidth || 0) / 2;
+      this.y =
+      ~~(document.documentElement.clientHeight, window.innerHeight || 0) / 2;
+    });this.element = element || window;this.drag = false;this.x = ~~(document.documentElement.clientWidth, window.innerWidth || 0) / 2;this.y = ~~(document.documentElement.clientHeight, window.innerHeight || 0) / 2;this.pointer = this.pointer.bind(this);this.getCoordinates = this.getCoordinates.bind(this);this.events = ["mouseenter", "mousemove"];this.events.forEach(eventName => {this.element.addEventListener(eventName, this.getCoordinates);});this.element.addEventListener("mousedown", () => {this.drag = true;});this.element.addEventListener("mouseup", () => {this.drag = false;});}
+  getCoordinates(event) {
+    event.preventDefault();
+    const x = event.pageX;
+    const y = event.pageY;
+    if (this.drag) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+  pointer() {
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.drag };
+
+  }}
+
+
+</script>
+
+<script>
+
+// Render Class //
+// Boostrap for WebGL and Attaching Shaders //
+// Fragment & Vertex Shaders in HTML window //
+// Click and Drag //
+class Render {
+  constructor() {
+    this.frame = 0;
+    this.zoom = 8;
+    this.start = Date.now();
+    this.mouse = new Mouse();
+    this.umouse = [0.0, 0.0, 0.0, 0.0];
+    this.tmouse = [0.0, 0.0, 0.0, 0.0];
+    const mouse = this.mouse.pointer();
+    // Setup WebGL canvas and surface object //
+   // Make Canvas and get WebGl2 Context //
+    const width = (this.width = ~~(document.documentElement.clientWidth,
+    window.innerWidth || 0));
+    const height = (this.height = ~~(document.documentElement.clientHeight,
+    window.innerHeight || 0));
+    const canvas = (this.canvas = document.createElement("canvas"));
+    canvas.id = "GLShaders";
+    canvas.width = width;
+    canvas.height = height;
+    document.body.appendChild(canvas);
+
+    const gl = (this.gl = canvas.getContext("webgl2"));
+
+    if (!gl) {
+      console.warn("WebGL 2 is not available.");
+      return;
+    }
+    // WebGl and WebGl2 Extension //
+    this.gl.getExtension("OES_standard_derivatives");
+    this.gl.getExtension("EXT_shader_texture_lod");
+    this.gl.getExtension("OES_texture_float");
+    this.gl.getExtension("WEBGL_color_buffer_float");
+    this.gl.getExtension("OES_texture_float_linear");
+
+    this.gl.viewport(0, 0, canvas.width, canvas.height);
+
+    window.addEventListener(
+      "resize",
+      () => {
+        const width = ~~(document.documentElement.clientWidth,
+        window.innerWidth || 0);
+        const height = ~~(document.documentElement.clientHeight,
+        window.innerHeight || 0);
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        this.resolution = new Float32Array([width, height]);
+        this.gl.uniform2fv(
+          this.gl.getUniformLocation(this.program, "resolution"),
+          this.resolution
+        );
+        this.clearCanvas();
+      },
+      true
+    );
+
+     this.init();
+  }
+  
+  // Canvas Helper Function //
+  createCanvas = name => {
+    this.canvas =
+      document.getElementById(name) || document.createElement("canvas");
+    this.canvas.id = name;
+    if (!document.getElementById(name)) {
+      document.body.appendChild(this.canvas);
+    }
+    const context = this.canvas.getContext("webgl2");
+    if (!context) {
+      console.error("no webgl avaiable");
+    }
+    this.setViewport();
+  };
+  // Viewport Helper Function //
+  setViewport = () => {
+    this.width = ~~(document.documentElement.clientWidth,
+    window.innerWidth || 0);
+    this.height = ~~(document.documentElement.clientHeight,
+    window.innerHeight || 0);
+    this.gl = this.canvas.getContext("webgl");
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    this.gl.viewport(0, 0, this.width, this.height);
+    this.clearCanvas();
+  };
+
+  // Shader Bootstrap code //
+  createShader = (type, source) => {
+    const shader = this.gl.createShader(type);
+    this.gl.shaderSource(shader, source);
+    this.gl.compileShader(shader);
+    const success = this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS);
+    if (!success) {
+      console.log(this.gl.getShaderInfoLog(shader));
+      this.gl.deleteShader(shader);
+      return false;
+    }
+    return shader;
+  };
+
+  createWebGL = (vertexSource, fragmentSource) => {
+    // Setup Vertext/Fragment Shader functions
+    this.vertexShader = this.createShader(this.gl.VERTEX_SHADER, vertexSource);
+    this.fragmentShader = this.createShader(
+      this.gl.FRAGMENT_SHADER,
+      fragmentSource
+    );
+
+    // Setup Program and Attach Shader functions
+    this.program = this.gl.createProgram();
+    this.gl.attachShader(this.program, this.vertexShader);
+    this.gl.attachShader(this.program, this.fragmentShader);
+    this.gl.linkProgram(this.program);
+    this.gl.useProgram(this.program);
+
+    if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {
+      console.warn(
+        "Unable to initialize the shader program: " +
+          this.gl.getProgramInfoLog(this.program)
+      );
+      return null;
+    }
+
+    // Create and Bind buffer //
+    const buffer = this.gl.createBuffer();
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
+
+    this.gl.bufferData(
+      this.gl.ARRAY_BUFFER,
+      new Float32Array([-1, 1, -1, -1, 1, -1, 1, 1]),
+      this.gl.STATIC_DRAW
+    );
+
+    const vPosition = this.gl.getAttribLocation(this.program, "vPosition");
+
+    this.gl.enableVertexAttribArray(vPosition);
+    this.gl.vertexAttribPointer(
+      vPosition,
+      2, // size: 2 components per iteration
+      this.gl.FLOAT, // type: the data is 32bit floats
+      false, // normalize: don't normalize the data
+      0, // stride: 0 = move forward size * sizeof(type) each iteration to get the next position
+      0 // start at the beginning of the buffer
+    );
+
+    this.clearCanvas();
+    this.importUniforms();
+  };
+
+  clearCanvas = () => {
+    this.gl.clearColor(0, 0, 0, 0);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+  };
+
+  importUniforms = () => {
+    const width = ~~(document.documentElement.clientWidth,
+    window.innerWidth || 0);
+    const height = ~~(document.documentElement.clientHeight,
+    window.innerHeight || 0);
+    this.resolution = new Float32Array([width, height]);
+    this.gl.uniform2fv(
+      this.gl.getUniformLocation(this.program, "resolution"),
+      this.resolution
+    );
+     // get the uniform ins from the shader fragments
+    this.ut = this.gl.getUniformLocation(this.program, "time");
+    this.ms = this.gl.getUniformLocation(this.program, "mouse");
+    this.zm = this.gl.getUniformLocation(this.program, "zoom");
+    this.resolution = new Float32Array([this.canvas.width, this.canvas.height]);
+    this.gl.uniform2fv(
+      this.gl.getUniformLocation(this.program, "resolution"),
+      this.resolution
+    );
+    this.gl.uniform1f(this.zm, this.zoom);
+  };
+
+  updateUniforms = () => {
+    this.gl.uniform1f(this.ut, (Date.now() - this.start) / 1000 * 0.25);
+    const mouse = this.mouse.pointer();
+    this.umouse = [mouse.x, this.canvas.height - mouse.y, mouse.x - mouse.y];
+    const factor = 0.15;
+    this.tmouse[0] =
+      this.tmouse[0] - (this.tmouse[0] - this.umouse[0]) * factor;
+    this.tmouse[1] =
+      this.tmouse[1] - (this.tmouse[1] - this.umouse[1]) * factor;
+    this.tmouse[2] =
+      this.tmouse[2] - (this.tmouse[2] - this.umouse[2]) * factor;
+    this.gl.uniform4fv(this.ms, this.tmouse);
+    
+ 
+    this.gl.drawArrays(
+      this.gl.TRIANGLE_FAN, // primitiveType
+      0, // Offset
+      4 // Count
+    );
+  };
+
+  init = () => {
+    this.createWebGL(
+      document.getElementById("vertexShader").textContent,
+      document.getElementById("fragmentShader").textContent
+    );
+    this.renderLoop();
+  };
+
+  renderLoop = () => {
+    this.updateUniforms();
+    this.animation = window.requestAnimationFrame(this.renderLoop);
+  };
+}
+
+const demo = new Render(document.body);
+
+
+</script>
+
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
