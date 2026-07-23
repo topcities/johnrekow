@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+<title>Count - Word and Character Counter</title>
+
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+    background-color: #F00;
+	background-image: url(img/decor.jpg);
+	background-repeat: repeat;
+}
+
+textarea {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    resize: both;
+}
+
+#status {
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+button {
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+</style>
+
+<script>
+window.onload = function () {
+
+    const textarea = document.getElementById("opt");
+    const status = document.getElementById("status");
+
+    function updateCounts() {
+        const text = textarea.value;
+
+        const chars = text.length;
+
+        const trimmed = text.trim();
+        const words = trimmed === "" ? 0 : trimmed.split(/\s+/).length;
+
+        status.innerHTML =
+    "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Words: <span style='font-size:200%; font-weight:bold;'>" + words + "</span>" +
+    "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Characters: <span style='font-size:200%; font-weight:bold;'>" + chars + "</span>";
+
+    }
+
+    textarea.addEventListener("input", updateCounts);
+
+    document.getElementById("clearButton").addEventListener("click", function () {
+        textarea.value = "";
+        textarea.focus();
+
+        status.innerHTML =
+    "<p>Type or Paste text into the above box, and this page will count the number of words and the number of characters in this box. Whatever is in this box will be lost and forgotten as soon as you leave this page.</p>";
+    });
+
+};
+</script>
+
+</head>
+<body>
+<div class="container">
+  <div class="header"><!-- end .header -->
+    <a name="PGTOP">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+  </div>
+  <div class="content">
+    <h1>Count</h1>
+    <p> 
+<br></p>
+<h3>Word and Character Counter</h3>
+        <p>
+
+<textarea cols="65" rows="20" wrap="virtual" name="opt" id="opt"></textarea>
+
+<div id="status"><p>
+Type or Paste text into the above box, and this page will count the number of words and the number of characters in this box. Whatever is in this box will be lost and forgotten as soon as you leave this page.
+</p></div>
+<p>
+<button type="button" id="clearButton">Clear</button>
+</p>
+<br>
+<br>
+<br>
+</p>
+<br>
+<p></p>
+<h2>&nbsp;</h2>
+<p>&nbsp;</p>
+    <!-- end .content --></div>
+  <div class="footer">
+    <p>&nbsp;</p>
+    <p>John Rekow Jr.'s Homepage</p>
+    <p>&nbsp;</p>
+    <p>###</p>
+    <p><!-- end .footer --></p>
+    <p>&nbsp;</p>
+  </div>
+  <!-- end .container --></div>
+  
+  <!-- *********************************************************
+     * You may use this code for free on any web page provided that 
+     * these comment lines and the following credit remain in the code.
+     * Floating Div from http://www.javascript-fx.com
+     ********************************************************  -->
+<div id="divTopLeft"     style="position:absolute">
+<!-- Start - put your content below here --->
+    
+          <table border=1 bgcolor="grey" background="img/decor.jpg"><tr><td>
+      <p><span style="background-color: #FFFFFF"><b><a href=#PGTOP>Top of Page</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">Overview</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quicksurf2.html">QuickSurf</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="newspg.html">Newspaper</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="hot.html">Hot Links</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="drawer.html">Top Drawer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span></p>
+</td></tr></table>
+
+<!-- End   - put your content above here --->
+</div>
+
+<script type="text/javascript">
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function JSFX_FloatDiv(id, sx, sy)
+{
+	var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+	var px = document.layers ? "" : "px";
+	window[id + "_obj"] = el;
+	if(d.layers)el.style=el;
+	el.cx = el.sx = sx;el.cy = el.sy = sy;
+	el.sP=function(x,y){this.style.left=x+px;this.style.top=y+px;};
+
+	el.floatIt=function()
+	{
+		var pX, pY;
+		pX = (this.sx >= 0) ? 0 : ns ? innerWidth : 
+		document.documentElement && document.documentElement.clientWidth ? 
+		document.documentElement.clientWidth : document.body.clientWidth;
+		pY = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+		document.documentElement.scrollTop : document.body.scrollTop;
+		if(this.sy<0) 
+		pY += ns ? innerHeight : document.documentElement && document.documentElement.clientHeight ? 
+		document.documentElement.clientHeight : document.body.clientHeight;
+		this.cx += (pX + this.sx - this.cx)/8;this.cy += (pY + this.sy - this.cy)/8;
+		this.sP(this.cx, this.cy);
+		setTimeout(this.id + "_obj.floatIt()", 40);
+	}
+	return el;
+}
+JSFX_FloatDiv("divTopLeft", 600,95).floatIt();
+</script>
+<!-- ********************************************************* -->
+  
+</body>
+</html>
+<noscript><table background="img/decor.jpg"><td><font color="#ffffff"><plaintext> 
