@@ -1,0 +1,177 @@
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="facebookexternalhit" content="noindex">
+<meta name="Facebot" content="noindex">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+  <title>Quicksurf 77e - Section 19 - TOTP Secret Base32 Generator</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    textarea { width: 100%; max-width: 720px; height: 54px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 14px; }
+    button { margin-top: 12px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+    .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+    label { display: inline-flex; gap: 8px; align-items: center; }
+    select { padding: 6px 8px; font-size: 14px; }
+    .hint { margin-top: 10px; color: #444; max-width: 720px; line-height: 1.35; }
+  </style>
+</head>
+<body>
+  <h1 style="margin:0 0 12px;">Section 19: Time-based One-Time Password (TOTP) Secret (Base32) Generator</h1>
+
+  <textarea id="secretBox" spellcheck="false" placeholder="Base32 secret will appear here after you click Generate."></textarea>
+
+  <div class="row">
+    <label>
+      <span>Secret length (characters)</span>
+      <!-- Default is exactly 20 Base32 characters (no padding). -->
+      <select id="secretCharLen">
+        <option value="20" selected>20</option>
+        <option value="24">24</option>
+        <option value="32">32</option>
+        <option value="40">40</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Letter casing</span>
+      <select id="caseMode">
+        <option value="upper" selected>upper only</option>
+        <option value="lower">lower only</option>
+        <option value="mixed">upper and lower mixed</option>
+      </select>
+    </label>
+  </div>
+
+  <button id="genBtn" type="button">Generate</button>
+
+  <div class="hint">
+    Generates RFC 4648 Base32 (no padding), using the standard alphabet A–Z and 2–7.
+    
+  </div>
+
+  <script>
+    const BASE32_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+
+    function base32NoPadEncodeFixedLength(bytes, outCharLen) {
+      // Encodes bytes to Base32 (no padding) and then truncates/pads by generating enough bytes.
+      // We ensure output length == outCharLen.
+      let bits = 0;
+      let value = 0;
+      let out = "";
+
+      for (const b of bytes) {
+        value = (value << 8) | b;
+        bits += 8;
+
+        while (bits >= 5 && out.length < outCharLen) {
+          const index = (value >>> (bits - 5)) & 31;
+          bits -= 5;
+          out += BASE32_ALPHABET[index];
+        }
+        if (out.length >= outCharLen) break;
+      }
+
+      // If, due to byte-count math, we didn't reach exact length, generate more bytes and retry.
+      // This keeps the output length deterministic.
+      while (out.length < outCharLen) {
+        const more = new Uint8Array(1);
+        crypto.getRandomValues(more);
+        // fold one byte at a time until we have enough 5-bit groups
+        value = (value << 8) | more[0];
+        bits += 8;
+
+        while (bits >= 5 && out.length < outCharLen) {
+          const index = (value >>> (bits - 5)) & 31;
+          bits -= 5;
+          out += BASE32_ALPHABET[index];
+        }
+      }
+
+      return out;
+    }
+
+    function randomBytes(n) {
+      const arr = new Uint8Array(n);
+      crypto.getRandomValues(arr);
+      return arr;
+    }
+
+    function applyCaseMode(secretB32, mode) {
+      if (mode === "upper") return secretB32.toUpperCase();
+      if (mode === "lower") return secretB32.toLowerCase();
+
+      // mixed: random per-letter for A-Z; digits 2-7 unchanged
+      const upper = secretB32.toUpperCase();
+      const arr = upper.split("");
+      const rand = randomBytes(arr.length);
+
+      for (let i = 0; i < arr.length; i++) {
+        const ch = arr[i];
+        if (ch >= "A" && ch <= "Z") {
+          arr[i] = (rand[i] & 1) ? ch.toLowerCase() : ch.toUpperCase();
+        }
+      }
+      return arr.join("");
+    }
+
+    function setTextareaText(text) {
+      const box = document.getElementById("secretBox");
+      box.value = text;
+    }
+
+    function generateSecret() {
+      const secretCharLen = parseInt(document.getElementById("secretCharLen").value, 10);
+      const caseMode = document.getElementById("caseMode").value;
+
+      // Each Base32 character carries 5 bits.
+      // To generate outCharLen characters, we need exactly outCharLen*5 bits of randomness.
+      // Convert bits -> bytes: ceil(bits/8)
+      const bitsNeeded = secretCharLen * 5;
+      const bytesNeeded = Math.ceil(bitsNeeded / 8);
+
+      const bytes = randomBytes(bytesNeeded);
+      const secretB32 = base32NoPadEncodeFixedLength(bytes, secretCharLen);
+      const cased = applyCaseMode(secretB32, caseMode);
+
+      // Final safety: enforce exact length
+      setTextareaText(cased.slice(0, secretCharLen));
+    }
+
+    document.getElementById("genBtn").addEventListener("click", generateSecret);
+
+    generateSecret();
+  </script>
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
