@@ -1,0 +1,489 @@
+<html>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT> 
+<HEAD>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META NAME="ROBOTS" CONTENT="NONE, NOARCHIVE">
+<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="facebookexternalhit" content="noindex, nofollow">
+<meta name="Facebot" content="noindex, nofollow">
+<meta property="og:restrictions:country" content="ALL">
+<meta property="og:restrictions:age" content="100">
+<meta property="og:title" content="Content Not Available">
+<meta property="og:description" content="This page cannot be shared.">
+<meta property="og:type" content="error">
+<NOSCRIPT>
+<!-- <BODY> -->
+</NOSCRIPT>
+<SCRIPT LANGUAGE="JavaScript">  
+<!--  
+function open() {return true;}  
+//-->  
+</SCRIPT>
+<SCRIPT> 
+<!-- eval(unescape("%69%66%28%74%6f%70%21%3d%73%65%6c%66%29%7b%74%6f%70%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3d%73%65%6c%66%2e%6c%6f%63%61%74%69%6f%6e%2e%68%72%65%66%3b%7d%0a")); 
+//--> 
+</SCRIPT> 
+  <title>NTP Ticking Clock (Latency-Compensated)</title>
+<meta http-equiv="Expires" content="Tue, 04 Dec 1997 21:29:02 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+
+
+</head>
+
+<body>
+
+<small>
+  <span style="font-family: Arial">
+    The current time from the internet:<br>
+  </span>
+</small>
+<!-- The time.now clock is listed first -->
+Time from time.now/developer/api:
+
+<script>
+/*
+  NTP Ticking Clocks — Latency Compensated
+
+  Clock 1:
+    time.now/developer/api
+
+  Clock 2:
+    aisenseapi.com/services/v1
+
+  Both services are accessed without an API key.
+  The displayed time is calculated from:
+    server time + performance.now() elapsed time
+
+  Date.now() is not used as the clock source.
+*/
+
+const TIME_NOW_API_URL =
+  "https://time.now/developer/api/timezone/Etc/UTC";
+
+const AISENSE_API_URL =
+  "https://aisenseapi.com/services/v1/datetime/0000";
+
+const TZ_JERUSALEM = "Asia/Jerusalem";
+const TZ_LONDON = "Europe/London";
+const TZ_CHICAGO = "America/Chicago";
+const TZ_LOS_ANGELES = "America/Los_Angeles";
+
+const OFFLINE_MSG = "Connecting...";
+
+/*
+  Format a Date object in a selected IANA time zone.
+*/
+function formatClock(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    hour12: true,
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit"
+  }).formatToParts(date);
+
+  const map = {};
+
+  for (const part of parts) {
+    map[part.type] = part.value;
+  }
+
+  return `${map.weekday} ${map.day} ${map.month} ${map.year} at ` +
+         `${map.hour}:${map.minute}:${map.second} ` +
+         `${String(map.dayPeriod).toLowerCase()}`;
+}
+
+/*
+  Parse the time.now response.
+
+  Expected response fields include:
+    unixtime
+    utc_datetime
+    datetime
+*/
+async function parseTimeNowResponse(response) {
+  const contentType =
+    response.headers.get("content-type") || "";
+
+  if (!contentType.includes("application/json")) {
+    const text = (await response.text()).trim();
+    const date = new Date(text);
+
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+
+    throw new Error("Unrecognized time.now response format.");
+  }
+
+  const data = await response.json();
+
+  if (typeof data.unixtime === "number") {
+    return new Date(data.unixtime * 1000);
+  }
+
+  if (typeof data.utc_datetime === "string") {
+    const date = new Date(data.utc_datetime);
+
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+  }
+
+  if (typeof data.datetime === "string") {
+    const date = new Date(data.datetime);
+
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+  }
+
+  throw new Error("Unrecognized time.now response format.");
+}
+
+/*
+  Parse the AISENSE response.
+
+  Expected response:
+    {
+      "datetime": "2026-08-20T12:34:56+00:00"
+    }
+*/
+async function parseAisenseResponse(response) {
+  const contentType =
+    response.headers.get("content-type") || "";
+
+  if (!contentType.includes("application/json")) {
+    const text = (await response.text()).trim();
+    const date = new Date(text);
+
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+
+    throw new Error("Unrecognized AISENSE response format.");
+  }
+
+  const data = await response.json();
+
+  if (typeof data.datetime === "string") {
+    const date = new Date(data.datetime);
+
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+  }
+
+  throw new Error("Unrecognized AISENSE response format.");
+}
+
+/*
+  Fetch time.now and use the request midpoint as the server-time anchor.
+*/
+async function syncOnceTimeNow() {
+  const startPerf = performance.now();
+
+  const response = await fetch(TIME_NOW_API_URL, {
+    cache: "no-store"
+  });
+
+  const endPerf = performance.now();
+
+  if (!response.ok) {
+    throw new Error("time.now request failed: " + response.status);
+  }
+
+  const serverDate = await parseTimeNowResponse(response);
+  const roundTripTime = endPerf - startPerf;
+  const midpointPerf = startPerf + roundTripTime / 2;
+
+  return {
+    serverDate,
+    anchorPerfNow: midpointPerf,
+    roundTripTime
+  };
+}
+
+/*
+  Fetch AISENSE and use the request midpoint as the server-time anchor.
+
+  /datetime/0000 means UTC.
+*/
+async function syncOnceAisense() {
+  const startPerf = performance.now();
+
+  const response = await fetch(AISENSE_API_URL, {
+    cache: "no-store",
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+
+  const endPerf = performance.now();
+
+  if (!response.ok) {
+    throw new Error("AISENSE request failed: " + response.status);
+  }
+
+  const serverDate = await parseAisenseResponse(response);
+  const roundTripTime = endPerf - startPerf;
+  const midpointPerf = startPerf + roundTripTime / 2;
+
+  return {
+    serverDate,
+    anchorPerfNow: midpointPerf,
+    roundTripTime
+  };
+}
+
+/*
+  Take several samples and keep the one with the shortest
+  round-trip time.
+*/
+async function resyncWithSamples(syncFunction, sampleCount = 5) {
+  let bestSample = null;
+
+  for (let i = 0; i < sampleCount; i++) {
+    try {
+      const sample = await syncFunction();
+
+      if (
+        !bestSample ||
+        sample.roundTripTime < bestSample.roundTripTime
+      ) {
+        bestSample = sample;
+      }
+    } catch (error) {
+      // Try the next sample.
+    }
+  }
+
+  if (!bestSample) {
+    return null;
+  }
+
+  return {
+    serverDate: bestSample.serverDate,
+    anchorPerfNow: bestSample.anchorPerfNow
+  };
+}
+
+/*
+  Create the city labels and time text nodes.
+*/
+function makeCityTextNodes() {
+  const cities = [
+    {
+      name: "Jerusalem",
+      timeZone: TZ_JERUSALEM
+    },
+    {
+      name: "London",
+      timeZone: TZ_LONDON
+    },
+    {
+      name: "Chicago",
+      timeZone: TZ_CHICAGO
+    },
+    {
+      name: "Los Angeles",
+      timeZone: TZ_LOS_ANGELES
+    }
+  ];
+
+  const timeNodes = [];
+
+  for (const city of cities) {
+    const line = document.createElement("div");
+    const timeNode = document.createTextNode("");
+
+    line.appendChild(
+      document.createTextNode(city.name + ": ")
+    );
+
+    line.appendChild(timeNode);
+    document.body.appendChild(line);
+
+    timeNodes.push(timeNode);
+  }
+
+  return {
+    cities,
+    timeNodes
+  };
+}
+
+/*
+  Show the offline message for every city in a clock section.
+*/
+function showOfflineMessage(clockSet, message) {
+  for (const timeNode of clockSet.timeNodes) {
+    timeNode.nodeValue = message;
+  }
+}
+
+/*
+  Render time using the server-date anchor and performance.now().
+*/
+function renderFromServerAnchor(
+  clockSet,
+  anchorServerDate,
+  anchorPerfNow
+) {
+  const elapsedMilliseconds =
+    performance.now() - anchorPerfNow;
+
+  const estimatedNow = new Date(
+    anchorServerDate.getTime() + elapsedMilliseconds
+  );
+
+  for (let i = 0; i < clockSet.cities.length; i++) {
+    clockSet.timeNodes[i].nodeValue =
+      formatClock(
+        estimatedNow,
+        clockSet.cities[i].timeZone
+      );
+  }
+}
+
+/*
+  Create the first section:
+  time.now/developer/api
+*/
+const timeNowClock = makeCityTextNodes();
+
+/*
+  Create the second section:
+  aisenseapi.com/services/v1
+*/
+const separator = document.createElement("hr");
+document.body.appendChild(separator);
+
+const aisenseLabel = document.createTextNode(
+  "Time from aisenseapi.com/services/v1:"
+);
+
+document.body.appendChild(aisenseLabel);
+document.body.appendChild(document.createElement("br"));
+
+const aisenseClock = makeCityTextNodes();
+
+let timeNowAnchor = null;
+let aisenseAnchor = null;
+
+/*
+  Fetch both providers independently.
+*/
+async function tryFetchBothOnce() {
+  let newTimeNowAnchor = null;
+  let newAisenseAnchor = null;
+
+  try {
+    newTimeNowAnchor =
+      await resyncWithSamples(syncOnceTimeNow, 5);
+  } catch (error) {
+    newTimeNowAnchor = null;
+  }
+
+  try {
+    newAisenseAnchor =
+      await resyncWithSamples(syncOnceAisense, 5);
+  } catch (error) {
+    newAisenseAnchor = null;
+  }
+
+  timeNowAnchor = newTimeNowAnchor;
+  aisenseAnchor = newAisenseAnchor;
+
+  if (timeNowAnchor) {
+    renderFromServerAnchor(
+      timeNowClock,
+      timeNowAnchor.serverDate,
+      timeNowAnchor.anchorPerfNow
+    );
+  } else {
+    showOfflineMessage(timeNowClock, OFFLINE_MSG);
+  }
+
+  if (aisenseAnchor) {
+    renderFromServerAnchor(
+      aisenseClock,
+      aisenseAnchor.serverDate,
+      aisenseAnchor.anchorPerfNow
+    );
+  } else {
+    showOfflineMessage(aisenseClock, OFFLINE_MSG);
+  }
+
+  return Boolean(timeNowAnchor && aisenseAnchor);
+}
+
+/*
+  Retry every 16 seconds until both providers respond.
+*/
+async function keepTryingUntilBoth() {
+  showOfflineMessage(timeNowClock, OFFLINE_MSG);
+  showOfflineMessage(aisenseClock, OFFLINE_MSG);
+
+  while (true) {
+    const bothReady = await tryFetchBothOnce();
+
+    if (bothReady) {
+      break;
+    }
+
+    await new Promise(resolve => {
+      setTimeout(resolve, 16000);
+    });
+  }
+}
+
+/*
+  Start synchronization.
+*/
+keepTryingUntilBoth();
+
+/*
+  Update both displays four times per second.
+*/
+setInterval(() => {
+  if (timeNowAnchor) {
+    renderFromServerAnchor(
+      timeNowClock,
+      timeNowAnchor.serverDate,
+      timeNowAnchor.anchorPerfNow
+    );
+  } else {
+    showOfflineMessage(timeNowClock, OFFLINE_MSG);
+  }
+
+  if (aisenseAnchor) {
+    renderFromServerAnchor(
+      aisenseClock,
+      aisenseAnchor.serverDate,
+      aisenseAnchor.anchorPerfNow
+    );
+  } else {
+    showOfflineMessage(aisenseClock, OFFLINE_MSG);
+  }
+}, 250);
+</script>
+
+</body>
+</html>
+<noscript><table background="decor.jpg"><td><font color="#ffffff"><plaintext> 
